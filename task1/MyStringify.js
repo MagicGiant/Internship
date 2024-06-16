@@ -8,102 +8,125 @@
 
 let strigifyRules = new Map();
 
+let spaceCount = 0;
+let newLine = ''
+let keyValueSpace = ''
+
  
 
 function getObjectType(obj){
     return Object.prototype.toString.call(obj).match(/\w*(?=])/)[0];
 }
 
+function getSpaces(){
+    return " ".repeat(spaceCount);
+}
 
-function MyStringify(value){
-    let type = getObjectType(value);
 
-    if (!strigifyRules.has(type)){
-        return value.toString();
+function myStringify(value, space = 0){
+    if (space != 0){
+        newLine = '\n';
+        keyValueSpace = " ";
     }
 
-    return strigifyRules.get(type)(value);
+    let type = getObjectType(value);
+
+
+    if (!strigifyRules.has(type)){
+        return getSpaces() + value.toString();
+    }
+
+    return strigifyRules.get(type)(value, space);
 }
 
-function DeleteLastComma(str){
-    if (str.slice(-1) == ',')
-        return str.slice(0, -1);
+function deleteLastComma(str){
+    if (str.lastIndexOf(",") !== -1) {
+        return str.slice(0, str.lastIndexOf(",")) + str.slice(str.lastIndexOf(",") + 1);
+    }
     return str;
 }
+  
 
 // ________set_rules_________
 
 
-strigifyRules.set('Function', (obj) =>{
+strigifyRules.set('Function', obj =>{
     return null;
 })
 
 
-strigifyRules.set('Set', (obj) => {
+strigifyRules.set('Set', obj => {
     return '{}';
 })
 
-strigifyRules.set('Map', (obj) => {
+strigifyRules.set('Map', obj => {
     return '{}';
 })
 
-strigifyRules.set('String', (obj) => {
+strigifyRules.set('String', obj => {
     return `"${obj}"`
 })
 
-strigifyRules.set('Date', (obj) => {
+strigifyRules.set('Date', obj => {
     let date = new Date();
     return `"${obj.toISOString()}"`
 })
 
-strigifyRules.set('Array', (obj) => {
-    let result = '[';
+strigifyRules.set('Array', (obj, space) => {
+    let result = getSpaces() + '[' + newLine;
+
+    spaceCount += space;
     for (value of obj){
-        result += MyStringify(value) + ',';
+        result += myStringify(value, space) + ',' + newLine;
     }
 
-    result = DeleteLastComma(result);
+    result = deleteLastComma(result);
 
-    return result + ']';
+    spaceCount -= space;
+
+    return result + getSpaces() + ']';
 })
 
-strigifyRules.set('Object', (obj) => {
-    let result = '{';
+strigifyRules.set('Object', (obj, space) => {
+    let result = getSpaces() + '{' + newLine;
+
+    spaceCount += space;
 
     for (key in obj){
-        result += `"${key}":${MyStringify(obj[key])},`;
+        result += `${getSpaces()}"${key}":${myStringify(obj[key], space)},${newLine}`;
     };
 
+    spaceCount -= space;
 
-    result = DeleteLastComma(result);
+    result = deleteLastComma(result);
 
-    return result + '}';
+    return result + getSpaces() + '}';
 })
 
 
 // _________testing____________
 
-function testMyStringify(testArray= [a, arr, map, set, number, f, user, date]){
+function testMyStringify(testArray=[[1,2,3,[1,2,3]], a], space = 4){
 
     function logLine(){
         console.log("_________________________");
     }
 
     for (value of testArray){
-        const standart = JSON.stringify(value);
-        const my = MyStringify(value);
+        const standart = JSON.stringify(value, null, space);
+        const my = myStringify(value, space);
         if (standart === my){
             console.log("OK!");
         }
         else{
             console.log("DIFFERENT");
-            logLine();
-            console.log("JSON.stringfy");
-            console.log(standart);
-            console.log("MyStringfy");
-            console.log(my);
-            logLine();
         }
+        logLine();
+        console.log("JSON.stringfy");
+        console.log(standart);
+        console.log("MyStringfy");
+        console.log(my);
+        logLine();
     }
 }
 
@@ -127,6 +150,7 @@ let map = new Map();
 let set = new Set();
 
 set.add(1);
+
 set.add(2);
 
 let number = new Number(3);
