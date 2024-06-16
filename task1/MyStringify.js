@@ -1,6 +1,7 @@
 // Как по мне это лучшее решение, так как оно полностью расширяемое, красивое(не использует уродские свитч кейсы и глобальные переменные), очень быстро работает (без перебора типов) за счет хеш мапы, а так же не выкинет ошибку в случае, если какой-то тип объекта не был рассмотрен (скорее всего просто покажет [object Object])
 
-
+//Основной метод:
+//Смысл в том, что я из хеш мапы (stringifyRules) в методе recursiveCast мгновенно вытаскиваю функцию по определенному ключу (имя типа объекта). Эта функция, если потребуется, может рекурсивно запустить recursiveCast. Поэтому должно работать быстро
 function MyStringify(value, space = 0){
 
     if (space === 0){
@@ -21,7 +22,9 @@ MyStringify.spaceCount = 0;
 
 MyStringify.strigifyRules = new Map();
 
+MyStringify.lastObject = null;
 
+//Тут я просто не додумался, как по другому получить тип объекта. Регулярка получает из "[Object Array]" только "Array"
 MyStringify.getObjectType = (obj) => {
     return Object.prototype.toString.call(obj).match(/\w*(?=])/)[0];
 }
@@ -36,6 +39,7 @@ MyStringify.deleteLastComma = (str) =>{
     }
     return str;
 }
+
 
 MyStringify.recursiveCast = (value, space) =>{
 
@@ -80,7 +84,8 @@ MyStringify.strigifyRules.set('Array', (obj, space) => {
 
     MyStringify.spaceCount += space;
     for (value of obj){
-        result += MyStringify.recursiveCast(value, space) + ',' + MyStringify.newLine;
+        let recursiveData = value == undefined ? MyStringify.getSpaces() + 'null' : MyStringify.recursiveCast(value, space);
+        result += recursiveData + ',' + MyStringify.newLine;
     }
 
     result = MyStringify.deleteLastComma(result);
@@ -96,6 +101,7 @@ MyStringify.strigifyRules.set('Object', (obj, space) => {
     MyStringify.spaceCount += space;
 
     for (key in obj){
+        let recursiveData = obj[key] == undefined ? MyStringify.getSpaces() + 'null' : MyStringify.recursiveCast(obj[key], space);
         result += `${MyStringify.getSpaces()}"${key}":${MyStringify.recursiveCast(obj[key], space)},${MyStringify.newLine}`;
     };
 
@@ -109,23 +115,19 @@ MyStringify.strigifyRules.set('Object', (obj, space) => {
 
 // _________testing____________
 
-function testMyStringify(
-    testArray=[
-        
-        [1,2,3,[1,2,3]],
+let testArr = [
+    [1,2,3,[1,2,3]],
+    {
+        1: "1",
+        2: [1, 2, {1: "3"}]
+    },
+    new Array(3),
+    new Array(0)];
 
-        {
-            1: "1",
-            2: [1, 2, {1: "3"}]
-        },
+let testSpace = 4
 
-        new Array(3),],
-    space = 4)
+function testMyStringify(testArray=testArr, space = testSpace, cyclicFunction = null)
 {
-    function logLine(){
-        console.log("_________________________");
-    }
-
     for (value of testArray){
         const standart = JSON.stringify(value, null, space);
         const my = MyStringify(value, space);
@@ -135,11 +137,25 @@ function testMyStringify(
         else{
             console.log("DIFFERENT");
         }
-        logLine();
-        console.log("JSON.stringfy");
-        console.log(standart);
-        console.log("MyStringfy");
-        console.log(my);
-        logLine();
+
+        if (cyclicFunction != null){
+            cyclicFunction(standart,  my)
+        }
     }
 }
+
+function testMyStringifyWithData(standart, my){
+    function logLine(){
+        console.log("_________________________");
+    }
+
+    logLine();
+    console.log("JSON.stringfy");
+    console.log(standart);
+    console.log("MyStringfy");
+    console.log(my);
+    logLine();
+}
+
+// testMyStringify();
+testMyStringify(testArr, testSpace, testMyStringifyWithData);
