@@ -6,23 +6,24 @@ function MyStringify(value, space = 0){
 
     if (space === 0){
         MyStringify.newLine = '';
-        MyStringify.keyValueSpace = '';
     }
     else{
         MyStringify.newLine = '\n';
-        MyStringify.keyValueSpace = ' '
     }
 
 
-    return MyStringify.recursiveCast(value, space);
+    MyStringify.prevObject = null;
+
+    MyStringify.spaceCount = 0;
+
+
+    return MyStringify.recursiveCast(value, space, null);
 }
 
 
-MyStringify.spaceCount = 0;
 
 MyStringify.strigifyRules = new Map();
 
-MyStringify.lastObject = null;
 
 //Тут я просто не додумался, как по другому получить тип объекта. Регулярка получает из "[Object Array]" только "Array"
 MyStringify.getObjectType = (obj) => {
@@ -41,7 +42,7 @@ MyStringify.deleteLastComma = (str) =>{
 }
 
 
-MyStringify.recursiveCast = (value, space) =>{
+MyStringify.recursiveCast = (value, space, prevObject) =>{
 
     let type = MyStringify.getObjectType(value);
 
@@ -50,23 +51,23 @@ MyStringify.recursiveCast = (value, space) =>{
         return MyStringify.getSpaces() + value.toString();
     }
 
-    return MyStringify.strigifyRules.get(type)(value, space);
+    return MyStringify.strigifyRules.get(type)(value, space, prevObject);
 }
   
 
 // ________set_rules_________
 
 
-MyStringify.strigifyRules.set('Function', obj =>{
+MyStringify.strigifyRules.set('Function', () =>{
     return null;
 })
 
 
-MyStringify.strigifyRules.set('Set', obj => {
+MyStringify.strigifyRules.set('Set', () => {
     return '{}';
 })
 
-MyStringify.strigifyRules.set('Map', obj => {
+MyStringify.strigifyRules.set('Map', () => {
     return '{}';
 })
 
@@ -79,12 +80,18 @@ MyStringify.strigifyRules.set('Date', obj => {
     return `"${obj.toISOString()}"`
 })
 
-MyStringify.strigifyRules.set('Array', (obj, space) => {
-    let result = MyStringify.getSpaces() + '[' + MyStringify.newLine;
+MyStringify.strigifyRules.set('Array', (obj, space, prevObject) => {
+    if (obj.length === 0){
+        return '[]'
+    }
+
+    let firstSpaces = prevObject == 'Object' ? '' : MyStringify.getSpaces();
+
+    let result = firstSpaces + '[' + MyStringify.newLine;
 
     MyStringify.spaceCount += space;
-    for (value of obj){
-        let recursiveData = value == undefined ? MyStringify.getSpaces() + 'null' : MyStringify.recursiveCast(value, space);
+    for (let value of obj){
+        let recursiveData = value == undefined ? MyStringify.getSpaces() + 'null' : MyStringify.recursiveCast(value, space, 'Array');
         result += recursiveData + ',' + MyStringify.newLine;
     }
 
@@ -95,14 +102,20 @@ MyStringify.strigifyRules.set('Array', (obj, space) => {
     return result + MyStringify.getSpaces() + ']';
 })
 
-MyStringify.strigifyRules.set('Object', (obj, space) => {
-    let result = MyStringify.getSpaces() + '{' + MyStringify.newLine;
+MyStringify.strigifyRules.set('Object', (obj, space, prevObject) => {
+
+    if (Object.keys(obj).length === 0){
+        return '{}'
+    }
+
+    let firstSpaces = prevObject == 'Object' ? '' : MyStringify.getSpaces();
+    let result = firstSpaces + '{' + MyStringify.newLine;
 
     MyStringify.spaceCount += space;
 
-    for (key in obj){
-        let recursiveData = obj[key] == undefined ? MyStringify.getSpaces() + 'null' : MyStringify.recursiveCast(obj[key], space);
-        result += `${MyStringify.getSpaces()}"${key}":${MyStringify.recursiveCast(obj[key], space)},${MyStringify.newLine}`;
+    for (let key in obj){
+        let recursiveData = obj[key] == undefined ? MyStringify.getSpaces() + 'null' : MyStringify.recursiveCast(obj[key], space, 'Object');
+        result += `${MyStringify.getSpaces()}"${key}": ${recursiveData},${MyStringify.newLine}`;
     };
 
     MyStringify.spaceCount -= space;
@@ -119,16 +132,17 @@ let testArr = [
     [1,2,3,[1,2,3]],
     {
         1: "1",
-        2: [1, 2, {1: "3"}]
+        2: [1, 2, {4: "3"}]
     },
     new Array(3),
-    new Array(0)];
+    new Array(0),
+    {}];
 
 let testSpace = 4
 
 function testMyStringify(testArray=testArr, space = testSpace, cyclicFunction = null)
 {
-    for (value of testArray){
+    for (let value of testArray){
         const standart = JSON.stringify(value, null, space);
         const my = MyStringify(value, space);
         if (standart === my){
@@ -157,5 +171,5 @@ function testMyStringifyWithData(standart, my){
     logLine();
 }
 
-// testMyStringify();
 testMyStringify(testArr, testSpace, testMyStringifyWithData);
+testMyStringify();
