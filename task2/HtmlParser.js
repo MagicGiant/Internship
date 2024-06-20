@@ -1,7 +1,7 @@
 "use strict"
 
 const fs = require('fs');
-const filePath = '/home/sherka/MyDirect/Internship/task2/Example.html';
+const filePath = './Example.html';
 
 class Paragraph{
     static type = "p";
