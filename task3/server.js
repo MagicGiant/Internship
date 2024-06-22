@@ -6,14 +6,17 @@ const PORT = 3000;
 const app = express();
 
 
-const staticPath = path.resolve(__dirname, 'static')
-const viewPath = path.resolve(__dirname, 'views')
+const staticPath = path.resolve(__dirname, 'static');
 
-const createViewPath = (page) => path.resolve(__dirname, 'views', `${page}.ejs`); 
+app.set('view engine', 'ejs');
+app.use(express.static('css'));
+
+const createViewPath = (page) => path.resolve(__dirname, 'views', `${page}.ejs`);
+
 
 app.listen(PORT, err => {
-    err ? console.log(err) : console.log(`http://localhost:${PORT}`)
-})
+    err ? console.log(err) : console.log(`http://localhost:${PORT}/`)
+});
 
 app.get('/', (req, res) => {
     fs.readdir(staticPath, (err, files) => {
@@ -25,10 +28,10 @@ app.get('/', (req, res) => {
             res.render(createViewPath('index'), {files});
         }   
     })
-})
+});
 
 app.use((req, res) => {
     let redirectPath = '/';
     console.log(`Invalid link. Redirect to "${redirectPath}"`);
     res.redirect(redirectPath);
-})
+});

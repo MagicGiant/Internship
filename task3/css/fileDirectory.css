@@ -1,0 +1,12 @@
+.file-directory{
+    display: block;
+    padding: 0;
+    margin: 10px;
+}
+
+.file-directory-item{
+    display: block;
+    margin: 3px;
+    padding: 10px;
+    background-color: rgb(223, 223, 223);
+}

@@ -3,13 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="fileDirectory.css">
     <title>Static files</title>
 </head>
     <body>
-        <ul>
-            <% files.forEach(file => { %>
-                <li><%= file %> </li>
-            <% }) %>
-        </ul>
+        <%- include('./partials/viewFilesDirectories.ejs') %>
     </body>
 </html>
