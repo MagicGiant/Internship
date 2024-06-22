@@ -13,17 +13,20 @@ app.use(express.static('css'));
 
 const createViewPath = (page) => path.resolve(__dirname, 'views', `${page}.ejs`);
 
-renderPath = (res, filePath) =>{
-    
-    fs.stat(filePath, (err, stats) =>{
+renderPath = async (res, fileDirPath) =>{
+    fs.stat(fileDirPath, (err, stats) =>{
+        if (err){
+            return res.status(404).send('File or directory not found');
+        }
+
         if (stats.isFile()){
-            res.sendFile(filePath);
+            res.sendFile(fileDirPath);
         }
         else{
-            fs.readdir(filePath, (err, files) => {
+            fs.readdir(fileDirPath, (err, files) => {
                 if (err){
                     console.error('Error reading static directory', err);
-                    res.status(500).send('Server error');
+                    return res.status(500).send('Server error');
                 }
                 else
                     res.render(createViewPath('index'), {files});
@@ -41,9 +44,9 @@ app.get('/', (req, res) => {
 });
 
 app.get('/*', (req, res) => {
-    const filePath = path.join(staticPath, req.params[0]);
+    const fileDirPath = path.join(staticPath, req.params[0]);
 
-    renderPath(res, filePath);
+    renderPath(res, fileDirPath);
 });
 
 app.use((req, res) => {
