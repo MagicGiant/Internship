@@ -30,6 +30,20 @@ app.get('/', (req, res) => {
     })
 });
 
+app.get('/*', (req, res) => {
+    const filePath = path.join(staticPath, req.params[0]);
+
+    fs.readdir(filePath, (err, files) => {
+        if (err){
+            console.error('Error reading static directory', err);
+            res.status(500).send('Server error');
+        }
+        else{
+            res.render(createViewPath('index'), {files});
+        }   
+    })
+});
+
 app.use((req, res) => {
     let redirectPath = '/';
     console.log(`Invalid link. Redirect to "${redirectPath}"`);
