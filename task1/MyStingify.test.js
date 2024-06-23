@@ -1,10 +1,13 @@
 "use strict";
-const myStringify = require("./MyStringify").myStringify;
 
 const MyStringifyError = require("./MyStringify.error").MyStringifyError;
 
+const myStringify = require("./MyStringify").myStringify;
+
+
 testCircular_error();
 testElements_equal();
+testBigInt_error();
 
 function testElements_equal() {
   const elements = [
@@ -19,7 +22,7 @@ function testElements_equal() {
   ];
 
   const testElement = (el, space = null) => {
-    test("test element myStringify", () => {
+    test("test element myStringify (equal)", () => {
       expect(myStringify(el, space)).toBe(JSON.stringify(el, null, space));
     });
   };
@@ -36,9 +39,18 @@ function testCircular_error() {
 
   a.push(b);
 
-  test("Test circular structure", () => {
+  test("Test circular structure (error)", () => {
     expect(() => myStringify(a)).toThrow(
-      MyStringifyError.CircularStructureError()
+      MyStringifyError.circularStructureError()
+    );
+  });
+}
+
+function testBigInt_error() {
+  let a = 1234567890123n;
+  test("Test big int serialize (error)", () => {
+    expect(() => myStringify(a)).toThrow(
+      MyStringifyError.serializeBigIntError()
     );
   });
 }

@@ -120,13 +120,17 @@ myStringify.strigifyRules.set("Date", (obj) => {
   return `"${obj.toISOString()}"`;
 });
 
+myStringify.strigifyRules.set("BigInt", (obj) => {
+  throw MyStringifyError.serializeBigIntError();
+})
+
 myStringify.strigifyRules.set("Array", (obj, space, prevObject) => {
   if (obj.length === 0) {
     return "[]";
   }
 
   if (myStringify.isMark(obj)) {
-    throw MyStringifyError.CircularStructureError();
+    throw MyStringifyError.circularStructureError();
   }
 
   myStringify.markObject(obj);
@@ -159,7 +163,7 @@ myStringify.strigifyRules.set("Object", (obj, space, prevObject) => {
   }
 
   if (myStringify.isMark(obj)) {
-    throw MyStringifyError.CircularStructureError();
+    throw MyStringifyError.circularStructureError();
   }
 
   myStringify.markObject(obj);
