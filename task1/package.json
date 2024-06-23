@@ -1,0 +1,13 @@
+{
+  "name": "task1",
+  "version": "1.0.0",
+  "main": "MyStringify.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "author": "Sherka",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+  }
+}

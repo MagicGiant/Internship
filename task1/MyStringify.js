@@ -2,32 +2,34 @@
 
 //Основной метод:
 //Смысл в том, что я из хеш мапы (stringifyRules) в методе recursiveCast мгновенно вытаскиваю функцию по определенному ключу (имя типа объекта). Эта функция, если потребуется, может рекурсивно запустить recursiveCast. Поэтому должно работать быстро
-function MyStringify(value, space = 0) {
-  if (space === 0) {
-    MyStringify.newLine = "";
+
+function myStringify(value, space = 0) {
+  if (space == null || space === 0) {
+    myStringify.newLine = "";
+    myStringify.objectSpace = "";
   } else {
-    MyStringify.newLine = "\n";
+    myStringify.newLine = "\n";
+    myStringify.objectSpace = " ";
   }
 
-  MyStringify.prevObject = null;
+  myStringify.prevObject = null;
 
-  MyStringify.spaceCount = 0;
+  myStringify.spaceCount = 0;
 
-  return MyStringify.recursiveCast(value, space, null);
+  return myStringify.recursiveCast(value, space, null);
 }
 
-MyStringify.strigifyRules = new Map();
+myStringify.strigifyRules = new Map();
 
-//Тут я просто не додумался, как по другому получить тип объекта. Регулярка получает из "[Object Array]" только "Array"
-MyStringify.getObjectType = (obj) => {
+myStringify.getObjectType = (obj) => {
   return Object.prototype.toString.call(obj).match(/\w*(?=])/)[0];
 };
 
-MyStringify.getSpaces = () => {
-  return " ".repeat(MyStringify.spaceCount);
+myStringify.getSpaces = () => {
+  return " ".repeat(myStringify.spaceCount);
 };
 
-MyStringify.deleteLastComma = (str) => {
+myStringify.deleteLastComma = (str) => {
   if (str.lastIndexOf(",") !== -1) {
     return (
       str.slice(0, str.lastIndexOf(",")) + str.slice(str.lastIndexOf(",") + 1)
@@ -36,138 +38,89 @@ MyStringify.deleteLastComma = (str) => {
   return str;
 };
 
-MyStringify.recursiveCast = (value, space, prevObject) => {
-  let type = MyStringify.getObjectType(value);
+myStringify.recursiveCast = (value, space, prevObject) => {
+  let type = myStringify.getObjectType(value);
 
-  if (!MyStringify.strigifyRules.has(type)) {
-    return MyStringify.getSpaces() + value.toString();
+  if (!myStringify.strigifyRules.has(type)) {
+    return myStringify.getSpaces() + value.toString();
   }
 
-  return MyStringify.strigifyRules.get(type)(value, space, prevObject);
+  return myStringify.strigifyRules.get(type)(value, space, prevObject);
 };
 
 // ________set_rules_________
 
-MyStringify.strigifyRules.set("Function", () => {
+myStringify.strigifyRules.set("Function", () => {
   return null;
 });
 
-MyStringify.strigifyRules.set("Set", () => {
+myStringify.strigifyRules.set("Set", () => {
   return "{}";
 });
 
-MyStringify.strigifyRules.set("Map", () => {
+myStringify.strigifyRules.set("Map", () => {
   return "{}";
 });
 
-MyStringify.strigifyRules.set("String", (obj) => {
+myStringify.strigifyRules.set("String", (obj) => {
   return `"${obj}"`;
 });
 
-MyStringify.strigifyRules.set("Date", (obj) => {
+myStringify.strigifyRules.set("Date", (obj) => {
   let date = new Date();
   return `"${obj.toISOString()}"`;
 });
 
-MyStringify.strigifyRules.set("Array", (obj, space, prevObject) => {
+myStringify.strigifyRules.set("Array", (obj, space, prevObject) => {
   if (obj.length === 0) {
     return "[]";
   }
 
-  let firstSpaces = prevObject == "Object" ? "" : MyStringify.getSpaces();
+  let firstSpaces = prevObject == "Object" ? "" : myStringify.getSpaces();
 
-  let result = firstSpaces + "[" + MyStringify.newLine;
+  let result = `${firstSpaces}[${myStringify.newLine}`;
 
-  MyStringify.spaceCount += space;
+  myStringify.spaceCount += space;
   for (let value of obj) {
     let recursiveData =
       value == undefined
-        ? MyStringify.getSpaces() + "null"
-        : MyStringify.recursiveCast(value, space, "Array");
-    result += recursiveData + "," + MyStringify.newLine;
+        ? myStringify.getSpaces() + "null"
+        : myStringify.recursiveCast(value, space, "Array");
+    result += `${recursiveData},${myStringify.newLine}`;
   }
 
-  result = MyStringify.deleteLastComma(result);
+  result = myStringify.deleteLastComma(result);
 
-  MyStringify.spaceCount -= space;
+  myStringify.spaceCount -= space;
 
-  return result + MyStringify.getSpaces() + "]";
+  return `${result + myStringify.getSpaces()}]`;
 });
 
-MyStringify.strigifyRules.set("Object", (obj, space, prevObject) => {
+myStringify.strigifyRules.set("Object", (obj, space, prevObject) => {
   if (Object.keys(obj).length === 0) {
     return "{}";
   }
+  let result = `${myStringify.getSpaces()}{${myStringify.newLine}`;
 
-  let firstSpaces = prevObject == "Object" ? "" : MyStringify.getSpaces();
-  let result = firstSpaces + "{" + MyStringify.newLine;
-
-  MyStringify.spaceCount += space;
+  myStringify.spaceCount += space;
 
   for (let key in obj) {
     let recursiveData =
       obj[key] == undefined
-        ? MyStringify.getSpaces() + "null"
-        : MyStringify.recursiveCast(obj[key], space, "Object");
-    result += `${MyStringify.getSpaces()}"${key}": ${recursiveData},${
-      MyStringify.newLine
+        ? myStringify.getSpaces() + "null"
+        : myStringify.recursiveCast(obj[key], space, "Object");
+    result += `${myStringify.getSpaces()}"${key}":${myStringify.objectSpace}${recursiveData},${
+      myStringify.newLine
     }`;
   }
 
-  MyStringify.spaceCount -= space;
+  myStringify.spaceCount -= space;
 
-  result = MyStringify.deleteLastComma(result);
+  result = myStringify.deleteLastComma(result);
 
-  return result + MyStringify.getSpaces() + "}";
+  return `${result + myStringify.getSpaces()}}`;
 });
 
-// _________testing____________
-
-let testArr = [
-  [1, 2, 3, [1, 2, 3]],
-  {
-    1: "1",
-    2: [1, 2, { 4: "3" }],
-  },
-  new Array(3),
-  new Array(0),
-  {},
-];
-
-let testSpace = 4;
-
-function testMyStringify(
-  testArray = testArr,
-  space = testSpace,
-  cyclicFunction = null
-) {
-  for (let value of testArray) {
-    const standart = JSON.stringify(value, null, space);
-    const my = MyStringify(value, space);
-    if (standart === my) {
-      console.log("OK!");
-    } else {
-      console.log("DIFFERENT");
-    }
-
-    if (cyclicFunction != null) {
-      cyclicFunction(standart, my);
-    }
-  }
-}
-
-function testMyStringifyWithData(standart, my) {
-  function logLine() {
-    console.log("_________________________");
-  }
-
-  logLine();
-  console.log("JSON.stringfy");
-  console.log(standart);
-  console.log("MyStringfy");
-  console.log(my);
-  logLine();
-}
-
-testMyStringify(testArr, testSpace, testMyStringifyWithData);
-testMyStringify();
+module.exports = {
+  myStringify: myStringify,
+};
