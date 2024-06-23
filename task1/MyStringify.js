@@ -52,6 +52,10 @@ myStringify.recursiveCast = (value, space, prevObject) => {
   return myStringify.strigifyRules.get(type)(value, space, prevObject);
 };
 
+myStringify.getFirstSpaces = (prevObject) =>{
+  return myStringify.getObjectType(prevObject) == "Object" ? "" : myStringify.getSpaces();
+}
+
 // ________set_rules_________
 
 myStringify.strigifyRules.set("Function", () => {
@@ -80,14 +84,14 @@ myStringify.strigifyRules.set("Array", (obj, space, prevObject) => {
     return "[]";
   }
 
-  let result = `${myStringify.getSpaces()}[${myStringify.newLine}`;
+  let result = `${myStringify.getFirstSpaces(prevObject)}[${myStringify.newLine}`;
 
   myStringify.spaceCount += space;
   for (let value of obj) {
     let recursiveData =
       value == undefined
         ? myStringify.getSpaces() + "null"
-        : myStringify.recursiveCast(value, space, "Array");
+        : myStringify.recursiveCast(value, space, obj);
     result += `${recursiveData},${myStringify.newLine}`;
   }
 
@@ -102,7 +106,8 @@ myStringify.strigifyRules.set("Object", (obj, space, prevObject) => {
   if (Object.keys(obj).length === 0) {
     return "{}";
   }
-  let result = `${myStringify.getSpaces()}{${myStringify.newLine}`;
+
+  let result = `${myStringify.getFirstSpaces(prevObject)}{${myStringify.newLine}`;
 
   myStringify.spaceCount += space;
 
@@ -110,7 +115,7 @@ myStringify.strigifyRules.set("Object", (obj, space, prevObject) => {
     let recursiveData =
       obj[key] == undefined
         ? myStringify.getSpaces() + "null"
-        : myStringify.recursiveCast(obj[key], space, "Object");
+        : myStringify.recursiveCast(obj[key], space, obj);
 
     result += `${myStringify.getSpaces()}"${key}":${
       myStringify.objectSpace
