@@ -2,6 +2,8 @@ module.exports = {
   myStringify: myStringify,
 };
 
+const MyStringifyError = require('./MyStringify.error').MyStringifyError
+
 // Как по мне это лучшее решение, так как оно полностью расширяемое, красивое(не использует уродские свитч кейсы и глобальные переменные), очень быстро работает (без перебора типов) за счет хеш мапы, а так же не выкинет ошибку в случае, если какой-то тип объекта не был рассмотрен (скорее всего просто покажет [object Object])
 
 //Основной метод:
@@ -25,6 +27,41 @@ function myStringify(value, space = 0) {
 
 myStringify.strigifyRules = new Map();
 
+myStringify.visitedObjects = new Set();
+
+myStringify.inTypes = (obj, arrayObjectsType) =>{
+  if (obj == null){
+    return false;
+  }
+
+  for (let el of arrayObjectsType){
+    if (el == myStringify.getObjectType(obj)){
+      return true;
+    }
+  }
+  return  false;
+}
+
+myStringify.markObject = (obj) =>{
+  if (!myStringify.inTypes(obj, ['Array', 'Object'])){
+    return false;
+  }
+
+  myStringify.visitedObjects.add(obj);
+  return true;
+}
+
+myStringify.isMark = (obj) =>{
+  return myStringify.inTypes(obj, ['Array', 'Object']) && myStringify.visitedObjects.has(obj);
+}
+
+myStringify.unmarkObject = (obj) =>{
+  if (myStringify.isMark(obj)){
+    myStringify.visitedObjects.delete(obj);
+  }
+}
+
+
 myStringify.getObjectType = (obj) => {
   return Object.prototype.toString.call(obj).match(/\w*(?=])/)[0];
 };
@@ -42,6 +79,12 @@ myStringify.deleteLastComma = (str) => {
   return str;
 };
 
+myStringify.getFirstSpaces = (prevObject) => {
+  return myStringify.getObjectType(prevObject) == "Object"
+    ? ""
+    : myStringify.getSpaces();
+};
+
 myStringify.recursiveCast = (value, space, prevObject) => {
   let type = myStringify.getObjectType(value);
 
@@ -51,10 +94,6 @@ myStringify.recursiveCast = (value, space, prevObject) => {
 
   return myStringify.strigifyRules.get(type)(value, space, prevObject);
 };
-
-myStringify.getFirstSpaces = (prevObject) =>{
-  return myStringify.getObjectType(prevObject) == "Object" ? "" : myStringify.getSpaces();
-}
 
 // ________set_rules_________
 
@@ -84,7 +123,15 @@ myStringify.strigifyRules.set("Array", (obj, space, prevObject) => {
     return "[]";
   }
 
-  let result = `${myStringify.getFirstSpaces(prevObject)}[${myStringify.newLine}`;
+  if (myStringify.isMark(obj)){
+    throw MyStringifyError.CircularStructureError();
+  }
+
+  myStringify.markObject(obj);
+
+  let result = `${myStringify.getFirstSpaces(prevObject)}[${
+    myStringify.newLine
+  }`;
 
   myStringify.spaceCount += space;
   for (let value of obj) {
@@ -99,6 +146,8 @@ myStringify.strigifyRules.set("Array", (obj, space, prevObject) => {
 
   myStringify.spaceCount -= space;
 
+  myStringify.unmarkObject(obj);
+
   return `${result + myStringify.getSpaces()}]`;
 });
 
@@ -107,7 +156,16 @@ myStringify.strigifyRules.set("Object", (obj, space, prevObject) => {
     return "{}";
   }
 
-  let result = `${myStringify.getFirstSpaces(prevObject)}{${myStringify.newLine}`;
+
+  if (myStringify.isMark(obj)){
+    throw MyStringifyError.CircularStructureError();
+  }
+
+  myStringify.markObject(obj);
+
+  let result = `${myStringify.getFirstSpaces(prevObject)}{${
+    myStringify.newLine
+  }`;
 
   myStringify.spaceCount += space;
 
@@ -125,6 +183,8 @@ myStringify.strigifyRules.set("Object", (obj, space, prevObject) => {
   myStringify.spaceCount -= space;
 
   result = myStringify.deleteLastComma(result);
+
+  myStringify.unmarkObject(obj);
 
   return `${result + myStringify.getSpaces()}}`;
 });
