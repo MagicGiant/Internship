@@ -1,6 +1,11 @@
+"use strict"
+
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
+const fetch = require("node-fetch");
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
 
 const PORT = 3000;
 const app = express();
@@ -13,7 +18,13 @@ app.use(express.static('css'));
 
 const createViewPath = (page) => path.resolve(__dirname, 'views', `${page}.ejs`);
 
-renderPath = async (res, fileDirPath) =>{
+const getJokesHtml = async () => {
+    const response = await fetch("https://www.anekdot.ru/random/anekdot/");
+    const text = await response.text()
+    return text;
+}
+
+const renderPath = async (res, fileDirPath) =>{
     fs.stat(fileDirPath, (err, stats) =>{
         if (err){
             return res.status(404).send('File or directory not found');
@@ -43,11 +54,25 @@ app.get('/', (req, res) => {
     renderPath(res, staticPath);
 });
 
+app.get('/jokes', async (req, res) => {
+    const jokesCount = 5;
+    const jokesHtml = await getJokesHtml();
+    const dom = await new JSDOM(jokesHtml);
+    const document = dom.window.document;
+    
+    const allItems = document.querySelectorAll('.text');
+
+    const jokes = Array.from(allItems).slice(0, jokesCount);
+    
+    res.render(createViewPath('jokes'), {jokes});
+});
+
 app.get('/*', (req, res) => {
     const fileDirPath = path.join(staticPath, req.params[0]);
 
     renderPath(res, fileDirPath);
 });
+
 
 app.use((req, res) => {
     let redirectPath = '/';
