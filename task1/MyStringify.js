@@ -2,7 +2,7 @@ module.exports = {
   myStringify: myStringify,
 };
 
-const MyStringifyError = require('./MyStringify.error').MyStringifyError
+const MyStringifyError = require("./MyStringify.error").MyStringifyError;
 
 // Как по мне это лучшее решение, так как оно полностью расширяемое, красивое(не использует уродские свитч кейсы и глобальные переменные), очень быстро работает (без перебора типов) за счет хеш мапы, а так же не выкинет ошибку в случае, если какой-то тип объекта не был рассмотрен (скорее всего просто покажет [object Object])
 
@@ -29,38 +29,40 @@ myStringify.strigifyRules = new Map();
 
 myStringify.visitedObjects = new Set();
 
-myStringify.inTypes = (obj, arrayObjectsType) =>{
-  if (obj == null){
+myStringify.inTypes = (obj, arrayObjectsType) => {
+  if (obj == null) {
     return false;
   }
 
-  for (let el of arrayObjectsType){
-    if (el == myStringify.getObjectType(obj)){
+  for (let el of arrayObjectsType) {
+    if (el == myStringify.getObjectType(obj)) {
       return true;
     }
   }
-  return  false;
-}
+  return false;
+};
 
-myStringify.markObject = (obj) =>{
-  if (!myStringify.inTypes(obj, ['Array', 'Object'])){
+myStringify.markObject = (obj) => {
+  if (!myStringify.inTypes(obj, ["Array", "Object"])) {
     return false;
   }
 
   myStringify.visitedObjects.add(obj);
   return true;
-}
+};
 
-myStringify.isMark = (obj) =>{
-  return myStringify.inTypes(obj, ['Array', 'Object']) && myStringify.visitedObjects.has(obj);
-}
+myStringify.isMark = (obj) => {
+  return (
+    myStringify.inTypes(obj, ["Array", "Object"]) &&
+    myStringify.visitedObjects.has(obj)
+  );
+};
 
-myStringify.unmarkObject = (obj) =>{
-  if (myStringify.isMark(obj)){
+myStringify.unmarkObject = (obj) => {
+  if (myStringify.isMark(obj)) {
     myStringify.visitedObjects.delete(obj);
   }
-}
-
+};
 
 myStringify.getObjectType = (obj) => {
   return Object.prototype.toString.call(obj).match(/\w*(?=])/)[0];
@@ -123,7 +125,7 @@ myStringify.strigifyRules.set("Array", (obj, space, prevObject) => {
     return "[]";
   }
 
-  if (myStringify.isMark(obj)){
+  if (myStringify.isMark(obj)) {
     throw MyStringifyError.CircularStructureError();
   }
 
@@ -156,8 +158,7 @@ myStringify.strigifyRules.set("Object", (obj, space, prevObject) => {
     return "{}";
   }
 
-
-  if (myStringify.isMark(obj)){
+  if (myStringify.isMark(obj)) {
     throw MyStringifyError.CircularStructureError();
   }
 

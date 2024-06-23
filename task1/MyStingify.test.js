@@ -1,7 +1,7 @@
 "use strict";
 const myStringify = require("./MyStringify").myStringify;
 
-const MyStringifyError = require("./MyStringify.error").MyStringifyError
+const MyStringifyError = require("./MyStringify.error").MyStringifyError;
 
 testCircular_error();
 testElements_equal();
@@ -30,16 +30,15 @@ function testElements_equal() {
   }
 }
 
-
-function testCircular_error(){
+function testCircular_error() {
   let a = [1, 2];
   let b = [3, a];
 
   a.push(b);
 
-  
-  test("Test circular structure", () =>{
-    expect(() => myStringify(a)).toThrow(MyStringifyError.CircularStructureError());
+  test("Test circular structure", () => {
+    expect(() => myStringify(a)).toThrow(
+      MyStringifyError.CircularStructureError()
+    );
   });
 }
-

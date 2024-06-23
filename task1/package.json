@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "MyStringify.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "debug": "npm test --watch"
   },
   "author": "Sherka",
   "license": "ISC",
