@@ -15,7 +15,8 @@ const elements = [
 const testElement = (el, space = null) => {
   test("test element myStringify", () => {
     expect(myStringify(el, space)).toBe(JSON.stringify(el, null, space));
-})};
+  });
+};
 
 for (const el of elements) {
   testElement(el);

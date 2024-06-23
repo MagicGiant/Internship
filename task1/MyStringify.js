@@ -1,3 +1,7 @@
+module.exports = {
+  myStringify: myStringify,
+};
+
 // Как по мне это лучшее решение, так как оно полностью расширяемое, красивое(не использует уродские свитч кейсы и глобальные переменные), очень быстро работает (без перебора типов) за счет хеш мапы, а так же не выкинет ошибку в случае, если какой-то тип объекта не был рассмотрен (скорее всего просто покажет [object Object])
 
 //Основной метод:
@@ -76,9 +80,7 @@ myStringify.strigifyRules.set("Array", (obj, space, prevObject) => {
     return "[]";
   }
 
-  let firstSpaces = prevObject == "Object" ? "" : myStringify.getSpaces();
-
-  let result = `${firstSpaces}[${myStringify.newLine}`;
+  let result = `${myStringify.getSpaces()}[${myStringify.newLine}`;
 
   myStringify.spaceCount += space;
   for (let value of obj) {
@@ -109,9 +111,10 @@ myStringify.strigifyRules.set("Object", (obj, space, prevObject) => {
       obj[key] == undefined
         ? myStringify.getSpaces() + "null"
         : myStringify.recursiveCast(obj[key], space, "Object");
-    result += `${myStringify.getSpaces()}"${key}":${myStringify.objectSpace}${recursiveData},${
-      myStringify.newLine
-    }`;
+
+    result += `${myStringify.getSpaces()}"${key}":${
+      myStringify.objectSpace
+    }${recursiveData},${myStringify.newLine}`;
   }
 
   myStringify.spaceCount -= space;
@@ -120,7 +123,3 @@ myStringify.strigifyRules.set("Object", (obj, space, prevObject) => {
 
   return `${result + myStringify.getSpaces()}}`;
 });
-
-module.exports = {
-  myStringify: myStringify,
-};
