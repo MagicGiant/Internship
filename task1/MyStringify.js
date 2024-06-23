@@ -122,7 +122,7 @@ myStringify.strigifyRules.set("Date", (obj) => {
 
 myStringify.strigifyRules.set("BigInt", (obj) => {
   throw MyStringifyError.serializeBigIntError();
-})
+});
 
 myStringify.strigifyRules.set("Array", (obj, space, prevObject) => {
   if (obj.length === 0) {
