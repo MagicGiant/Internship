@@ -7,7 +7,7 @@ class MyStringifyError extends Error {
     return new MyStringifyError("Converting circular structure to JSON");
   }
 
-  static serializeBigIntError(){
+  static serializeBigIntError() {
     return new MyStringifyError("Do not know how to serialize a BigInt");
   }
 }

@@ -1,9 +1,7 @@
 "use strict";
 
 const MyStringifyError = require("./MyStringify.error").MyStringifyError;
-
 const myStringify = require("./MyStringify").myStringify;
-
 
 testCircular_error();
 testElements_equal();
