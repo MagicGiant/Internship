@@ -15,6 +15,7 @@
     "express": "^4.19.2",
     "jsdom": "^24.1.0",
     "node-fetch": "^2.7.0",
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.4",
+    "some-random-cat": "^2.4.0"
   }
 }

@@ -4,6 +4,7 @@ const express = require('express');
 const path = require('path');
 const fs = require('fs');
 const fetch = require("node-fetch");
+const someRandomCat = require('some-random-cat');
 const jsdom = require("jsdom");
 const { JSDOM } = jsdom;
 
@@ -24,6 +25,14 @@ const getJokesHtml = async () => {
     return text;
 }
 
+const getRandomCatUrl = async () => {
+    try {
+        const res = await someRandomCat.Random.getCat();
+        return res.url;
+    } catch (e) {
+        return error(e); 
+    }
+};
 const renderPath = async (res, fileDirPath) =>{
     fs.stat(fileDirPath, (err, stats) =>{
         if (err){
@@ -66,6 +75,12 @@ app.get('/jokes', async (req, res) => {
     
     res.render(createViewPath('jokes'), {jokes});
 });
+
+app.get('/cat', async (req, res) => {
+    const catUrl = await getRandomCatUrl();
+    // const catUrl = 'https://cdn2.thecatapi.com/images/5lr.jpg'
+    res.render(createViewPath('cat'), {catUrl});
+})
 
 app.get('/*', (req, res) => {
     const fileDirPath = path.join(staticPath, req.params[0]);
