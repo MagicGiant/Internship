@@ -1,12 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Static files</title>
     <%- include('./partials/includeCss.ejs') %>
-</head>
-    <body>
-        <%- include('./partials/viewFilesDirectories.ejs') %>
-    </body>
+  </head>
+  <header>
+    <div class="authentification-box">
+      <form action="/regForm">
+        <button class="auth-btn">Sing up</button>
+      </form>
+      <form action="/logForm">
+        <button class="auth-btn">Log in</button>
+      </form>
+    </div>
+  </header>
+  <body>
+    <%- include('./partials/viewFilesDirectories.ejs') %>
+  </body>
 </html>

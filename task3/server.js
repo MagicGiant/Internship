@@ -79,6 +79,18 @@ app.get("/cat", async (req, res) => {
   res.render(createViewPath("cat"), { catUrl });
 });
 
+app.get("/regForm", (req, res) =>{
+  res.render(createViewPath("singIn"))
+})
+
+app.get("/logForm", (req, res) => {
+  res.render(createViewPath("logIn"))
+})
+
+app.post('/check-user', (req, res) => {
+    console.log(req.body);
+})
+
 app.get("/*", (req, res) => {
   const fileDirPath = path.join(staticPath, req.params[0]);
 
