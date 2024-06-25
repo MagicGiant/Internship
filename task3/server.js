@@ -6,6 +6,9 @@ const fs = require("fs");
 const fetch = require("node-fetch");
 const someRandomCat = require("some-random-cat");
 const jsdom = require("jsdom");
+const User = require("./models/user");
+const UserTransactions = require("./transactions/user.transaction")
+
 const { JSDOM } = jsdom;
 
 const PORT = 3000;
@@ -15,6 +18,7 @@ const staticPath = path.resolve(__dirname, "static");
 
 app.set("view engine", "ejs");
 app.use(express.static("css"));
+app.use(express.urlencoded({extended: false })) 
 
 const createViewPath = (page) =>
   path.resolve(__dirname, "views", `${page}.ejs`);
@@ -75,20 +79,23 @@ app.get("/jokes", async (req, res) => {
 
 app.get("/cat", async (req, res) => {
   const catUrl = await getRandomCatUrl();
-  // const catUrl = 'https://cdn2.thecatapi.com/images/5lr.jpg'
   res.render(createViewPath("cat"), { catUrl });
 });
 
-app.get("/regForm", (req, res) =>{
-  res.render(createViewPath("singIn"))
+app.get("/sing-up", (req, res) =>{
+  res.render(createViewPath("singUp"))
 })
 
-app.get("/logForm", (req, res) => {
+app.get("/log-in", (req, res) => {
   res.render(createViewPath("logIn"))
 })
 
-app.post('/check-user', (req, res) => {
-    console.log(req.body);
+app.post('/sing-up', async (req, res) => {
+  const user = new User(await UserTransactions.getLastId() + 1, req.body.username, req.body.password);
+
+  UserTransactions.addUser(user);
+
+  res.redirect('/');
 })
 
 app.get("/*", (req, res) => {
