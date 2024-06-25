@@ -1,17 +1,18 @@
-class Checker{
+const {UserTransaction} = require("../transactions/user.transaction");
+
+class Checker {
   static isLogIn = false;
 
-  static checkLogin(res){
-    if (!isLogIn){
-      alert("Please, log in.")
-      res.redirect("/");
-    }
+  static async checkingForUserExistence(user) {
+    const trUser = await UserTransactions.getUserByName(user.username);
+    return trUser == null;
   }
 
-  static CheckingForUserExistence(user, res){
-    if (!user){
-      alert("User is not exists");
-      res.redirect("/log-in");
-    }
+  static async checkingForUserAlreadyExistence(user) {
+    const trUser = await UserTransaction.getUserByName(user.username);
+    
+    return trUser != null;
   }
 }
+
+module.exports = Checker;

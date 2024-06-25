@@ -66,4 +66,6 @@ class UserTransaction {
   }
 }
 
-module.exports = UserTransaction;
+module.exports = {
+  UserTransaction
+}
