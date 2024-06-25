@@ -78,9 +78,6 @@ app.post('/log-in', async(req, res) =>{
   const {username, password} = req.body;
   const user = await UserTransaction.getUserByName(username);
 
-  console.log(`${username}|${password}`);
-  console.log(user);
-
   if (!user || password != user.password){
     res.send(MessageRedirect.passwordOrLoginIncorrect("/log-in"));
     return;
