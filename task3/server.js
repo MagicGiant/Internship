@@ -8,8 +8,8 @@ const staticPath = require("./js/static");
 const cat = require("./js/cat");
 const Checker = require("./js/checker");
 const MessageRedirect = require("./js/messageRedirect");
+const hasher = require('./js/hasher');
 const { UserTransaction } = require("./transactions/user.transaction");
-
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const session = require("express-session");
@@ -34,14 +34,14 @@ app.use(passport.session());
 passport.use(
   new LocalStrategy(async function (username, password, done) {
     try {
-      console.log(`${username} ${password}`);
       const user = await UserTransaction.getUserByName(username);
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
       }
-      if (user.password != password) {
+      if (!await hasher.checkPassword(password, user.password)) {
         return done(null, false, { message: "Incorrect password." });
       }
+      Checker.isLogIn = true;
       return done(null, user);
     } catch (err) {
       if (err) {
@@ -102,7 +102,7 @@ app.post(
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/log-in",
-    failureFlash: true,
+    failureFlash: false,
   })
 );
 
@@ -119,7 +119,7 @@ app.post("/sing-up", async (req, res) => {
   const user = new User(
     (await UserTransaction.getLastId()) + 1,
     req.body.username,
-    req.body.password
+    await hasher.hashPassword(req.body.password)
   );
 
   if (await Checker.checkingForUserAlreadyExistence(user)) {
