@@ -3,7 +3,7 @@ const fs = require("fs");
 const pathCreator = require('./pathCreator');
 
 
-const renderPath = async (res, fileDirPath) => {
+const renderPath = async (res, fileDirPath, isLogIn = false) => {
   fs.stat(fileDirPath, (err, stats) => {
     if (err) {
       console.log(err);
@@ -17,7 +17,7 @@ const renderPath = async (res, fileDirPath) => {
         if (err) {
           console.error("Error reading static directory", err);
           return res.status(500).send("Server error");
-        } else res.render(pathCreator.createViewPath("index"), { files });
+        } else res.render(pathCreator.createViewPath("index"), { files , isLogIn});
       });
     }
   });

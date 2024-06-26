@@ -8,12 +8,18 @@
   </head>
   <header>
     <div class="authentification-box">
-      <form action="/sing-up">
-        <button class="auth-btn">Sing up</button>
-      </form>
-      <form action="/log-in">
-        <button class="auth-btn">Log in</button>
-      </form>
+      <% if(!isLogIn){ %>
+        <form method="get" action="/sing-up">
+          <button class="auth-btn">Sing up</button>
+        </form>
+        <form method="get" action="/log-in">
+          <button class="auth-btn">Log in</button>
+        </form>
+      <% }else{ %>
+        <form method="post" action="/log-out">
+          <button class="auth-btn">Log out</button>
+        </form>
+      <% } %>
     </div>
   </header>
   <body>

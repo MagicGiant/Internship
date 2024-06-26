@@ -68,10 +68,6 @@ app.listen(PORT, (err) => {
   err ? console.log(err) : console.log(`http://localhost:${PORT}/`);
 });
 
-app.get("/", (req, res) => {
-  staticPath.renderPath(res, pathCreator.staticPath);
-});
-
 app.get("/jokes", async (req, res) => {
   if (!Checker.isLogIn) {
     res.send(MessageRedirect.doesNotLogInMessage("/"));
@@ -132,6 +128,15 @@ app.post("/sing-up", async (req, res) => {
   res.redirect("/");
 });
 
+app.post("/log-out", (req, res) =>{
+  Checker.isLogIn = false;
+  res.redirect("/");
+});
+
+app.get("/", (req, res) => {
+  staticPath.renderPath(res, pathCreator.staticPath, Checker.isLogIn);
+});
+
 app.get("/*", (req, res) => {
   if (!Checker.isLogIn) {
     res.send(MessageRedirect.doesNotLogInMessage("/"));
@@ -142,7 +147,7 @@ app.get("/*", (req, res) => {
     req.params[0]
   );
 
-  staticPath.renderPath(res, fileDirPath);
+  staticPath.renderPath(res, fileDirPath, Checker.isLogIn);
 });
 
 app.use((req, res) => {
