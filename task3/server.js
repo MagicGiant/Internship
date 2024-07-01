@@ -9,7 +9,7 @@ const cat = require("./js/cat");
 const Checker = require("./js/checker");
 const MessageRedirect = require("./js/messageRedirect");
 const hasher = require('./js/hasher');
-const { UserTransaction } = require("./transactions/user.transaction");
+const { UserRepository } = require("./repositories/user.repository");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const session = require("express-session");
@@ -34,7 +34,7 @@ app.use(passport.session());
 passport.use(
   new LocalStrategy(async function (username, password, done) {
     try {
-      const user = await UserTransaction.getUserByName(username);
+      const user = await UserRepository.getUserByName(username);
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
       }
@@ -57,7 +57,7 @@ passport.serializeUser(function (user, done) {
 
 passport.deserializeUser(async function (id, done) {
   try {
-    const user = await UserTransaction.getUserById(id);
+    const user = await UserRepository.getUserById(id);
     done(null, user);
   } catch(err) {
     done(err, null);
@@ -113,7 +113,7 @@ app.post("/sing-up", async (req, res) => {
   }
 
   const user = new User(
-    (await UserTransaction.getLastId()) + 1,
+    (await UserRepository.getLastId()) + 1,
     req.body.username,
     await hasher.hashPassword(req.body.password)
   );
@@ -123,7 +123,7 @@ app.post("/sing-up", async (req, res) => {
     return;
   }
 
-  UserTransaction.addUser(user);
+  UserRepository.addUser(user);
 
   res.redirect("/");
 });

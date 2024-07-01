@@ -2,7 +2,7 @@ const transaction = require("../db/db").transaction;
 const { user } = require("pg/lib/defaults");
 const User = require("../models/user");
 
-class UserTransaction {
+class UserRepository {
   static async getLastId() {
     return transaction(async (client) => {
       const res = await client.query(
@@ -67,5 +67,5 @@ class UserTransaction {
 }
 
 module.exports = {
-  UserTransaction
+  UserRepository
 }

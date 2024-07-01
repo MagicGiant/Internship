@@ -1,4 +1,4 @@
-const {UserTransaction} = require("../transactions/user.transaction");
+const {UserRepository} = require("../repositories/user.repository");
 
 class Checker {
   static isLogIn = false;
@@ -9,7 +9,7 @@ class Checker {
   }
 
   static async checkingForUserAlreadyExistence(user) {
-    const trUser = await UserTransaction.getUserByName(user.username);
+    const trUser = await UserRepository.getUserByName(user.username);
     
     return trUser != null;
   }
