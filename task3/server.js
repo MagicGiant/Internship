@@ -8,32 +8,17 @@ const staticPath = require("./public/js/static");
 const cat = require("./public/js/cat");
 const Checker = require("./public/js/checker");
 const MessageRedirect = require("./public/js/messageRedirect");
-const hasher = require('./public/js/hasher');
 const Database = require('./src/db/database');
 const UserRepository = require("./src/repositories/user.repository");
-const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
-const session = require("express-session");
-
 const PORT = 3000;
 const app = express();
+
+const authRouter = require('./src/routes/auth.router');
 
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
-
-app.use(
-  session({
-    secret: "asdjsdaqjwhegfbjbdjsayeglrjhbqwyf",
-    resave: false,
-    saveUninitialized: false,
-  })
-);
-app.use(passport.initialize());
-app.use(passport.session());
-
-
 
 const database = Database.getDatabaseFromObject({
   user: "Sherka",
@@ -41,47 +26,16 @@ const database = Database.getDatabaseFromObject({
   port: 5432,
   database: "fileManager"
 });
-
 const userRepository = new UserRepository(database);
+const checker = new Checker(userRepository);
 
-let checker = new Checker(userRepository);
 
-passport.use(
-  new LocalStrategy(async function (username, password, done) {
-    try {
-      const user = await userRepository.getUserByName(username);
-      if (!user) {
-        return done(null, false, { message: "Incorrect username" });
-      }
-      if (!await hasher.checkPassword(password, user.password)) {
-        return done(null, false, { message: "Incorrect password." });
-      }
-      checker.isLogIn = true;
-      return done(null, user);
-    } catch (err) {
-      if (err) {
-        return done(err);
-      }
-    }
-  })
-);
-
-passport.serializeUser(function (user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(async function (id, done) {
-  try {
-    const user = await userRepository.getUserById(id);
-    done(null, user);
-  } catch(err) {
-    done(err, null);
-  }
-});
 
 app.listen(PORT, (err) => {
   err ? console.log(err) : console.log(`http://localhost:${PORT}/`);
 });
+
+app.use('/', authRouter(userRepository, checker));
 
 app.get("/jokes", async (req, res) => {
   if (!checker.isLogIn) {
@@ -100,52 +54,6 @@ app.get("/cat", async (req, res) => {
   }
   const catUrl = await cat.getRandomCatUrl();
   res.render(pathCreator.createViewPath("cat"), { catUrl });
-});
-
-
-
-app.get("/log-in", (req, res) => {
-  res.render(pathCreator.createViewPath("logIn"));
-});
-
-app.post(
-  "/log-in",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/log-in",
-    failureFlash: false,
-  })
-);
-
-app.get("/sing-up", (req, res) => {
-  res.render(pathCreator.createViewPath("singUp"));
-});
-
-app.post("/sing-up", async (req, res) => {
-  if (req.body.password != req.body.secpassword) {
-    res.send(MessageRedirect.passwordsMismatch("/sing-up"));
-    return;
-  }
-
-  const user = new User(
-    (await userRepository.getLastId()) + 1,
-    req.body.username,
-    await hasher.hashPassword(req.body.password)
-  );
-
-  if (await checker.checkingForUserAlreadyExistence(user)) {
-    res.send(MessageRedirect.userAlreadyExistenceMessage("/sing-up"));
-    return;
-  }
-
-  userRepository.addUser(user);
-
-  res.redirect("/");
-});
-
-app.post("/log-out", (req, res) =>{
-  checker.isLogIn = false;
-  res.redirect("/");
 });
 
 app.get("/", (req, res) => {
