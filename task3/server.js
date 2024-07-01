@@ -1,157 +1,40 @@
 "use strict";
 
 const express = require("express");
-const User = require("./models/user");
-const pathCreator = require("./js/pathCreator");
-const joke = require("./js/joke");
-const staticPath = require("./js/static");
-const cat = require("./js/cat");
-const Checker = require("./js/checker");
-const MessageRedirect = require("./js/messageRedirect");
-const hasher = require('./js/hasher');
-const { UserTransaction } = require("./transactions/user.transaction");
-const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
-const session = require("express-session");
-
-const PORT = 3000;
+const Checker = require("./public/js/checker");
+const Database = require("./src/db/database");
+const UserRepository = require("./src/repository/user.repository");
 const app = express();
 
+const authRouter = require("./src/routes/auth.router");
+const staticRouter = require("./src/routes/static.router");
+const jokesRouter = require("./src/routes/jokes.router");
+const catRouter = require("./src/routes/cat.router");
+
 app.set("view engine", "ejs");
-app.use(express.static("css"));
+app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 
-app.use(
-  session({
-    secret: "asdjsdaqjwhegfbjbdjsayeglrjhbqwyf",
-    resave: false,
-    saveUninitialized: false,
-  })
-);
-app.use(passport.initialize());
-app.use(passport.session());
-
-passport.use(
-  new LocalStrategy(async function (username, password, done) {
-    try {
-      const user = await UserTransaction.getUserByName(username);
-      if (!user) {
-        return done(null, false, { message: "Incorrect username" });
-      }
-      if (!await hasher.checkPassword(password, user.password)) {
-        return done(null, false, { message: "Incorrect password." });
-      }
-      Checker.isLogIn = true;
-      return done(null, user);
-    } catch (err) {
-      if (err) {
-        return done(err);
-      }
-    }
-  })
-);
-
-passport.serializeUser(function (user, done) {
-  done(null, user.id);
+const database = Database.getDatabaseFromObject({
+  user: "Sherka",
+  host: "localhost",
+  port: 5432,
+  database: "fileManager",
 });
 
-passport.deserializeUser(async function (id, done) {
-  try {
-    const user = await UserTransaction.getUserById(id);
-    done(null, user);
-  } catch(err) {
-    done(err, null);
-  }
-});
+const userRepository = new UserRepository(database);
+const checker = new Checker(userRepository);
+
+const PORT = 3000;
 
 app.listen(PORT, (err) => {
   err ? console.log(err) : console.log(`http://localhost:${PORT}/`);
 });
 
-app.get("/jokes", async (req, res) => {
-  if (!Checker.isLogIn) {
-    res.send(MessageRedirect.doesNotLogInMessage("/"));
-    return;
-  }
+app.use("/auth", authRouter(userRepository, checker));
 
-  const jokes = await joke.getJokes(5);
-  res.render(pathCreator.createViewPath("jokes"), { jokes });
-});
+app.use("/cat", catRouter(checker));
 
-app.get("/cat", async (req, res) => {
-  if (!Checker.isLogIn) {
-    res.send(MessageRedirect.doesNotLogInMessage("/"));
-    return;
-  }
-  const catUrl = await cat.getRandomCatUrl();
-  res.render(pathCreator.createViewPath("cat"), { catUrl });
-});
+app.use("/jokes", jokesRouter(checker));
 
-
-
-app.get("/log-in", (req, res) => {
-  res.render(pathCreator.createViewPath("logIn"));
-});
-
-app.post(
-  "/log-in",
-  passport.authenticate("local", {
-    successRedirect: "/",
-    failureRedirect: "/log-in",
-    failureFlash: false,
-  })
-);
-
-app.get("/sing-up", (req, res) => {
-  res.render(pathCreator.createViewPath("singUp"));
-});
-
-app.post("/sing-up", async (req, res) => {
-  if (req.body.password != req.body.secpassword) {
-    res.send(MessageRedirect.passwordsMismatch("/sing-up"));
-    return;
-  }
-
-  const user = new User(
-    (await UserTransaction.getLastId()) + 1,
-    req.body.username,
-    await hasher.hashPassword(req.body.password)
-  );
-
-  if (await Checker.checkingForUserAlreadyExistence(user)) {
-    res.send(MessageRedirect.userAlreadyExistenceMessage("/sing-up"));
-    return;
-  }
-
-  UserTransaction.addUser(user);
-
-  res.redirect("/");
-});
-
-app.post("/log-out", (req, res) =>{
-  Checker.isLogIn = false;
-  res.redirect("/");
-});
-
-app.get("/", (req, res) => {
-  staticPath.renderPath(res, pathCreator.staticPath, Checker.isLogIn);
-});
-
-app.get("/*", (req, res) => {
-  if (!Checker.isLogIn) {
-    res.send(MessageRedirect.doesNotLogInMessage("/"));
-    return;
-  }
-  const fileDirPath = pathCreator.path.join(
-    pathCreator.staticPath,
-    req.params[0]
-  );
-
-  staticPath.renderPath(res, fileDirPath, Checker.isLogIn);
-});
-
-app.use((req, res) => {
-  let redirectPath = "/";
-  console.log(`Invalid link. Redirect to "${redirectPath}"`);
-  res.redirect(redirectPath);
-});
+app.use("/", staticRouter(checker));

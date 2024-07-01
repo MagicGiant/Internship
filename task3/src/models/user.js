@@ -5,8 +5,7 @@ class User{
     this.password = password;
   }
 
-  static async createUserFromObj(obj){
-    let {id, username, password} = obj;
+  static async createUserFromObj({id, username, password}){
     return new User(id, username, password);
   }
 
