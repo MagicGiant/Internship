@@ -1,4 +1,4 @@
-const {UserRepository} = require("../repositories/user.repository");
+const {UserRepository} = require("../../src/repositories/user.repository");
 
 class Checker {
   static isLogIn = false;

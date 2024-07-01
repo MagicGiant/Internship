@@ -1,15 +1,15 @@
 "use strict";
 
 const express = require("express");
-const User = require("./models/user");
-const pathCreator = require("./js/pathCreator");
-const joke = require("./js/joke");
-const staticPath = require("./js/static");
-const cat = require("./js/cat");
-const Checker = require("./js/checker");
-const MessageRedirect = require("./js/messageRedirect");
-const hasher = require('./js/hasher');
-const { UserRepository } = require("./repositories/user.repository");
+const User = require("./src/models/user");
+const pathCreator = require("./public/js/pathCreator");
+const joke = require("./public/js/joke");
+const staticPath = require("./public/js/static");
+const cat = require("./public/js/cat");
+const Checker = require("./public/js/checker");
+const MessageRedirect = require("./public/js/messageRedirect");
+const hasher = require('./public/js/hasher');
+const { UserRepository } = require("./src/repositories/user.repository");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const session = require("express-session");
@@ -18,7 +18,7 @@ const PORT = 3000;
 const app = express();
 
 app.set("view engine", "ejs");
-app.use(express.static("css"));
+app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 
 app.use(
