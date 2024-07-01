@@ -8,7 +8,7 @@ module.exports = (checker) => {
   router.get("/", (req, res) => {
     static.renderPath(res, pathCreator.staticPath, checker.isLogIn);
   });
-  
+
   router.get("/*", (req, res) => {
     if (!checker.isLogIn) {
       res.send(MessageRedirect.doesNotLogInMessage("/"));
@@ -18,10 +18,10 @@ module.exports = (checker) => {
       pathCreator.staticPath,
       req.params[0]
     );
-  
+
     static.renderPath(res, fileDirPath, checker.isLogIn);
   });
-  
+
   router.use((req, res) => {
     let redirectPath = "/";
     console.log(`Invalid link. Redirect to "${redirectPath}"`);
@@ -29,4 +29,4 @@ module.exports = (checker) => {
   });
 
   return router;
-}
+};

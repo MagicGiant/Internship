@@ -5,7 +5,7 @@ const joke = require("../../public/js/joke");
 const MessageRedirect = require("../../public/js/messageRedirect");
 const pathCreator = require("../../public/js/pathCreator");
 
-module.exports = (checker) =>{
+module.exports = (checker) => {
   router.get("/", async (req, res) => {
     if (!checker.isLogIn) {
       res.send(MessageRedirect.doesNotLogInMessage("/"));
@@ -17,4 +17,4 @@ module.exports = (checker) =>{
   });
 
   return router;
-}
+};

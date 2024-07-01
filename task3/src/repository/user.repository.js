@@ -1,7 +1,7 @@
 const User = require("../models/user");
 
 class UserRepository {
-  constructor(database){
+  constructor(database) {
     this.db = database;
   }
 
@@ -49,21 +49,15 @@ class UserRepository {
     });
   }
 
-  async deleteUserById(id){
+  async deleteUserById(id) {
     this.db.transaction(async (client) => {
-      await client.query(
-        `DELETE FROM users WHERE id = $1;`,
-        [id]
-      );
+      await client.query(`DELETE FROM users WHERE id = $1;`, [id]);
     });
   }
 
-  async deleteUserByName(username){
+  async deleteUserByName(username) {
     this.db.transaction(async (client) => {
-      await client.query(
-        `DELETE FROM users WHERE username = $1;`,
-        [username]
-      );
+      await client.query(`DELETE FROM users WHERE username = $1;`, [username]);
     });
   }
 }

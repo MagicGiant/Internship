@@ -5,9 +5,9 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const session = require("express-session");
 
-const hasher = require('../../public/js/hasher');
+const hasher = require("../../public/js/hasher");
 
-module.exports = (repository, checker) =>{
+module.exports = (repository, checker) => {
   passport.use(
     new LocalStrategy(async function (username, password, done) {
       try {
@@ -15,7 +15,7 @@ module.exports = (repository, checker) =>{
         if (!user) {
           return done(null, false, { message: "Incorrect username" });
         }
-        if (!await hasher.checkPassword(password, user.password)) {
+        if (!(await hasher.checkPassword(password, user.password))) {
           return done(null, false, { message: "Incorrect password." });
         }
         checker.isLogIn = true;
@@ -27,20 +27,20 @@ module.exports = (repository, checker) =>{
       }
     })
   );
-  
+
   passport.serializeUser(function (user, done) {
     done(null, user.id);
   });
-  
+
   passport.deserializeUser(async function (id, done) {
     try {
       const user = await repository.getUserById(id);
       done(null, user);
-    } catch(err) {
+    } catch (err) {
       done(err, null);
     }
   });
-  
+
   router.use(
     session({
       secret: "asdjsdaqjwhegfbjbdjsayeglrjhbqwyf",
@@ -53,6 +53,6 @@ module.exports = (repository, checker) =>{
 
   return {
     router,
-    passport
-  }
-}
+    passport,
+  };
+};

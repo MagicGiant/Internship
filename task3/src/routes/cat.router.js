@@ -16,4 +16,4 @@ module.exports = (checker) => {
   });
 
   return router;
-}
+};
