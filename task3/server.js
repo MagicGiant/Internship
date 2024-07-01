@@ -9,13 +9,15 @@ const cat = require("./public/js/cat");
 const Checker = require("./public/js/checker");
 const MessageRedirect = require("./public/js/messageRedirect");
 const hasher = require('./public/js/hasher');
-const { UserRepository } = require("./src/repositories/user.repository");
+const Database = require('./src/db/database');
+const UserRepository = require("./src/repositories/user.repository");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const session = require("express-session");
 
 const PORT = 3000;
 const app = express();
+
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -31,17 +33,30 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+
+
+const database = Database.getDatabaseFromObject({
+  user: "Sherka",
+  host: "localhost",
+  port: 5432,
+  database: "fileManager"
+});
+
+const userRepository = new UserRepository(database);
+
+let checker = new Checker(userRepository);
+
 passport.use(
   new LocalStrategy(async function (username, password, done) {
     try {
-      const user = await UserRepository.getUserByName(username);
+      const user = await userRepository.getUserByName(username);
       if (!user) {
         return done(null, false, { message: "Incorrect username" });
       }
       if (!await hasher.checkPassword(password, user.password)) {
         return done(null, false, { message: "Incorrect password." });
       }
-      Checker.isLogIn = true;
+      checker.isLogIn = true;
       return done(null, user);
     } catch (err) {
       if (err) {
@@ -57,7 +72,7 @@ passport.serializeUser(function (user, done) {
 
 passport.deserializeUser(async function (id, done) {
   try {
-    const user = await UserRepository.getUserById(id);
+    const user = await userRepository.getUserById(id);
     done(null, user);
   } catch(err) {
     done(err, null);
@@ -69,7 +84,7 @@ app.listen(PORT, (err) => {
 });
 
 app.get("/jokes", async (req, res) => {
-  if (!Checker.isLogIn) {
+  if (!checker.isLogIn) {
     res.send(MessageRedirect.doesNotLogInMessage("/"));
     return;
   }
@@ -79,7 +94,7 @@ app.get("/jokes", async (req, res) => {
 });
 
 app.get("/cat", async (req, res) => {
-  if (!Checker.isLogIn) {
+  if (!checker.isLogIn) {
     res.send(MessageRedirect.doesNotLogInMessage("/"));
     return;
   }
@@ -113,32 +128,32 @@ app.post("/sing-up", async (req, res) => {
   }
 
   const user = new User(
-    (await UserRepository.getLastId()) + 1,
+    (await userRepository.getLastId()) + 1,
     req.body.username,
     await hasher.hashPassword(req.body.password)
   );
 
-  if (await Checker.checkingForUserAlreadyExistence(user)) {
+  if (await checker.checkingForUserAlreadyExistence(user)) {
     res.send(MessageRedirect.userAlreadyExistenceMessage("/sing-up"));
     return;
   }
 
-  UserRepository.addUser(user);
+  userRepository.addUser(user);
 
   res.redirect("/");
 });
 
 app.post("/log-out", (req, res) =>{
-  Checker.isLogIn = false;
+  checker.isLogIn = false;
   res.redirect("/");
 });
 
 app.get("/", (req, res) => {
-  staticPath.renderPath(res, pathCreator.staticPath, Checker.isLogIn);
+  staticPath.renderPath(res, pathCreator.staticPath, checker.isLogIn);
 });
 
 app.get("/*", (req, res) => {
-  if (!Checker.isLogIn) {
+  if (!checker.isLogIn) {
     res.send(MessageRedirect.doesNotLogInMessage("/"));
     return;
   }
@@ -147,7 +162,7 @@ app.get("/*", (req, res) => {
     req.params[0]
   );
 
-  staticPath.renderPath(res, fileDirPath, Checker.isLogIn);
+  staticPath.renderPath(res, fileDirPath, checker.isLogIn);
 });
 
 app.use((req, res) => {
