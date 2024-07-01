@@ -2,7 +2,6 @@
 
 const express = require("express");
 const pathCreator = require("./public/js/pathCreator");
-const cat = require("./public/js/cat");
 const Checker = require("./public/js/checker");
 const MessageRedirect = require("./public/js/messageRedirect");
 const Database = require('./src/db/database');
@@ -12,6 +11,7 @@ const app = express();
 const authRouter = require('./src/routes/auth.router');
 const staticRouter = require('./src/routes/static.router');
 const jokesRouter = require('./src/routes/jokes.router');
+const catRouter = require('./src/routes/cat.router');
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -35,14 +35,7 @@ app.listen(PORT, (err) => {
 
 app.use('/auth', authRouter(userRepository, checker));
 
-app.get("/cat", async (req, res) => {
-  if (!checker.isLogIn) {
-    res.send(MessageRedirect.doesNotLogInMessage("/"));
-    return;
-  }
-  const catUrl = await cat.getRandomCatUrl();
-  res.render(pathCreator.createViewPath("cat"), { catUrl });
-});
+app.use('/cat', catRouter(checker));
 
 app.use("/jokes", jokesRouter(checker));
 
