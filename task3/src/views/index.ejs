@@ -9,14 +9,14 @@
   <header>
     <div class="authentification-box">
       <% if(!isLogIn){ %>
-        <form method="get" action="/sing-up">
+        <form method="get" action="/auth/sing-up">
           <button class="auth-btn">Sing up</button>
         </form>
-        <form method="get" action="/log-in">
+        <form method="get" action="/auth/log-in">
           <button class="auth-btn">Log in</button>
         </form>
       <% }else{ %>
-        <form method="post" action="/log-out">
+        <form method="post" action="/auth/log-out">
           <button class="auth-btn">Log out</button>
         </form>
       <% } %>

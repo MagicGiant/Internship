@@ -9,12 +9,11 @@ const cat = require("./public/js/cat");
 const Checker = require("./public/js/checker");
 const MessageRedirect = require("./public/js/messageRedirect");
 const Database = require('./src/db/database');
-const UserRepository = require("./src/repositories/user.repository");
+const UserRepository = require("./src/repository/user.repository");
 const PORT = 3000;
 const app = express();
 
 const authRouter = require('./src/routes/auth.router');
-
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -35,7 +34,7 @@ app.listen(PORT, (err) => {
   err ? console.log(err) : console.log(`http://localhost:${PORT}/`);
 });
 
-app.use('/', authRouter(userRepository, checker));
+app.use('/auth', authRouter(userRepository, checker));
 
 app.get("/jokes", async (req, res) => {
   if (!checker.isLogIn) {
