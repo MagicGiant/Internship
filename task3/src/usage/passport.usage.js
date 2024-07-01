@@ -1,5 +1,5 @@
 const express = require("express");
-var router = express.Router();
+let router = express.Router();
 
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
