@@ -1,5 +1,5 @@
 const express = require("express");
-let router = express.Router();
+const router = express.Router();
 
 const pathCreator = require("../../public/js/pathCreator");
 const hasher = require('../../public/js/hasher');

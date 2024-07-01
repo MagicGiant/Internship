@@ -2,7 +2,6 @@
 
 const express = require("express");
 const pathCreator = require("./public/js/pathCreator");
-const joke = require("./public/js/joke");
 const cat = require("./public/js/cat");
 const Checker = require("./public/js/checker");
 const MessageRedirect = require("./public/js/messageRedirect");
@@ -12,6 +11,7 @@ const app = express();
 
 const authRouter = require('./src/routes/auth.router');
 const staticRouter = require('./src/routes/static.router');
+const jokesRouter = require('./src/routes/jokes.router');
 
 app.set("view engine", "ejs");
 app.use(express.static("public"));
@@ -23,6 +23,7 @@ const database = Database.getDatabaseFromObject({
   port: 5432,
   database: "fileManager"
 });
+
 const userRepository = new UserRepository(database);
 const checker = new Checker(userRepository);
 
@@ -34,16 +35,6 @@ app.listen(PORT, (err) => {
 
 app.use('/auth', authRouter(userRepository, checker));
 
-app.get("/jokes", async (req, res) => {
-  if (!checker.isLogIn) {
-    res.send(MessageRedirect.doesNotLogInMessage("/"));
-    return;
-  }
-
-  const jokes = await joke.getJokes(5);
-  res.render(pathCreator.createViewPath("jokes"), { jokes });
-});
-
 app.get("/cat", async (req, res) => {
   if (!checker.isLogIn) {
     res.send(MessageRedirect.doesNotLogInMessage("/"));
@@ -52,5 +43,7 @@ app.get("/cat", async (req, res) => {
   const catUrl = await cat.getRandomCatUrl();
   res.render(pathCreator.createViewPath("cat"), { catUrl });
 });
+
+app.use("/jokes", jokesRouter(checker));
 
 app.use('/', staticRouter(checker));
