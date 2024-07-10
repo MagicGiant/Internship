@@ -3,6 +3,7 @@ const router = express.Router();
 
 const pathCreator = require("../../public/js/pathCreator");
 const static = require("../../public/js/static");
+const MessageRedirect = require("../../public/js/messageRedirect");
 
 module.exports = (checker) => {
   router.get("/", (req, res) => {
