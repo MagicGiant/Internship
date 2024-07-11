@@ -1,0 +1,11 @@
+{
+  "name": "task2",
+  "version": "1.0.0",
+  "main": "HtmlParser.js",
+  "scripts": {
+    "start": "node HtmlParser.js"
+  },
+  "author": "Sherka",
+  "license": "ISC",
+  "description": ""
+}
