@@ -1,9 +1,9 @@
 {
   "name": "task2",
   "version": "1.0.0",
-  "main": "HtmlParser.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node HtmlParser.js"
+    "start": "node app.js"
   },
   "author": "Sherka",
   "license": "ISC",
