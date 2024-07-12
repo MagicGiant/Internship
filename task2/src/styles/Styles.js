@@ -1,4 +1,4 @@
-const Properties = require('./Properties')
+const Properties = require("./Properties");
 
 class Styles {
   groupRegex = /(?<=<style>).+?(?=<\/style>)/gis;
@@ -11,7 +11,7 @@ class Styles {
 
     let styleMatch;
     while ((styleMatch = this.styleRegex.exec(groupStr)) != null) {
-      let styleName = styleMatch.groups?.style;
+      let styleName = styleMatch.groups?.style.replace(/\s+/g, "");
       let styleValue = styleMatch.groups?.value;
       let styleProperties = new Properties().get(styleValue);
 
@@ -22,4 +22,4 @@ class Styles {
   }
 }
 
-module.exports = Styles
+module.exports = Styles;

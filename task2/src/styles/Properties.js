@@ -6,7 +6,9 @@ class Properties {
 
     let propertyMatch;
     while ((propertyMatch = this.propertyRegex.exec(str)) != null) {
-      properties[`${propertyMatch.groups.prop}`] = propertyMatch.groups.value;
+      let propName = propertyMatch.groups.prop.replace(/\s+/g, '');
+
+      properties[`${propName}`] = propertyMatch.groups.value;
     }
 
     return properties;
