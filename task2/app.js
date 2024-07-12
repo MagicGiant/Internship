@@ -7,9 +7,8 @@ const Table = require("./src/objects/Table");
 let styles = new Styles();
 
 const INPUT_FILE_PATH = "examples/Example.html";
-// Это тоже работает ↴ 
+// Это тоже работает ↴ (просто тут ⤴ будто нагляднее)
 // const INPUT_FILE_PATH = "examples/doc.html";
-
 
 const OUT_FILE_PATH = "./output.json";
 
