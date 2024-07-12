@@ -1,7 +1,7 @@
 class Paragraph{
   textRegex = /<p.*?>(?<text>.*?)<\/p>/s;
-  classRegex = /<p.*?(class="(?<class>.*?)")?.*?>/s
-  pidRegex = /<p.*?(data-pid="(?<pid>.*?)")?.*?>/s
+  classRegex = /<p.*?class="(?<class>.*?)".*?>/s
+  pidRegex = /<p.*?data-pid="(?<pid>.*?)".*?>/s
   
   firstPid = null;
   lastPid = null;
