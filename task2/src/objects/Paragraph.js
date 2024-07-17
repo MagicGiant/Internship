@@ -12,7 +12,8 @@ class Paragraph{
       source: str
     }
 
-    paragraphs.text = this.textRegex.exec(str)?.groups?.text;
+    paragraphs.text = this.textRegex.exec(str)?.groups?.text
+      .replace(/(<.*?>)|(\n)|(\t)/gs, '');
     paragraphs.class = this.classRegex.exec(str)?.groups?.class;
     paragraphs.pid = this.pidRegex.exec(str)?.groups?.pid;
 
