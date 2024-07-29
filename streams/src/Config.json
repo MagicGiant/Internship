@@ -1,0 +1,14 @@
+{ 
+  "inputFiles": ["input1.txt", "input2.txt"], 
+  "outputFiles": ["output1.txt", "output2.txt"], 
+  "filterKeywords": ["ERROR"], 
+  "emailConfig": { 
+    "service": "gmail", 
+    "auth": { 
+      "user": "your-email@gmail.com", 
+      "pass": "your-email-password" 
+    }, 
+    "to": "notify-email@example.com", 
+    "subject": "Processing Completed" 
+  } 
+} 
