@@ -1,6 +1,12 @@
 class ToUpperCase{
-  change(chunk) {
-    return chunk.toUpperCase();
+  change(chunk, callback) {
+    try {
+      return chunk.toUpperCase();  
+    } catch (error) {
+      callback(error);
+    } finally{
+      callback();
+    }
   }
 }
 

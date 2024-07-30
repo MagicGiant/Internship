@@ -48,7 +48,7 @@ class FileHandler {
     const outDataThrough = new PassThrough();
 
     outDataThrough.on('data', (chunk) => {
-      this.logger.addLog(`Writing chunk to ${outputPath}: ${chunk}`);
+      this.logger.addLog(`Writing chunk to ${outputPath}:\n${chunk}`);
       fs.appendFileSync(outputPath, chunk, 'utf8');
     });
 
