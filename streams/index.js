@@ -1,14 +1,15 @@
+const { getConfig } = require('./src/configReader');
+const FileHandler = require('./src/fileHandler');
+const Logger = require('./src/logger');
 const Manager = require('./src/manager');
-const TransformToUpperCase = require('./src/transformStrategies/transformToUpperCase');
+const {TransformToUpperCaseBuilder} = require('./src/transformStrategies/transformToUpperCase');
 const path = require('path')
 
 async function f(){
   const configPath = path.join(__dirname, './src/Config.json');
-  const transformToUpperCase = new TransformToUpperCase();
-
-  console.log(new Manager(configPath).getConfig(), transformToUpperCase);
-
   
+  new Logger().clearLogs();
+  new FileHandler(getConfig(configPath), new TransformToUpperCaseBuilder()).processFiles();
 }
 
 f();

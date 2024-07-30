@@ -15,4 +15,13 @@ class TransformToUpperCase extends Transform{
   }
 }
 
-module.exports = TransformToUpperCase;
+class TransformToUpperCaseBuilder{
+  create(){
+    return new TransformToUpperCase();
+  }
+}
+
+module.exports ={
+  TransformToUpperCase,
+  TransformToUpperCaseBuilder
+}
