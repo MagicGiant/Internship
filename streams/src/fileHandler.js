@@ -1,50 +1,34 @@
 const fs = require('fs');
 const path = require('path');
-const { PassThrough, Transform } = require('stream');
+const { PassThrough } = require('stream');
 const Logger = require('./logger');
 
 class FileHandler {
-  constructor(config, transformBuilder = null) {
+  constructor(config, transformBuilder) {
     this.config = config;
-    this.transformBuilder = transformBuilder || new PassThrough();
+    this.transformBuilder = transformBuilder;
     this.logger = new Logger();
   }
 
   processFile(inputPath, outputPath) {
     this.createFile(outputPath);
 
-
     const readableStream = fs.createReadStream(inputPath, { 
       encoding: 'utf8',
       highWaterMark: 40
     });
 
-    const writeStream = this.writeThrough(outputPath);
-
     let transform = this.transformBuilder.create();
 
-    return new Promise((resolve, reject) => {
-
-      readableStream
-        .on('error', (error) => {
-          this.logger.addLog(`Error reading from ${inputPath}:`, error);
-          reject(error);
-        })
-        .pipe(transform)
-        .on('error', (error) => {
-          this.logger.addLog(`Error in transform stream for ${inputPath}:`, error);
-          reject(error);
-        })
-        .pipe(writeStream)
-        .on('error', (error) => {
-          this.logger.addLog(`Error writing to ${outputPath}:`, error);
-          reject(error);
-        })
-        .on('finish', () => {
-          this.logger.addLog(`Finished processing ${inputPath}`);
-          resolve();
-        });
-    });
+    readableStream
+      .on('error', (error) => {
+        this.logger.addLog(`Error reading from ${inputPath}:`, error);
+      })
+      .pipe(transform)
+      .pipe(this.writeThrough(outputPath))
+      .on('finish', () => {
+        this.logger.addLog(`Finished processing ${inputPath}`);
+      });
   }
 
   async processFiles() {
