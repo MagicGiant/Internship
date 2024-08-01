@@ -8,12 +8,11 @@ const TextTransformBuilder = require('./src/transform/textTransformBuilder');
 const { AddLineNumber, AddLineNumberBuilder } = require('./src/transform/strategies/AddLineNumber');
 const OutputArchiver = require('./src/outputArchiver');
 
-async function f(){
-  const configPath = path.join(__dirname, './src/Config.json');
-  const config = getConfig(configPath);
-  let logger = new Logger();
-  logger.clearLogs();
-  new FileHandler(
+let logger = new Logger();
+logger.clearLogs();
+
+async function f() {
+  const fileHandler = new FileHandler(
     config,
     logger,
     new TextTransformBuilder(
@@ -23,11 +22,21 @@ async function f(){
       ],
       [
         new AddLineNumberBuilder()
-      ]))
-    .processFiles();
+      ]
+    )
+  );
   
-  // let outputArchiver = new OutputArchiver(config, logger);
-  // outputArchiver.archiveOutputs();
+  await fileHandler.processFiles();
 }
 
-f();
+async function g() {
+  await f();
+
+  let outputArchiver = new OutputArchiver(config, logger);
+  outputArchiver.archiveOutputs();
+}
+
+const configPath = path.join(__dirname, './src/Config.json');
+const config = getConfig(configPath);
+
+g();

@@ -5,6 +5,7 @@ const fs = require('fs');
 class OutputArchiver{
   constructor(config, logger){
     this.config = config;
+    this.logger = logger;
 
     this.output = fs.createWriteStream(path.join(config.filesDirectory, '/output.zip'));
     this.archive = archiver('zip', {
@@ -26,9 +27,19 @@ class OutputArchiver{
     this.archive.pipe(this.output);
   }
 
-  archiveOutputs(){
-    for (let name of this.config.outputFiles){
-      this.archive.append(fs.createReadStream(path.join(this.config.filesDirectory, name)), {name});
+  archiveOutputs() {
+    for (let name of this.config.outputFiles) {
+      const filePath = path.join(this.config.filesDirectory, name);
+      if (fs.existsSync(filePath)) {
+        const fileContent = fs.readFileSync(filePath, 'utf8');
+        if (fileContent.trim()) {
+          this.archive.append(fileContent, { name });
+        } else {
+          console.log(`File ${name} is empty.`);
+        }
+      } else {
+        console.log(`File ${name} does not exist.`);
+      }
     }
     this.archive.finalize();
   }

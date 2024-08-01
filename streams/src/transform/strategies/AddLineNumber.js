@@ -12,7 +12,6 @@ class AddLineNumber{
       
       if (chunk.includes('\n')){
         let splitChunks = chunk.split('\n');
-        console.log(splitChunks);
         let result = "";
         for (let i in splitChunks){
           if (i == splitChunks.length - 1){

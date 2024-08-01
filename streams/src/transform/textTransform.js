@@ -32,8 +32,8 @@ class TextTransform extends Transform{
         return;
       }
 
-      let combinedTransformChunk = this._combinedTransform(chunk.toString());
-      let splitTransformChunk = this._splitTransform(combinedTransformChunk);
+      let combinedTransformChunk = this._combinedTransform(chunk.toString(), this.combinedStrategies);
+      let splitTransformChunk = this._splitTransform(combinedTransformChunk, this.splitStrategies);
 
       this.push(splitTransformChunk);
 
@@ -44,10 +44,10 @@ class TextTransform extends Transform{
     }
   }
 
-  _combinedTransform(chunk){
+  _combinedTransform(chunk, strategies){
     let processedMergedChunks = this.prevChunk + chunk; 
-    for (let i = 0; i < this.combinedStrategies.length; i++) {
-      processedMergedChunks = this.combinedStrategies[i].change(processedMergedChunks, this._strategyCallback);
+    for (let i = 0; i < strategies.length; i++) {
+      processedMergedChunks = strategies[i].change(processedMergedChunks, this._strategyCallback);
     }
 
     let splitСhunks = this._splitStringByCharacters(processedMergedChunks, this.config.highWaterMark);
@@ -56,10 +56,10 @@ class TextTransform extends Transform{
     return splitСhunks.leftPart;
   }
 
-  _splitTransform(chunk){
+  _splitTransform(chunk, strategies){
     let processedChunks = chunk; 
-    for (let i = 0; i < this.splitStrategies.length; i++) {
-      processedChunks = this.splitStrategies[i].change(processedChunks, this._strategyCallback);
+    for (let i = 0; i < strategies.length; i++) {
+      processedChunks = strategies[i].change(processedChunks, this._strategyCallback);
     }
 
     return processedChunks;
@@ -88,6 +88,11 @@ class TextTransform extends Transform{
     if (error){
       this.logger.addLog(`strategy error: ${error.message}`);
     }
+  }
+
+  _final(){
+    this.push(this._splitTransform(this.prevChunk, this.combinedStrategies.concat(this.splitStrategies)));
+    console.log('end');
   }
 }
 

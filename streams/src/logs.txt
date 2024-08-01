@@ -1,6 +1,7 @@
 Created file C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 1|
+archiver has been finalized and the output file descriptor has closed.
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 НЕСМО
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
@@ -97,5 +98,5 @@ Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\outpu
 МЛИ, ТЕОРИЯ ПЛОСКОЙ ЗЕМЛИ ПРОДОЛЖАЕТ НАХОДИТЬ СВОИХ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
  ПОСЛЕДОВАТЕЛЕЙ. ЭТО ЯВЛЕНИЕ ПОДЧЕРКИВАЕТ ВАЖ
-Finished writing to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt
-Finished processing C:\Users\Sherka-user\MyDirect\Internship\streams\examples\input1.txt
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
+НОСТЬ КРИТИЧЕСКОГО МЫШЛЕНИЯ И НЕОБХОДИМОСТИ ТЩАТЕЛЬНОЙ ПРОВЕРКИ ИНФОРМАЦИИ ИЗ РАЗНЫХ ИСТОЧНИКОВ.

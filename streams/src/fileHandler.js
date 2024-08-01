@@ -10,7 +10,7 @@ class FileHandler {
     this.logger = logger;
   }
 
-  processFile(inputPath, outputPath) {
+  async processFile(inputPath, outputPath) {
     this.createFile(outputPath);
 
     const readableStream = fs.createReadStream(inputPath, { 
@@ -25,26 +25,26 @@ class FileHandler {
         this.logger.addLog(`Error reading from ${inputPath}:`, error);
       })
       .pipe(transform)
-      .pipe(this.writeThrough(outputPath))
+      .pipe(await this.writeThrough(outputPath))
       .on('finish', () => {
         this.logger.addLog(`Finished processing ${inputPath}`);
       });
   }
 
   async processFiles() {
-    for (let i = 0; i < this.config.inputFiles?.length; i++) {
-      let inputPath = path.join(this.config.filesDirectory, this.config.inputFiles[i]);
+    const tasks = this.config.inputFiles.map((inputFile, i) => {
+      let inputPath = path.join(this.config.filesDirectory, inputFile);
       let outputPath = path.join(this.config.filesDirectory, this.config.outputFiles[i]);
-
-      try {
-        this.processFile(inputPath, outputPath);
-      } catch (error) {
-        this.logger.addLog(`Error processing file ${inputPath}:`, error);
-      }
-    }
+      
+      return this.processFile(inputPath, outputPath).catch(error => {
+        this.logger.addLog(`Error processing file ${inputPath}: ${error}`);
+      });
+    });
+  
+    await Promise.all(tasks);
   }
 
-  writeThrough(outputPath) {
+  async writeThrough(outputPath) {
     const outDataThrough = new PassThrough();
 
     outDataThrough.on('data', (chunk) => {
