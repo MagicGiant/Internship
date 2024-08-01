@@ -18,7 +18,9 @@ async function f(){
         [
           new FilterBuilder(config),
           new ToUpperCaseBuilder(),
-          // new AddLineNumberBuilder()
+        ],
+        [
+          new AddLineNumberBuilder()
         ]))
     .processFiles();
 }

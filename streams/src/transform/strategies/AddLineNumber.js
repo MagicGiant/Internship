@@ -6,11 +6,21 @@ class AddLineNumber{
 
   change(chunk, callback) {
     try {
-      // console.log(this.lineNumber);
       if (this.lineNumber === 1){
-        return `${this.lineNumber++} ${chunk}`;
+        return `${this.lineNumber++}|${chunk}`;
       }
-      return chunk.replace('\n', `\n${this.lineNumber++}`);
+      
+      if (chunk.includes('\n')){
+        let splitChunks = chunk.split('\n');
+        let result = "";
+        for (let substr of splitChunks){
+          result += `${substr}\n${this.lineNumber++}|`;
+        }
+
+        return result;
+      }
+
+      return chunk;
     } catch (error) {
       callback(error)
     } finally{

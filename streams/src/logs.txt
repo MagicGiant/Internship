@@ -1,99 +1,106 @@
 Created file C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-1 Несмо
+1|
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-тря  на научные доказательства, утверждающие, что Зем
+НЕСМО
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-ля имеет форму шара, существует значительное количес
+ТРЯ  НА НАУЧНЫЕ ДОКАЗАТЕЛЬСТВА, УТВЕРЖДАЮЩИЕ, ЧТО ЗЕМ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-тво людей, которые верят в плоскую Землю. Эту гипот
+ЛЯ ИМЕЕТ ФОРМУ ШАРА, СУЩЕСТВУЕТ ЗНАЧИТЕЛЬНОЕ КОЛИЧЕС
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-езу часто называют «теорией плоской Земли». В этом соч
+ТВО ЛЮДЕЙ, КОТОРЫЕ ВЕРЯТ В ПЛОСКУЮ ЗЕМЛЮ. ЭТУ ГИПОТ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-инении мы постараемся представить аргументы, которые 
+ЕЗУ ЧАСТО НАЗЫВАЮТ «ТЕОРИЕЙ ПЛОСКОЙ ЗЕМЛИ». В ЭТОМ СО
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-приводят сторонники данной теории.
-876
-Одним из осн
+ЧИНЕНИИ МЫ ПОСТАРАЕМСЯ ПРЕДСТАВИТЬ АРГУМЕНТЫ, КОТОРЫ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-овных аргументов в пользу плоской Земли является види
+Е ПРИВОДЯТ СТОРОННИКИ ДАННОЙ ТЕОРИИ.
+2|
+3|ОДНИМ ИЗ ОСН
+4|
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-мый горизонт. Сторонники теории плоской Земли утвержда
+ОВНЫХ АРГУМЕНТОВ В ПОЛЬЗУ ПЛОСКОЙ ЗЕМЛИ ЯВЛЯЕТСЯ ВИДИ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-ют, что если бы Земля была круглой, то горизонт бы из
+МЫЙ ГОРИЗОНТ. СТОРОННИКИ ТЕОРИИ ПЛОСКОЙ ЗЕМЛИ УТВЕРЖДА
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-гибался вниз, чего, по их мнению, не наблюдается. Он
+ЮТ, ЧТО ЕСЛИ БЫ ЗЕМЛЯ БЫЛА КРУГЛОЙ, ТО ГОРИЗОНТ БЫ ИЗ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-и уверены, что плоская поверхность лучше объясняет, 
+ГИБАЛСЯ ВНИЗ, ЧЕГО, ПО ИХ МНЕНИЮ, НЕ НАБЛЮДАЕТСЯ. ОН
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-почему горизонт всегда остается на уровне глаз наблюдате
+И УВЕРЕНЫ, ЧТО ПЛОСКАЯ ПОВЕРХНОСТЬ ЛУЧШЕ ОБЪЯСНЯЕТ, 
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-ля, независимо от его высоты над поверхностью Земли.
-1
+ПОЧЕМУ ГОРИЗОНТ ВСЕГДА ОСТАЕТСЯ НА УРОВНЕ ГЛАЗ НАБЛЮДА
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-514
-16Другим аргументом является то, что вода, по их м
+ТЕЛЯ, НЕЗАВИСИМО ОТ ЕГО ВЫСОТЫ НАД ПОВЕРХНОСТЬЮ ЗЕМЛИ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-нению, всегда находит свой уровень и остается плоск
+.
+5|
+6|ДРУГИМ АРГУМЕНТОМ ЯВЛЯЕТСЯ ТО, ЧТО ВОДА, ПО ИХ М
+7|
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-ой. Согласно этой логике, океаны и большие водоемы не м
+НЕНИЮ, ВСЕГДА НАХОДИТ СВОЙ УРОВЕНЬ И ОСТАЕТСЯ ПЛОСК
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-огут существовать на искривленной поверхности, так к
+ОЙ. СОГЛАСНО ЭТОЙ ЛОГИКЕ, ОКЕАНЫ И БОЛЬШИЕ ВОДОЕМЫ НЕ М
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-ак вода бы стекала вниз. Плоская Земля, с их точки зре
+ОГУТ СУЩЕСТВОВАТЬ НА ИСКРИВЛЕННОЙ ПОВЕРХНОСТИ, ТАК К
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-ния, лучше объясняет стабильность и гладкость поверхнос
+АК ВОДА БЫ СТЕКАЛА ВНИЗ. ПЛОСКАЯ ЗЕМЛЯ, С ИХ ТОЧКИ З
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-тей водоемов.
-222120
-Сторонники теории также обращаю
+РЕНИЯ, ЛУЧШЕ ОБЪЯСНЯЕТ СТАБИЛЬНОСТЬ И ГЛАДКОСТЬ ПОВЕР
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-т внимание на то, что многие древние культуры и цивили
+ХНОСТЕЙ ВОДОЕМОВ.
+8|
+9|СТОРОННИКИ ТЕОРИИ ТАКЖЕ ОБРАЩАЮ
+10|
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-зации описывали Землю как плоскую. Эти описания, по и
+Т ВНИМАНИЕ НА ТО, ЧТО МНОГИЕ ДРЕВНИЕ КУЛЬТУРЫ И ЦИВИЛИ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-х мнению, могут быть свидетельством того, что наши п
+ЗАЦИИ ОПИСЫВАЛИ ЗЕМЛЮ КАК ПЛОСКУЮ. ЭТИ ОПИСАНИЯ, ПО И
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-редки имели доступ к знаниям, которые были утрачены
+Х МНЕНИЮ, МОГУТ БЫТЬ СВИДЕТЕЛЬСТВОМ ТОГО, ЧТО НАШИ П
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
- с развитием современной науки. Они считают, что со
+РЕДКИ ИМЕЛИ ДОСТУП К ЗНАНИЯМ, КОТОРЫЕ БЫЛИ УТРАЧЕНЫ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-временные научные открытия могут быть результатом ошибоч
+ С РАЗВИТИЕМ СОВРЕМЕННОЙ НАУКИ. ОНИ СЧИТАЮТ, ЧТО СО
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-ных интерпретаций и неверных предположений.
-2928
-Не 
+ВРЕМЕННЫЕ НАУЧНЫЕ ОТКРЫТИЯ МОГУТ БЫТЬ РЕЗУЛЬТАТОМ ОШИБ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-меньшую роль в их аргументации играет и недоверие к о
+ОЧНЫХ ИНТЕРПРЕТАЦИЙ И НЕВЕРНЫХ ПРЕДПОЛОЖЕНИЙ.
+11|
+12|НЕ 
+13|
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-фициальным источникам информации. Они утверждают, ч
+МЕНЬШУЮ РОЛЬ В ИХ АРГУМЕНТАЦИИ ИГРАЕТ И НЕДОВЕРИЕ К О
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-то космические агентства, такие как НАСА, могут пред
+ФИЦИАЛЬНЫМ ИСТОЧНИКАМ ИНФОРМАЦИИ. ОНИ УТВЕРЖДАЮТ, Ч
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-оставлять ложные данные и фотографии, созданные с пом
+ТО КОСМИЧЕСКИЕ АГЕНТСТВА, ТАКИЕ КАК НАСА, МОГУТ ПРЕД
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-ощью компьютерной графики, чтобы скрыть правду о нас
+ОСТАВЛЯТЬ ЛОЖНЫЕ ДАННЫЕ И ФОТОГРАФИИ, СОЗДАННЫЕ С ПОМ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-тоящей форме Земли. Они полагают, что существует глобаль
+ОЩЬЮ КОМПЬЮТЕРНОЙ ГРАФИКИ, ЧТОБЫ СКРЫТЬ ПРАВДУ О НАС
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-ный заговор, целью которого является сокрытие факта пл
+ТОЯЩЕЙ ФОРМЕ ЗЕМЛИ. ОНИ ПОЛАГАЮТ, ЧТО СУЩЕСТВУЕТ ГЛОБА
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-оской Земли.
-373635
-В заключение, теория плоской Зе
+ЛЬНЫЙ ЗАГОВОР, ЦЕЛЬЮ КОТОРОГО ЯВЛЯЕТСЯ СОКРЫТИЕ ФАКТ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-мли основывается на ряде аргументов, которые кажутся 
+А ПЛОСКОЙ ЗЕМЛИ.
+14|
+15|В ЗАКЛЮЧЕНИЕ, ТЕОРИЯ ПЛОСКОЙ ЗЕ
+16|
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-её сторонникам убедительными. Они указывают на видим
+МЛИ ОСНОВЫВАЕТСЯ НА РЯДЕ АРГУМЕНТОВ, КОТОРЫЕ КАЖУТСЯ 
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-ый горизонт, природу воды, древние описания и недо
+ЕЁ СТОРОННИКАМ УБЕДИТЕЛЬНЫМИ. ОНИ УКАЗЫВАЮТ НА ВИДИМ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-верие к официальной информации. Несмотря на научные 
+ЫЙ ГОРИЗОНТ, ПРИРОДУ ВОДЫ, ДРЕВНИЕ ОПИСАНИЯ И НЕДО
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-доказательства, подтверждающие сферическую форму Зе
+ВЕРИЕ К ОФИЦИАЛЬНОЙ ИНФОРМАЦИИ. НЕСМОТРЯ НА НАУЧНЫЕ 
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
-мли, теория плоской Земли продолжает находить своих
+ДОКАЗАТЕЛЬСТВА, ПОДТВЕРЖДАЮЩИЕ СФЕРИЧЕСКУЮ ФОРМУ ЗЕ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
- последователей. Это явление подчеркивает важ
+МЛИ, ТЕОРИЯ ПЛОСКОЙ ЗЕМЛИ ПРОДОЛЖАЕТ НАХОДИТЬ СВОИХ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
+ ПОСЛЕДОВАТЕЛЕЙ. ЭТО ЯВЛЕНИЕ ПОДЧЕРКИВАЕТ ВАЖ
 Finished writing to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt
 Finished processing C:\Users\Sherka-user\MyDirect\Internship\streams\examples\input1.txt
