@@ -11,7 +11,7 @@ const OutputArchiver = require('./src/outputArchiver');
 let logger = new Logger();
 logger.clearLogs();
 
-async function f() {
+async function processFiles() {
   const fileHandler = new FileHandler(
     config,
     logger,
@@ -29,8 +29,9 @@ async function f() {
   await fileHandler.processFiles();
 }
 
-async function g() {
-  await f();
+async function main() {
+  //вот он по идее должен ожидать
+  await processFiles();
 
   let outputArchiver = new OutputArchiver(config, logger);
   outputArchiver.archiveOutputs();
@@ -39,4 +40,4 @@ async function g() {
 const configPath = path.join(__dirname, './src/Config.json');
 const config = getConfig(configPath);
 
-g();
+main();
