@@ -6,23 +6,28 @@ const path = require('path');
 const {Filter, FilterBuilder} = require('./src/transform/strategies/Filter');
 const TextTransformBuilder = require('./src/transform/textTransformBuilder');
 const { AddLineNumber, AddLineNumberBuilder } = require('./src/transform/strategies/AddLineNumber');
+const OutputArchiver = require('./src/outputArchiver');
 
 async function f(){
   const configPath = path.join(__dirname, './src/Config.json');
   const config = getConfig(configPath);
-  new Logger().clearLogs();
+  let logger = new Logger();
+  logger.clearLogs();
   new FileHandler(
-      config,
-      new TextTransformBuilder(
-        config,
-        [
-          new FilterBuilder(config),
-          new ToUpperCaseBuilder(),
-        ],
-        [
-          new AddLineNumberBuilder()
-        ]))
+    config,
+    logger,
+    new TextTransformBuilder(
+      [
+        new FilterBuilder(config),
+        new ToUpperCaseBuilder(),
+      ],
+      [
+        new AddLineNumberBuilder()
+      ]))
     .processFiles();
+  
+  // let outputArchiver = new OutputArchiver(config, logger);
+  // outputArchiver.archiveOutputs();
 }
 
 f();

@@ -17,7 +17,6 @@ Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\outpu
 Е ПРИВОДЯТ СТОРОННИКИ ДАННОЙ ТЕОРИИ.
 2|
 3|ОДНИМ ИЗ ОСН
-4|
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ОВНЫХ АРГУМЕНТОВ В ПОЛЬЗУ ПЛОСКОЙ ЗЕМЛИ ЯВЛЯЕТСЯ ВИДИ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
@@ -34,9 +33,8 @@ Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\outpu
 ТЕЛЯ, НЕЗАВИСИМО ОТ ЕГО ВЫСОТЫ НАД ПОВЕРХНОСТЬЮ ЗЕМЛИ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 .
-5|
-6|ДРУГИМ АРГУМЕНТОМ ЯВЛЯЕТСЯ ТО, ЧТО ВОДА, ПО ИХ М
-7|
+4|
+5|ДРУГИМ АРГУМЕНТОМ ЯВЛЯЕТСЯ ТО, ЧТО ВОДА, ПО ИХ М
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 НЕНИЮ, ВСЕГДА НАХОДИТ СВОЙ УРОВЕНЬ И ОСТАЕТСЯ ПЛОСК
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
@@ -49,9 +47,8 @@ Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\outpu
 РЕНИЯ, ЛУЧШЕ ОБЪЯСНЯЕТ СТАБИЛЬНОСТЬ И ГЛАДКОСТЬ ПОВЕР
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ХНОСТЕЙ ВОДОЕМОВ.
-8|
-9|СТОРОННИКИ ТЕОРИИ ТАКЖЕ ОБРАЩАЮ
-10|
+6|
+7|СТОРОННИКИ ТЕОРИИ ТАКЖЕ ОБРАЩАЮ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 Т ВНИМАНИЕ НА ТО, ЧТО МНОГИЕ ДРЕВНИЕ КУЛЬТУРЫ И ЦИВИЛИ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
@@ -66,9 +63,8 @@ Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\outpu
 ВРЕМЕННЫЕ НАУЧНЫЕ ОТКРЫТИЯ МОГУТ БЫТЬ РЕЗУЛЬТАТОМ ОШИБ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ОЧНЫХ ИНТЕРПРЕТАЦИЙ И НЕВЕРНЫХ ПРЕДПОЛОЖЕНИЙ.
-11|
-12|НЕ 
-13|
+8|
+9|НЕ 
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 МЕНЬШУЮ РОЛЬ В ИХ АРГУМЕНТАЦИИ ИГРАЕТ И НЕДОВЕРИЕ К О
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
@@ -85,9 +81,8 @@ Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\outpu
 ЛЬНЫЙ ЗАГОВОР, ЦЕЛЬЮ КОТОРОГО ЯВЛЯЕТСЯ СОКРЫТИЕ ФАКТ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 А ПЛОСКОЙ ЗЕМЛИ.
-14|
-15|В ЗАКЛЮЧЕНИЕ, ТЕОРИЯ ПЛОСКОЙ ЗЕ
-16|
+10|
+11|В ЗАКЛЮЧЕНИЕ, ТЕОРИЯ ПЛОСКОЙ ЗЕ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 МЛИ ОСНОВЫВАЕТСЯ НА РЯДЕ АРГУМЕНТОВ, КОТОРЫЕ КАЖУТСЯ 
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:

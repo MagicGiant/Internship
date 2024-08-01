@@ -4,10 +4,10 @@ const { PassThrough } = require('stream');
 const Logger = require('./logger');
 
 class FileHandler {
-  constructor(config, transformBuilder) {
+  constructor(config, logger, transformBuilder) {
     this.config = config;
     this.transformBuilder = transformBuilder;
-    this.logger = new Logger();
+    this.logger = logger;
   }
 
   processFile(inputPath, outputPath) {
@@ -18,7 +18,7 @@ class FileHandler {
       highWaterMark: this.config.highWaterMark
     });
 
-    let transform = this.transformBuilder.create();
+    let transform = this.transformBuilder.create(this.config, this.logger);
 
     readableStream
       .on('error', (error) => {

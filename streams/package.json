@@ -8,5 +8,8 @@
   },
   "author": "sherka",
   "license": "ISC",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "archiver": "^7.0.1"
+  }
 }

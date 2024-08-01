@@ -4,9 +4,10 @@ const { config } = require('process');
 const { time } = require('console');
 
 class TextTransform extends Transform{
-  constructor(config, combinedStrategiesBuilders = [], splitStrategiesBuilders = []){
+  constructor(config, logger, combinedStrategiesBuilders = [], splitStrategiesBuilders = []){
     super();
 
+    this.logger = logger;
     this.combinedStrategies = this._createStrategies(combinedStrategiesBuilders);
     this.splitStrategies = this._createStrategies(splitStrategiesBuilders);
     this.config = config;
@@ -38,6 +39,7 @@ class TextTransform extends Transform{
 
       callback();
     } catch (error) {
+      this.logger.addLog(error);
       callback(error);
     }
   }
@@ -84,7 +86,7 @@ class TextTransform extends Transform{
 
   _strategyCallback(error = null){
     if (error){
-      new Logger().addLog(`strategy error: ${error.message}`);
+      this.logger.addLog(`strategy error: ${error.message}`);
     }
   }
 }
