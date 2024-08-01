@@ -10,7 +10,13 @@ class ToUpperCase{
   }
 }
 
+class ToUpperCaseBuilder{
+  create(){
+    return new ToUpperCase();
+  }
+}
 
 module.exports ={
   ToUpperCase,
+  ToUpperCaseBuilder
 }

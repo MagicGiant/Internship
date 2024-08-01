@@ -1,15 +1,26 @@
-{ 
-  "inputFiles": ["input1.txt", "input2.txt", "input3.txt"], 
-  "outputFiles": ["output1.txt", "output2.txt", "output3.txt"], 
+{
+  "inputFiles": [
+    "input1.txt"
+
+  ],
+  "outputFiles": [
+    "output1.txt"
+
+  ],
   "filesDirectory": "C:/Users/Sherka-user/MyDirect/Internship/streams/examples",
-  "filterKeywords": ["ERROR"], 
-  "emailConfig": { 
-    "service": "gmail", 
-    "auth": { 
-      "user": "your-email@gmail.com", 
-      "pass": "your-email-password" 
-    }, 
-    "to": "notify-email@example.com", 
-    "subject": "Processing Completed" 
-  } 
-} 
+  "filterKeywords": [
+    "ERROR",
+    "---Для проверки длинной строки (должно быть удалено)---"
+  ],
+  "highWaterMark": 10,
+  "encoding": "utf8",
+  "emailConfig": {
+    "service": "gmail",
+    "auth": {
+      "user": "your-email@gmail.com",
+      "pass": "your-email-password"
+    },
+    "to": "notify-email@example.com",
+    "subject": "Processing Completed"
+  }
+}

@@ -14,8 +14,8 @@ class FileHandler {
     this.createFile(outputPath);
 
     const readableStream = fs.createReadStream(inputPath, { 
-      encoding: 'utf8',
-      highWaterMark: 40
+      encoding: this.config.encoding,
+      highWaterMark: this.config.highWaterMark
     });
 
     let transform = this.transformBuilder.create();

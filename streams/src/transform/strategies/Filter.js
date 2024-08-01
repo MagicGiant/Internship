@@ -7,7 +7,8 @@ class Filter{
     try {
       let resultChunk = chunk;
       for (let i = 0; i < this.config.filterKeywords.length; i++) {
-        var regexp = new RegExp(String.raw`\s?${this.config.filterKeywords}\s?`, "gi");;
+        let regexKeyword = _escapeRegExp(this.config.filterKeywords[i]);
+        var regexp = new RegExp(String.raw`${regexKeyword}`, "gi");
         resultChunk = resultChunk.replace(regexp, "");
       }
       return resultChunk
@@ -19,4 +20,21 @@ class Filter{
   }
 }
 
-module.exports = Filter;
+function _escapeRegExp(string) {
+  return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // экранирует все специальные символы
+}
+
+class FilterBuilder{
+  constructor(config){
+    this.config = config;
+  }
+
+  create(){
+    return new Filter(this.config);
+  }
+}
+
+module.exports ={
+  Filter,
+  FilterBuilder
+} 
