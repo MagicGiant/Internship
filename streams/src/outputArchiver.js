@@ -27,7 +27,7 @@ class OutputArchiver{
     this.archive.pipe(this.output);
   }
 
-  archiveOutputs() {
+  async archiveOutputs() {
     for (let name of this.config.outputFiles) {
       const filePath = path.join(this.config.filesDirectory, name);
       if (fs.existsSync(filePath)) {
@@ -41,7 +41,7 @@ class OutputArchiver{
         console.log(`File ${name} does not exist.`);
       }
     }
-    this.archive.finalize();
+    await this.archive.finalize();
   }
 }
 

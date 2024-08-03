@@ -20,15 +20,24 @@ class FileHandler {
 
     let transform = this.transformBuilder.create(this.config, this.logger);
 
-    readableStream
-      .on('error', (error) => {
-        this.logger.addLog(`Error reading from ${inputPath}:`, error);
-      })
-      .pipe(transform)
-      .pipe(await this.writeThrough(outputPath))
-      .on('finish', () => {
-        this.logger.addLog(`Finished processing ${inputPath}`);
-      });
+
+    return new Promise((resolve, reject) => {
+      readableStream
+        .on('error', (error) => {
+          this.logger.addLog(`Error reading from ${inputPath}: ${error}`);
+          reject(error);
+        })
+        .pipe(transform)
+        .pipe( this.writeThrough(outputPath))
+        .on('finish', () => {
+          this.logger.addLog(`Finished processing ${inputPath}`);
+          resolve();
+        })
+        .on('error', (error) => {
+          this.logger.addLog(`Error writing to ${outputPath}: ${error}`);
+          reject(error);
+        });
+    });
   }
 
   async processFiles() {
@@ -40,11 +49,10 @@ class FileHandler {
         this.logger.addLog(`Error processing file ${inputPath}: ${error}`);
       });
     });
-  
-    await Promise.all(tasks);
+    return Promise.all(tasks);
   }
 
-  async writeThrough(outputPath) {
+  writeThrough(outputPath) {
     const outDataThrough = new PassThrough();
 
     outDataThrough.on('data', (chunk) => {

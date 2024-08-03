@@ -1,93 +1,235 @@
 Created file C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt
+Created file C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt
+Created file C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output3.txt
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 1|
-archiver has been finalized and the output file descriptor has closed.
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+1|ИГРАТЬ В К
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output3.txt:
+1|НАРУТО ЭТО 
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 НЕСМО
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ОМПЬЮТЕРНЫЕ ИГРЫ МОЖЕТ БЫТЬ ВРЕДНО ПО СЛЕДУЮЩИМ ПРИЧ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output3.txt:
+НЕ ПРОСТО АНИМЕ , ЭТО ИСТОРИЯ И НЕ ОДНА , КОТОРАЯ ТРО
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ТРЯ  НА НАУЧНЫЕ ДОКАЗАТЕЛЬСТВА, УТВЕРЖДАЮЩИЕ, ЧТО ЗЕМ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ИНАМ:
+2|
+3|1. ЗАВИСИМОСТЬ: КОМПЬЮТЕРНЫЕ ИГРЫ МОГУТ ВЫЗЫ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output3.txt:
+ГАЕТ ДО ГЛУБИНЫ ДУШИ. ПЕРСОНАЖИ СО СВОИМИ ХАРАКТЕРАМИ 
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ЛЯ ИМЕЕТ ФОРМУ ШАРА, СУЩЕСТВУЕТ ЗНАЧИТЕЛЬНОЕ КОЛИЧЕС
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ВАТЬ СИЛЬНОЕ ПРИВЫКАНИЕ, ЧТО ПРИВОДИТ К ТОМУ, ЧТО ЧЕЛ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output3.txt:
+, И ОСОБЕННОСТИ, ЗА КОТОРЫМИ ИНТЕРЕСНО НЕ ТОЛЬКО НАБЛ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ТВО ЛЮДЕЙ, КОТОРЫЕ ВЕРЯТ В ПЛОСКУЮ ЗЕМЛЮ. ЭТУ ГИПОТ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ОВЕК НАЧИНАЕТ УДЕЛЯТЬ ИМ СЛИШКОМ МНОГО ВРЕМЕНИ В УЩЕ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output3.txt:
+ЮДАТЬ. МЫ СОПЕРЕЖИВАЕМ ИМ , ХОТИМ БЫТЬ ЧЕМ ТО ДАЖЕ ХОТИ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ЕЗУ ЧАСТО НАЗЫВАЮТ «ТЕОРИЕЙ ПЛОСКОЙ ЗЕМЛИ». В ЭТОМ СО
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+РБ ДРУГИМ ВАЖНЫМ АСПЕКТАМ ЖИЗНИ, ТАКИМ КАК РАБОТА, УЧЕБ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output3.txt:
+М БЫТЬ ПОХОЖИ НА НИХ . НЕОЖИДАННЫЕ ПОВОРОТЫ , ЮМОР ,
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ЧИНЕНИИ МЫ ПОСТАРАЕМСЯ ПРЕДСТАВИТЬ АРГУМЕНТЫ, КОТОРЫ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+А, СОЦИАЛЬНЫЕ СВЯЗИ И ФИЗИЧЕСКАЯ АКТИВНОСТЬ.
+4|
+5|2. З
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output3.txt:
+ ДРАМА И ОЧЕНЬ ИНТЕРЕСНЫЕ И БОЁВКИ И ТО КАК ЭТО ИНТЕГ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 Е ПРИВОДЯТ СТОРОННИКИ ДАННОЙ ТЕОРИИ.
 2|
 3|ОДНИМ ИЗ ОСН
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ДОРОВЬЕ: ДЛИТЕЛЬНОЕ СИДЕНИЕ ПЕРЕД ЭКРАНОМ МОЖЕТ ПРИВ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output3.txt:
+РИРОВАННО. ИНТЕРЕСНО ЧТО ЗА ОСНОВУ ВЗЯЛИ ЯПОНСКУЮ МИФ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ОВНЫХ АРГУМЕНТОВ В ПОЛЬЗУ ПЛОСКОЙ ЗЕМЛИ ЯВЛЯЕТСЯ ВИДИ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ЕСТИ К РАЗЛИЧНЫМ ПРОБЛЕМАМ СО ЗДОРОВЬЕМ, ВКЛЮЧАЯ УХУДШЕН
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output3.txt:
+ОЛОГИИ И ЯПОНСКИХ БОГОВ.
+2|В НАШИХ СЕРДЦАХ ВСЕГДА ОСТ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 МЫЙ ГОРИЗОНТ. СТОРОННИКИ ТЕОРИИ ПЛОСКОЙ ЗЕМЛИ УТВЕРЖДА
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ИЕ ЗРЕНИЯ, НАРУШЕНИЕ ОСАНКИ, ПРОБЛЕМЫ С ПОЗВОНОЧНИ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output3.txt:
+АНУТСЯ ,
+3|ЛЮБИМЫЕ ПЕРСОНАЖИ К КОТОРЫМ МЫ ПРОНИКЛИСЬ. Т
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ЮТ, ЧТО ЕСЛИ БЫ ЗЕМЛЯ БЫЛА КРУГЛОЙ, ТО ГОРИЗОНТ БЫ ИЗ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+КОМ, А ТАКЖЕ ГОЛОВНЫЕ БОЛИ И УСТАЛОСТЬ.
+6|
+7|3. ПСИХИЧ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output3.txt:
+АК ЖЕ ХОЧУ УПОМЯНУТЬ ПОСЛЕДНИЙ ФИЛЬМ НАРУТО , ЗАВЕРШАЮЩ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ГИБАЛСЯ ВНИЗ, ЧЕГО, ПО ИХ МНЕНИЮ, НЕ НАБЛЮДАЕТСЯ. ОН
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ЕСКОЕ ЗДОРОВЬЕ: ЧРЕЗМЕРНОЕ УВЛЕЧЕНИЕ КОМПЬЮТЕРНЫМИ И
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output3.txt:
+ИЙ ВСЮ ИСТОРИЮ НАШИХ ГЕРОЕВ.
+4|НА НАРУТО ВЫРОСЛО НЕСКО
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 И УВЕРЕНЫ, ЧТО ПЛОСКАЯ ПОВЕРХНОСТЬ ЛУЧШЕ ОБЪЯСНЯЕТ, 
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ГРАМИ МОЖЕТ НЕГАТИВНО ВЛИЯТЬ НА ПСИХИЧЕСКОЕ ЗДОРОВЬЕ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output3.txt:
+ЛЬКО ПОКОЛЕНИЙ, ВОТ УЖЕ 5-10 ЛЕТ ЛЮДИ ПЕРЕСМАТРИВАЮТ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ПОЧЕМУ ГОРИЗОНТ ВСЕГДА ОСТАЕТСЯ НА УРОВНЕ ГЛАЗ НАБЛЮДА
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+, ВЫЗЫВАЯ СТРЕСС, ТРЕВОГУ, ДЕПРЕССИЮ И ЧУВСТВО ОДИНОЧЕ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output3.txt:
+ ЛЮБИМЫЕ МОМЕНТЫ В НАРЕЗКЕ НА ЮТУБЕ. ТАК ЖЕ ВЫРАЖАЮ 
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ТЕЛЯ, НЕЗАВИСИМО ОТ ЕГО ВЫСОТЫ НАД ПОВЕРХНОСТЬЮ ЗЕМЛИ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+СТВА. НЕКОТОРЫЕ ИГРЫ МОГУТ ТАКЖЕ СПОСОБСТВОВАТЬ РАЗ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output3.txt:
+БЛАГОДАРНОСТЬ И СНИМАЮ ШЛЯПУ ПЕРЕД ЛЮДЬМИ, КОТОРЫЕ РАБ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 .
 4|
 5|ДРУГИМ АРГУМЕНТОМ ЯВЛЯЕТСЯ ТО, ЧТО ВОДА, ПО ИХ М
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ВИТИЮ АГРЕССИИ И РАЗДРАЖИТЕЛЬНОСТИ.
+8|
+9|4. СОЦИАЛЬНАЯ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output3.txt:
+ОТАЛИ НАД ЭТИМ ПРОИЗВЕДЕНИЕМ . ОНИ ВЛОЖИЛИ ТУДА ДУШУ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 НЕНИЮ, ВСЕГДА НАХОДИТ СВОЙ УРОВЕНЬ И ОСТАЕТСЯ ПЛОСК
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ ИЗОЛЯЦИЯ: УВЛЕЧЕНИЕ КОМПЬЮТЕРНЫМИ ИГРАМИ МОЖЕТ ПР
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output3.txt:
+ И СВОЙ ТРУД. В НАРУТО ОТЛИЧНАЯ РИСОВКА И ОЧЕНЬ КРУТЫ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ОЙ. СОГЛАСНО ЭТОЙ ЛОГИКЕ, ОКЕАНЫ И БОЛЬШИЕ ВОДОЕМЫ НЕ М
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ИВЕСТИ К СОЦИАЛЬНОЙ ИЗОЛЯЦИИ, ТАК КАК ИГРОКИ МОГУТ ПР
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output3.txt:
+Е С
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ОГУТ СУЩЕСТВОВАТЬ НА ИСКРИВЛЕННОЙ ПОВЕРХНОСТИ, ТАК К
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ЕДПОЧИТАТЬ ВИРТУАЛЬНЫЕ ВЗАИМОДЕЙСТВИЯ РЕАЛЬНЫМ, ЧТО ПР
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output3.txt:
+АУТРЕКИ . ТАК ЖЕ МУЗЫКАЛЬНЫЕ ТЕМЫ ПЕРСОНАЖЕЙ. ДЛЯ ТЕХ КТО ЕЩЁ НЕ СМОТРЕЛ ОДНОЗНАЧНО РЕКОМЕНДУЮ .
+Finished writing to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output3.txt
+Finished processing C:\Users\Sherka-user\MyDirect\Internship\streams\examples\input3.txt
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 АК ВОДА БЫ СТЕКАЛА ВНИЗ. ПЛОСКАЯ ЗЕМЛЯ, С ИХ ТОЧКИ З
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ИВОДИТ К УМЕНЬШЕНИЮ КРУГА ОБЩЕНИЯ И УХУДШЕНИЮ СОЦИАЛ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 РЕНИЯ, ЛУЧШЕ ОБЪЯСНЯЕТ СТАБИЛЬНОСТЬ И ГЛАДКОСТЬ ПОВЕР
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ЬНЫХ НАВЫКОВ.
+10|
+11|5. СНИЖЕНИЕ ПРОДУКТИВНОСТИ: ЗАТЯГИВА
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ХНОСТЕЙ ВОДОЕМОВ.
 6|
 7|СТОРОННИКИ ТЕОРИИ ТАКЖЕ ОБРАЩАЮ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ЮЩИЕ ИГРЫ МОГУТ ОТВЛЕКАТЬ ОТ ВАЖНЫХ ДЕЛ И ОБЯЗАННОС
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 Т ВНИМАНИЕ НА ТО, ЧТО МНОГИЕ ДРЕВНИЕ КУЛЬТУРЫ И ЦИВИЛИ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ТЕЙ, СНИЖАЯ ПРОДУКТИВНОСТЬ В УЧЕБЕ И РАБОТЕ. ЭТО МОЖЕТ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ЗАЦИИ ОПИСЫВАЛИ ЗЕМЛЮ КАК ПЛОСКУЮ. ЭТИ ОПИСАНИЯ, ПО И
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ ПРИВЕСТИ К УХУДШЕНИЮ АКАДЕМИЧЕСКИХ И ПРОФЕССИОНАЛЬ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 Х МНЕНИЮ, МОГУТ БЫТЬ СВИДЕТЕЛЬСТВОМ ТОГО, ЧТО НАШИ П
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+НЫХ РЕЗУЛЬТАТОВ.
+12|
+13|6. ФИНАНСОВЫЕ ТРАТЫ: НЕКОТОРЫЕ ИГ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 РЕДКИ ИМЕЛИ ДОСТУП К ЗНАНИЯМ, КОТОРЫЕ БЫЛИ УТРАЧЕНЫ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+РЫ ТРЕБУЮТ ЗНАЧИТЕЛЬНЫХ ФИНАНСОВЫХ ВЛОЖЕНИЙ, БУДЬ ТО
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
  С РАЗВИТИЕМ СОВРЕМЕННОЙ НАУКИ. ОНИ СЧИТАЮТ, ЧТО СО
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ ПОКУПКА САМИХ ИГР, ВНУТРИИГРОВЫХ ПРЕДМЕТОВ ИЛИ ПОДПИСО
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ВРЕМЕННЫЕ НАУЧНЫЕ ОТКРЫТИЯ МОГУТ БЫТЬ РЕЗУЛЬТАТОМ ОШИБ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+К. ЭТО МОЖЕТ ПРИВЕСТИ К НЕРАЦИОНАЛЬНЫМ РАСХОДАМ И ФИН
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ОЧНЫХ ИНТЕРПРЕТАЦИЙ И НЕВЕРНЫХ ПРЕДПОЛОЖЕНИЙ.
 8|
 9|НЕ 
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+АНСОВЫМ ПРОБЛЕМАМ.
+14|
+15|7. НАРУШЕНИЕ СНА: ИГРАЯ ДО ПОЗ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 МЕНЬШУЮ РОЛЬ В ИХ АРГУМЕНТАЦИИ ИГРАЕТ И НЕДОВЕРИЕ К О
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ДНЕЙ НОЧИ, ИГРОКИ ЧАСТО НАРУШАЮТ РЕЖИМ СНА, ЧТО МОЖЕ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ФИЦИАЛЬНЫМ ИСТОЧНИКАМ ИНФОРМАЦИИ. ОНИ УТВЕРЖДАЮТ, Ч
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+Т ПРИВЕСТИ К ХРОНИЧЕСКОМУ НЕДОСЫПАНИЮ, УСТАЛОСТИ И СНИ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ТО КОСМИЧЕСКИЕ АГЕНТСТВА, ТАКИЕ КАК НАСА, МОГУТ ПРЕД
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ЖЕНИЮ КОНЦЕНТРАЦИИ ВНИМАНИЯ В ТЕЧЕНИЕ ДНЯ.
+16|
+17|8. ОТ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ОСТАВЛЯТЬ ЛОЖНЫЕ ДАННЫЕ И ФОТОГРАФИИ, СОЗДАННЫЕ С ПОМ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+СУТСТВИЕ ФИЗИЧЕСКОЙ АКТИВНОСТИ: ЧРЕЗМЕРНОЕ УВЛЕЧЕНИЕ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ОЩЬЮ КОМПЬЮТЕРНОЙ ГРАФИКИ, ЧТОБЫ СКРЫТЬ ПРАВДУ О НАС
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ КОМПЬЮТЕРНЫМИ ИГРАМИ ЧАСТО ПРИВОДИТ К МАЛОПОДВИЖНОМ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ТОЯЩЕЙ ФОРМЕ ЗЕМЛИ. ОНИ ПОЛАГАЮТ, ЧТО СУЩЕСТВУЕТ ГЛОБА
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+У ОБРАЗУ ЖИЗНИ, ЧТО ПОВЫШАЕТ РИСК РАЗВИТИЯ РАЗЛИЧНЫХ 
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ЛЬНЫЙ ЗАГОВОР, ЦЕЛЬЮ КОТОРОГО ЯВЛЯЕТСЯ СОКРЫТИЕ ФАКТ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ЗАБОЛЕВАНИЙ, ТАКИХ КАК ОЖИРЕНИЕ, ДИАБЕТ И СЕРДЕЧНО-
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 А ПЛОСКОЙ ЗЕМЛИ.
 10|
 11|В ЗАКЛЮЧЕНИЕ, ТЕОРИЯ ПЛОСКОЙ ЗЕ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+СОСУДИСТЫЕ ЗАБОЛЕВАНИЯ.
+18|
+19|ЭТИ АРГУМЕНТЫ МОГУТ СЛУЖ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 МЛИ ОСНОВЫВАЕТСЯ НА РЯДЕ АРГУМЕНТОВ, КОТОРЫЕ КАЖУТСЯ 
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ИТЬ ОСНОВОЙ ДЛЯ ПОН
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ЕЁ СТОРОННИКАМ УБЕДИТЕЛЬНЫМИ. ОНИ УКАЗЫВАЮТ НА ВИДИМ
+Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt:
+ИМАНИЯ ПОТЕНЦИАЛЬНЫХ РИСКОВ И НЕГАТИВНЫХ ПОСЛЕДСТВИЙ ЧРЕЗМЕРНОГО УВЛЕЧЕНИЯ КОМПЬЮТЕРНЫМИ ИГРАМИ.
+Finished writing to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output2.txt
+Finished processing C:\Users\Sherka-user\MyDirect\Internship\streams\examples\input2.txt
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 ЫЙ ГОРИЗОНТ, ПРИРОДУ ВОДЫ, ДРЕВНИЕ ОПИСАНИЯ И НЕДО
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
@@ -100,3 +242,6 @@ Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\outpu
  ПОСЛЕДОВАТЕЛЕЙ. ЭТО ЯВЛЕНИЕ ПОДЧЕРКИВАЕТ ВАЖ
 Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt:
 НОСТЬ КРИТИЧЕСКОГО МЫШЛЕНИЯ И НЕОБХОДИМОСТИ ТЩАТЕЛЬНОЙ ПРОВЕРКИ ИНФОРМАЦИИ ИЗ РАЗНЫХ ИСТОЧНИКОВ.
+Finished writing to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt
+Finished processing C:\Users\Sherka-user\MyDirect\Internship\streams\examples\input1.txt
+archiver has been finalized and the output file descriptor has closed.

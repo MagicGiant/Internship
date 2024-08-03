@@ -90,9 +90,9 @@ class TextTransform extends Transform{
     }
   }
 
-  _final(){
+  _final(callback){
     this.push(this._splitTransform(this.prevChunk, this.combinedStrategies.concat(this.splitStrategies)));
-    console.log('end');
+    callback();
   }
 }
 
