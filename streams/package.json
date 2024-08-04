@@ -11,6 +11,7 @@
   "description": "",
   "dependencies": {
     "archiver": "^7.0.1",
-    "nodemailer": "^6.9.14"
+    "nodemailer": "^6.9.14",
+    "streams": "file:"
   }
 }

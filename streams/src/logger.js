@@ -12,10 +12,9 @@ class Logger{
     fs.appendFileSync(this.loggerPath, `${data}\n`);
   }
 
-  addResultLog(){
-    this.addLog(
-      `Количество строк: ${this.lineNumber}\n`+
-      `Количество отфильтрованных строк ${this.filterNumber}`);
+  getResultStr(){
+    return `Количество строк: ${this.lineNumber}\n`+
+      `Количество отфильтрованных строк ${this.filterNumber}`;
   }
 
   clearLogs(){

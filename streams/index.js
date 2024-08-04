@@ -7,6 +7,7 @@ const {Filter, FilterBuilder} = require('./src/transform/strategies/Filter');
 const TextTransformBuilder = require('./src/transform/textTransformBuilder');
 const { AddLineNumber, AddLineNumberBuilder } = require('./src/transform/strategies/AddLineNumber');
 const OutputArchiver = require('./src/outputArchiver');
+const EmailSendler = require('./src/emailSender');
 
 let logger = new Logger();
 logger.clearLogs();
@@ -20,7 +21,7 @@ async function processFiles() {
     logger,
     new TextTransformBuilder(
       [
-        new FilterBuilder(config, logger),
+        new FilterBuilder(config),
         new ToUpperCaseBuilder(),
       ],
       [
@@ -38,10 +39,11 @@ async function main() {
   let outputArchiver = new OutputArchiver(config, logger);
   await outputArchiver.archiveOutputs();
 
-  logger.addResultLog();
+  let emailSendler = new EmailSendler(config, logger);
+
+  logger.addLog(logger.getResultStr());
+
+  await emailSendler.send();
 }
 
 main();
-
-//Zm7T_m3:3aB-4RE
-//test1524521@gmail.com
