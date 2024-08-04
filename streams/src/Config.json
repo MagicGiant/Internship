@@ -1,13 +1,9 @@
 {
   "inputFiles": [
-    "input1.txt",
-    "input2.txt",
-    "input3.txt"
+    "input1.txt"
   ],
   "outputFiles": [
-    "output1.txt",
-    "output2.txt",
-    "output3.txt"
+    "output1.txt"
   ],
   "filesDirectory": "C:/Users/Sherka-user/MyDirect/Internship/streams/examples",
   "filterKeywords": [

@@ -20,7 +20,7 @@ async function processFiles() {
     logger,
     new TextTransformBuilder(
       [
-        new FilterBuilder(config),
+        new FilterBuilder(config, logger),
         new ToUpperCaseBuilder(),
       ],
       [
@@ -37,6 +37,8 @@ async function main() {
 
   let outputArchiver = new OutputArchiver(config, logger);
   await outputArchiver.archiveOutputs();
+
+  logger.addResultLog();
 }
 
 main();

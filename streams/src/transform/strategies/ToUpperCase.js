@@ -1,18 +1,23 @@
 class ToUpperCase{
+  constructor(logger){
+    this.logger = logger;
+  }
+
   change(chunk, callback) {
     try {
       return chunk.toUpperCase();  
     } catch (error) {
-      callback(error);
+      callback.bind(this, error);
     } finally{
-      callback();
+      callback.bind(this);
     }
   }
 }
 
 class ToUpperCaseBuilder{
-  create(){
-    return new ToUpperCase();
+
+  create(logger){
+    return new ToUpperCase(logger);
   }
 }
 

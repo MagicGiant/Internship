@@ -1,13 +1,16 @@
+const Logger = require("../../logger");
+
 class AddLineNumber{
 
-  constructor(){
+  constructor(logger){
     this.lineNumber = 1; 
+    this.logger = logger;
   }
 
   change(chunk, callback) {
     try {
       if (this.lineNumber === 1){
-        return `${this.lineNumber++}|${chunk}`;
+        return `${this.increaseLineNumber()}|${chunk}`;
       }
       
       if (chunk.includes('\n')){
@@ -18,7 +21,7 @@ class AddLineNumber{
             result += splitChunks[i];
             break;
           }
-          result += `${splitChunks[i]}\n${this.lineNumber++}|`;
+          result += `${splitChunks[i]}\n${this.increaseLineNumber()}|`;
         }
 
         return result;
@@ -26,16 +29,22 @@ class AddLineNumber{
 
       return chunk;
     } catch (error) {
-      callback(error)
+      callback.bind(this, error)
     } finally{
-      callback()
+      callback.bind(this)
     }
+  }
+
+  increaseLineNumber(){
+    this.lineNumber++;
+    this.logger.lineNumber++;
+    return this.lineNumber;
   }
 }
 
 class AddLineNumberBuilder{
-  create(){
-    return new AddLineNumber();
+  create(logger){
+    return new AddLineNumber(logger);
   }
 }
 

@@ -18,8 +18,10 @@ class FileHandler {
       highWaterMark: this.config.highWaterMark
     });
 
+
     let transform = this.transformBuilder.create(this.config, this.logger);
 
+    
 
     return new Promise((resolve, reject) => {
       readableStream

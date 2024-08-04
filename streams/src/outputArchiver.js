@@ -11,10 +11,6 @@ class OutputArchiver{
     this.archive = archiver('zip', {
       zlib: { level: 9 }
     });
-
-    this.output.on('close', function() {
-      logger.addLog('archiver has been finalized and the output file descriptor has closed.');
-    });
     
     this.output.on('end', function() {
       logger.addLog('Data has been drained');
@@ -27,22 +23,30 @@ class OutputArchiver{
     this.archive.pipe(this.output);
   }
 
-  async archiveOutputs() {
-    for (let name of this.config.outputFiles) {
-      const filePath = path.join(this.config.filesDirectory, name);
-      if (fs.existsSync(filePath)) {
-        const fileContent = fs.readFileSync(filePath, 'utf8');
-        if (fileContent.trim()) {
-          this.archive.append(fileContent, { name });
+  archiveOutputs() {
+    return new Promise((resolve, reject) => {
+      this.output.on('close', () => {
+        this.logger.addLog('archiver has been finalized and the output file descriptor has closed.');
+        resolve();
+      });
+
+      for (let name of this.config.outputFiles) {
+        const filePath = path.join(this.config.filesDirectory, name);
+        if (fs.existsSync(filePath)) {
+          const fileContent = fs.readFileSync(filePath, 'utf8');
+          if (fileContent.trim()) {
+            this.archive.append(fileContent, { name });
+          } else {
+            this.logger.addLog(`File ${name} is empty.`);
+          }
         } else {
-          console.log(`File ${name} is empty.`);
+          this.logger.addLog(`File ${name} does not exist.`);
         }
-      } else {
-        console.log(`File ${name} does not exist.`);
       }
-    }
-    await this.archive.finalize();
+      this.archive.finalize();
+    });
   }
+    
 }
 
 module.exports = OutputArchiver;

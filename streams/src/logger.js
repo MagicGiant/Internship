@@ -4,8 +4,18 @@ const path = require('path');
 class Logger{
   loggerPath = path.join(__dirname, 'logs.txt');
 
+  filterNumber = 0;
+
+  lineNumber = 0;
+
   addLog(data){
     fs.appendFileSync(this.loggerPath, `${data}\n`);
+  }
+
+  addResultLog(){
+    this.addLog(
+      `Количество строк: ${this.lineNumber}\n`+
+      `Количество отфильтрованных строк ${this.filterNumber}`);
   }
 
   clearLogs(){

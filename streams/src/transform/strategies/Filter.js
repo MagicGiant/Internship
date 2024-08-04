@@ -1,7 +1,10 @@
 class Filter{
-  constructor(config){
+  constructor(config, logger){
     this.config = config;
+    this.logger = logger;
   }
+
+  static filterNumber = 0;
 
   change(chunk, callback) {
     try {
@@ -9,16 +12,21 @@ class Filter{
       for (let i = 0; i < this.config.filterKeywords.length; i++) {
         let regexKeyword = _escapeRegExp(this.config.filterKeywords[i]);
         var regexp = new RegExp(String.raw`${regexKeyword}`, "gi");
-        resultChunk = resultChunk.replace(regexp, "");
+        resultChunk = resultChunk.replace(regexp, () => {
+          this.logger.filterNumber++;
+          return "";
+        });
       }
-      return resultChunk
+  
+      return resultChunk;
     } catch (error) {
-      callback(error)
+      callback.bind(this, error)
     } finally{
-      callback()
+      callback.bind(this)
     }
   }
 }
+
 
 function _escapeRegExp(string) {
   return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // экранирует все специальные символы
@@ -29,8 +37,8 @@ class FilterBuilder{
     this.config = config;
   }
 
-  create(){
-    return new Filter(this.config);
+  create(logger){
+    return new Filter(this.config, logger);
   }
 }
 

@@ -8,6 +8,7 @@ class TextTransform extends Transform{
     super();
 
     this.logger = logger;
+    
     this.combinedStrategies = this._createStrategies(combinedStrategiesBuilders);
     this.splitStrategies = this._createStrategies(splitStrategiesBuilders);
     this.config = config;
@@ -15,12 +16,17 @@ class TextTransform extends Transform{
   }
 
   _createStrategies(strategiesBuilders = []){
-    let strategies = []
-    for (let i = 0; i < strategiesBuilders.length; i++) {
-      strategies[i] = strategiesBuilders[i].create();
-    }
+    try {
+      let strategies = []
+      for (let i = 0; i < strategiesBuilders.length; i++) {
+        strategies[i] = strategiesBuilders[i].create(this.logger);
+      }
 
-    return strategies;
+      return strategies;
+        
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   _transform(chunk, encoding, callback) {
@@ -49,6 +55,7 @@ class TextTransform extends Transform{
     for (let i = 0; i < strategies.length; i++) {
       processedMergedChunks = strategies[i].change(processedMergedChunks, this._strategyCallback);
     }
+
 
     let splitСhunks = this._splitStringByCharacters(processedMergedChunks, this.config.highWaterMark);
     this.prevChunk = splitСhunks.rightPart;
