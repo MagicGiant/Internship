@@ -15,7 +15,7 @@ logger.clearLogs();
 const configPath = path.join(__dirname, './src/Config.json');
 const config = getConfig(configPath);
 
-async function processFiles() {
+async function f() {
   const fileHandler = new FileHandler(
     config,
     logger,
@@ -31,10 +31,6 @@ async function processFiles() {
   );
   
   await fileHandler.processFiles();
-}
-
-async function main() {
-  await processFiles();
 
   let outputArchiver = new OutputArchiver(config, logger);
   await outputArchiver.archiveOutputs();
@@ -46,4 +42,5 @@ async function main() {
   await emailSendler.send();
 }
 
-main();
+f();
+
