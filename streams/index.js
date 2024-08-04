@@ -9,38 +9,43 @@ const { AddLineNumber, AddLineNumberBuilder } = require('./src/transform/strateg
 const OutputArchiver = require('./src/outputArchiver');
 const EmailSendler = require('./src/emailSender');
 
-let logger = new Logger();
-logger.clearLogs();
-
-const configPath = path.join(__dirname, './src/Config.json');
-const config = getConfig(configPath);
-
 async function f() {
+  // Создаю логи и удаляю всю информацию в существующем файле логов
+  let logger = new Logger();
+  logger.clearLogs();
+
+  // Подгружаю конфиг
+  const configPath = path.join(__dirname, './src/Config.json');
+  const config = getConfig(configPath);
+
+  // Создаю обработчик файлов с билдером Transform для потоков
   const fileHandler = new FileHandler(
     config,
     logger,
     new TextTransformBuilder(
       [
         new FilterBuilder(config),
-        new ToUpperCaseBuilder(),
       ],
       [
-        new AddLineNumberBuilder()
+        new AddLineNumberBuilder(),
+        new ToUpperCaseBuilder()
       ]
     )
   );
-  
+
+  // Запускаю обработку файлов
   await fileHandler.processFiles();
 
+  // создаю архиватор и архивирую сгенерированные файлы
   let outputArchiver = new OutputArchiver(config, logger);
   await outputArchiver.archiveOutputs();
 
+  //отправляю отчет
   let emailSendler = new EmailSendler(config, logger);
-
-  logger.addLog(logger.getResultStr());
-
   await emailSendler.send();
-}
 
+  //сохраняю отчет в логах
+  logger.addLog(logger.getResultStr());
+}
 f();
 

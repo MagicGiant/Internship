@@ -10,6 +10,8 @@ class FileHandler {
     this.logger = logger;
   }
 
+  // Запускаю поток. Так как для каждого потока нужен новый объект transform,
+  // я использую свой билдер с методом create.
   async processFile(inputPath, outputPath) {
     this.createFile(outputPath);
 
@@ -42,6 +44,7 @@ class FileHandler {
     });
   }
 
+  //асинхронно запускаю processFile для каждого файла в конфиге
   async processFiles() {
     const tasks = this.config.inputFiles.map((inputFile, i) => {
       let inputPath = path.join(this.config.filesDirectory, inputFile);

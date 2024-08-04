@@ -3,6 +3,7 @@ const Logger = require('../logger');
 const { config } = require('process');
 const { time } = require('console');
 
+
 class TextTransform extends Transform{
   constructor(config, logger, combinedStrategiesBuilders = [], splitStrategiesBuilders = []){
     super();
