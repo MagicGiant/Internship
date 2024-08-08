@@ -1,19 +1,20 @@
 const Pool = require("pg").Pool;
 
 class Database {
-  constructor(user, host, port, database) {
-    Object.assign(this, host, port, user, database);
+  constructor(user, host, port, database, password) {
+    Object.assign(this, host, port, user, database, password);
 
     this.pool = new Pool({
       user,
       host,
       port,
       database,
+      password
     });
   }
 
-  static getDatabaseFromObject({ user, host, port, database }) {
-    return new Database(user, host, port, database);
+  static getDatabaseFromObject({ user, host, port, database,  password}) {
+    return new Database(user, host, port, database, password);
   }
 
   async transaction(f, err = null) {

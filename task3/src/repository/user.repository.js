@@ -17,6 +17,23 @@ class UserRepository {
     });
   }
 
+  async createTableIfNotExists(){
+    return this.db.transaction(async (client) => {
+      const res = await client.query(
+        'CREATE TABLE IF NOT EXISTS public.users'+
+          '('+
+              'id integer NOT NULL GENERATED ALWAYS AS IDENTITY ( INCREMENT 1 START 1 MINVALUE 1 MAXVALUE 2147483647 CACHE 1 ),'+
+              'username character varying(100) COLLATE pg_catalog."default" NOT NULL,'+
+              'password character varying(100) COLLATE pg_catalog."default" NOT NULL,'+
+              'CONSTRAINT user_pkey PRIMARY KEY (id)'+
+          ')');
+      if (res.rows.length === 0) {
+        return null;
+      }
+      return res.rows[0].id;
+    });
+  }
+
   async getUserByName(userName) {
     return this.db.transaction(async (client) => {
       const res = await client.query(
@@ -43,8 +60,8 @@ class UserRepository {
   async addUser(user) {
     this.db.transaction(async (client) => {
       await client.query(
-        `INSERT INTO users (id, username, password) VALUES ($1,$2,$3);`,
-        [user.id, user.username, user.password]
+        `INSERT INTO users (username, password) VALUES ($1,$2);`,
+        [user.username, user.password]
       );
     });
   }

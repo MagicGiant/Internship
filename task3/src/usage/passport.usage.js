@@ -5,7 +5,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const session = require("express-session");
 
-const hasher = require("../../public/js/hasher");
+const hasher = require("../js/hasher");
 
 module.exports = (repository, checker) => {
   passport.use(

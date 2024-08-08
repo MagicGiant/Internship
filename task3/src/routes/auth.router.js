@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const pathCreator = require("../../public/js/pathCreator");
-const hasher = require("../../public/js/hasher");
+const pathCreator = require("../js/pathCreator");
+const hasher = require("../js/hasher");
 const User = require("../models/user");
+const MessageRedirect = require("../js/messageRedirect")
 
 module.exports = (repository, checker) => {
   const passportUsage = require("../usage/passport.usage")(repository, checker);

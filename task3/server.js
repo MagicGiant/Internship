@@ -1,7 +1,7 @@
 "use strict";
 
 const express = require("express");
-const Checker = require("./public/js/checker");
+const Checker = require("./src/js/checker");
 const Database = require("./src/db/database");
 const UserRepository = require("./src/repository/user.repository");
 const app = express();
@@ -16,13 +16,16 @@ app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 
 const database = Database.getDatabaseFromObject({
-  user: "Sherka",
+  user: "postgres",
   host: "localhost",
   port: 5432,
   database: "fileManager",
+  password: "1239"
 });
 
 const userRepository = new UserRepository(database);
+userRepository.createTableIfNotExists();
+
 const checker = new Checker(userRepository);
 
 const PORT = 3000;

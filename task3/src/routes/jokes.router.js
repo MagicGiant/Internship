@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 
-const joke = require("../../public/js/joke");
-const MessageRedirect = require("../../public/js/messageRedirect");
-const pathCreator = require("../../public/js/pathCreator");
+const joke = require("../js/joke");
+const MessageRedirect = require("../js/messageRedirect");
+const pathCreator = require("../js/pathCreator");
 
 module.exports = (checker) => {
   router.get("/", async (req, res) => {
