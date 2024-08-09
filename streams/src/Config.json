@@ -13,10 +13,10 @@
   "highWaterMark": 10,
   "encoding": "utf8",
   "emailConfig": {
-    "service": "ethereal.email",
+    "service": "gmail",
     "auth": {
-      "user": "jakayla45@ethereal.email",
-      "pass": "BzRnj9Zq7sJxVPvETe"
+      "user": "test1524521@gmail.com",
+      "pass": "jbmaouochvbtpfke"
     },
     "to": "obidjanow@mail.ru"
   }

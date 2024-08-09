@@ -102,6 +102,6 @@ Writing chunk to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\outpu
 Finished writing to C:\Users\Sherka-user\MyDirect\Internship\streams\examples\output1.txt
 Finished processing C:\Users\Sherka-user\MyDirect\Internship\streams\examples\input1.txt
 archiver has been finalized and the output file descriptor has closed.
-Message sent: <fd64ac7e-176b-3f1c-38e4-0e2ffb01b214@ethereal.email>
+Message sent: <7e9533b5-1032-711f-7413-6f734fd8c44e@gmail.com>
 Количество строк: 11
 Количество отфильтрованных строк 3

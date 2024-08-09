@@ -6,19 +6,14 @@ class EmailSendler{
     this.logger = logger;
     
     this.transporter = nodemailer.createTransport({
-      host: `smtp.${config.emailConfig.service}`,
-      port: 587,
-      secure: false, // Use `true` for port 465, `false` for all other ports
-      auth: {
-        user: config.emailConfig.auth.user,
-        pass: config.emailConfig.auth.pass,
-      },
-    });
+      service: config.emailConfig.service,
+      auth: config.emailConfig.auth
+    })
   }
 
   async send(){
     const info = await this.transporter.sendMail({
-      from: `"Streams internship" <${this.config.emailConfig.auth.user}>`, // sender address
+      from: this.config.emailConfig.auth.user, // sender address
       to: this.config.emailConfig.to, // list of receivers
       subject: "file processed", // Subject line
       text: this.logger.getResultStr(), // plain text body
