@@ -14,6 +14,13 @@ class Checker {
     
     return trUser != null;
   }
+
+  ensureAuthenticated(req, res, next) {
+    if (req.isAuthenticated()) {
+      return next();
+    }
+    res.send(MessageRedirect.doesNotLogInMessage("/"))
+  }
 }
 
 module.exports = Checker;

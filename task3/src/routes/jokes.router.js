@@ -6,11 +6,7 @@ const MessageRedirect = require("../js/messageRedirect");
 const pathCreator = require("../js/pathCreator");
 
 module.exports = (checker) => {
-  router.get("/", async (req, res) => {
-    if (!checker.isLogIn) {
-      res.send(MessageRedirect.doesNotLogInMessage("/"));
-      return;
-    }
+  router.get("/", checker.ensureAuthenticated, async (req, res) => {
 
     const jokes = await joke.getJokes(5);
     res.render(pathCreator.createViewPath("jokes"), { jokes });

@@ -10,11 +10,7 @@ module.exports = (checker) => {
     static.renderPath(res, pathCreator.staticPath, checker.isLogIn);
   });
 
-  router.get("/*", (req, res) => {
-    if (!checker.isLogIn) {
-      res.send(MessageRedirect.doesNotLogInMessage("/"));
-      return;
-    }
+  router.get("/*", checker.ensureAuthenticated,(req, res) => {
     const fileDirPath = pathCreator.path.join(
       pathCreator.staticPath,
       req.params[0]

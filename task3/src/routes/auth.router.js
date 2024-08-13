@@ -6,7 +6,7 @@ const hasher = require("../js/hasher");
 const User = require("../models/user");
 const MessageRedirect = require("../js/messageRedirect")
 
-module.exports = (repository, checker) => {
+module.exports = (repository, checker, passport) => {
   const passportUsage = require("../usage/passport.usage")(repository, checker);
 
   router.use(passportUsage.router);
@@ -17,7 +17,7 @@ module.exports = (repository, checker) => {
 
   router.post(
     "/log-in",
-    passportUsage.passport.authenticate("local", {
+    passport.authenticate("local", {
       successRedirect: "/",
       failureRedirect: "/log-in",
       failureFlash: false,
@@ -50,10 +50,13 @@ module.exports = (repository, checker) => {
     res.redirect("/");
   });
 
-  router.post("/log-out", (req, res) => {
-    checker.isLogIn = false;
-    res.redirect("/");
+  router.get('/log-out', function(req, res, next) {
+    req.logout(function(err) {
+      if (err) { return next(err); }
+      res.redirect('/');
+    });
   });
+  
 
   return router;
 };

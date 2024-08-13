@@ -6,11 +6,7 @@ const MessageRedirect = require("../js/messageRedirect");
 const pathCreator = require("../js/pathCreator");
 
 module.exports = (checker) => {
-  router.get("/", async (req, res) => {
-    if (!checker.isLogIn) {
-      res.send(MessageRedirect.doesNotLogInMessage("/"));
-      return;
-    }
+  router.get("/", checker.ensureAuthenticated, async (req, res) => {
     const catUrl = await cat.getRandomCatUrl();
     res.render(pathCreator.createViewPath("cat"), { catUrl });
   });
