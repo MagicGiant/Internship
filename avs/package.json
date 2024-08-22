@@ -1,0 +1,25 @@
+{
+  "name": "avs",
+  "version": "1.0.0",
+  "main": "./app.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "start": "node ./app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "avs": "file:",
+    "cheerio": "^1.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.9.0",
+    "eslint": "^9.9.0",
+    "eslint-plugin-jsdoc": "^50.2.2",
+    "globals": "^15.9.0",
+    "jsdoc": "^4.0.3"
+  }
+}

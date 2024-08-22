@@ -4,7 +4,6 @@ const getParagraph = require("./kdoc-utils/text-utils/get-paragraph");
 const getStyles = require("./kdoc-utils/get-styles");
 const getTables = require("./kdoc-utils/get-tables");
 const Logger = require("./kdoc-utils/logger");
-const Paragraph = require("./kdoc-utils/parser/paragraphs")
 
 /**
  * Конвертирует html-строку в объект особо вида для дальнейшей обработки.
@@ -14,7 +13,7 @@ const Paragraph = require("./kdoc-utils/parser/paragraphs")
  *
  * @param {string} html исходная html-строка
  * @param {Logger} logger
- * @return {object} Результат: объект с информацией о содержимом документа и о css-стилях
+ * @returns {object} Результат: объект с информацией о содержимом документа и о css-стилях
  */
 module.exports = async (html, logger) => {
   // читаем стили
@@ -25,11 +24,12 @@ module.exports = async (html, logger) => {
   const paragraphs = $("p");
   const tables = $("table");
 
+  
   const objects = [];
   paragraphs.each((_index, element) => {
     const $element = $(element);
     const PObject = getParagraph($, $element, stylesData);
-
+    
     objects.push(PObject);
   });
 

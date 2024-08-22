@@ -1,8 +1,11 @@
-module.exports = (html) => {
+module.exports = (/**@type {string}*/ html) => {
   const styles = html.match(/\.([^{]+)\s*\{([^}]*)\}/g);
   const stylesData = {};
 
-  styles.forEach((styleString) => {
+  /**
+   *@param {string} styleString
+   */
+  styles?.forEach((/**@type {string}*/ styleString) => {
     const name = styleString.replace(/^\.|{[\s\S]*}$/g, "");
     stylesData[name] = {};
 
