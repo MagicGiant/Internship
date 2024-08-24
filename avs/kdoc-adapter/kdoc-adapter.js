@@ -3,7 +3,7 @@ const cheerio = require("cheerio");
 const getParagraph = require("./kdoc-utils/text-utils/get-paragraph");
 const getStyles = require("./kdoc-utils/get-styles");
 const getTables = require("./kdoc-utils/get-tables");
-const Logger = require("./kdoc-utils/logger");
+const Logger = require("../element-kdoc-adapter/logger");
 
 /**
  * Конвертирует html-строку в объект особо вида для дальнейшей обработки.
