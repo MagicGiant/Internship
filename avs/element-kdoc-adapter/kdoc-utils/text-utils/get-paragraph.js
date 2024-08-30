@@ -20,7 +20,7 @@ const docType = require("../../constants").DOC_TYPE;
  */
 module.exports = (element, stylesData) => {
 
-  element.replace('span[style="padding-left:1em;"]', ' ');
+  element.replaceElement('span',['style="padding-left:1em;"'], ' ');
 
   // $e('span[style="padding-left:1em;"]').each(function () {
   //   $(this).replaceWith(" ");
@@ -42,11 +42,11 @@ module.exports = (element, stylesData) => {
   // const styleClass = stylesData[$element.attr("class")];
 
   const isBold = 
-    element.elementData.body.trim() ||
+    element.getText() ||
       isBoldFull(element.html, stylesData);
 
   const isItalic =
-    element.elementData.body.trim() &&
+    element.getText() &&
     (styleClass["font-style"] == "italic" ||
       isItalicText(element.html, stylesData));
 
@@ -57,7 +57,7 @@ module.exports = (element, stylesData) => {
     source: element.html,
     pid: element.attr("data-pid"),
     spacesBefore: spacesBefore,
-    text: element.elementData.body,
+    text: element.getText(),
     format: format,
     align: styleClass ? styleClass["text-align"] : undefined,
     isBold: isBold,

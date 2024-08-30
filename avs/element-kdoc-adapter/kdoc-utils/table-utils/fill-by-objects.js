@@ -144,7 +144,6 @@ module.exports = (tableObject, tableString, stylesData) => {
 
   // заполняем поле "objects" объектами, полученными из внутренностей рамки
   for (let string of htmlStrings) {
-    // console.log("!!!!!!!!!!!!!!!!");
     
     const $ = cheerio.load(string);
 

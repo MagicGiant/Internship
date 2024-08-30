@@ -1,14 +1,30 @@
 const Element = require("./element");
 
+/**
+ * @description Класс-контейнер. Парсит всю html страницу и хранит ее в виде объектов Element. Можно итерировать по элементам с помощью метода each.
+ * @example let elements = new Elements(htmlStr).parse('p'); elements.each(el => console.log(el));
+ */
 class Elements {
-
 	/**
 	 * @param { string } html
 	 */
 	constructor(html) {
 		this.html = html;
 		/**@type {Element[]}*/ this.elements = [];
+
+    return new Proxy(this, {
+      get: (target, prop) => {
+        if (typeof prop === 'string' && !isNaN(prop)) {
+          return target.elements[Number(prop)];
+        }
+        return target[prop];
+      }
+    });
 	}
+
+  get length(){
+    return this.elements.length;
+  }
 
 	/**
 	 *@param {string} tag
@@ -37,7 +53,7 @@ class Elements {
 	}
 
 	/**
-	 * @param {function(Element): void} f 
+	 * @param {function(Element, number): void} f 
 	 * @returns {Elements}
 	 * @description Итерироваться по элементам. Обратный вызов принимает индекс и значение
 	 */
@@ -45,7 +61,7 @@ class Elements {
 		let size = this.elements.length;
     let it = 0;
 		while(size > it){
-			let command = f(this.elements[it]);
+			let command = f(this.elements[it], it);
       if (command){
         if (command == "break"){
           break;

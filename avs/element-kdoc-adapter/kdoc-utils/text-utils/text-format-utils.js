@@ -19,19 +19,15 @@ function getTextFormat(styleClass, element, isBold) {
   if (!styleClass) return "unformattext";
 
   if (
-    element.elementData.body.trim() &&
-    !element.elementData.body.trim().match(/\.$/) &&
+    element.getText() &&
+    !element.getText().match(/\.$/) &&
     (isBold ||
       (styleClass["font-size"] &&
         styleClass["font-size"].replace(/pt/, "") >= 16))
   ) {
     format = "headertext";
   } else if (
-    element
-      .elementData
-      .body
-      .trim()
-      .match(/<img src=[^>]>/)
+    element.getText().match(/<img src=[^>]>/)
   ) {
     format = "";
   } else {
@@ -59,7 +55,7 @@ function isBoldStart(htmlString, stylesData) {
   // const $ = cheerio.load(htmlString);
   // const paragraph = $("p")[0];
 
-  const fullText = element.elementData.body.trim();
+  const fullText = element.getText();
 
   // Проходимся по всем ключам объекта styleClass
   for (const classKey in stylesData) {
@@ -72,7 +68,7 @@ function isBoldStart(htmlString, stylesData) {
 
       // Проверяем каждый <span> с текущим классом
       spans.each((span) =>{
-        const textInside = span.elementData.body.trim();
+        const textInside = span.getText();
 
         if (textInside !== "" && !boldText) {
           boldText = textInside;
@@ -125,9 +121,8 @@ function isBoldFull(htmlString, stylesData) {
     .replace(/<a href=[^>]+>[\s\S]*?<\/a>/g, "")
     .replace(pictureRegExp, "");
 
-  const $ = cheerio.load(clearString);
-  const paragraph = $("p")[0];
-  const fullText = $(paragraph).text().trim();
+  const paragraph = new Element(clearString).parse('p');
+  const fullText = paragraph.getText();
 
   if (!fullText.replace(/\s+/g, "")) return false;
 
@@ -137,13 +132,11 @@ function isBoldFull(htmlString, stylesData) {
   for (const classKey in stylesData) {
     if (stylesData.hasOwnProperty(classKey)) {
       // Находим все элементы <span> с текущим классом
-      const spans = $(`span.${classKey}`);
+      const spans = new Elements(clearString).parse('span', [`class="${classKey}"`]);
 
       // Проверяем каждый <span> с текущим классом
-      spans.each((_index, element) => {
-        const textInside = $(element).text().trim();
-
-        // Если текст не пустой, увеличиваем счетчик непустых элементов и добавляем его к общему жирному тексту
+      spans.each((element) => {
+        const textInside = element.getText();
         if (
           textInside !== "" &&
           stylesData[classKey]["font-weight"] === "bold"
@@ -204,9 +197,8 @@ function isItalicText(htmlString, stylesData) {
     .replace(/<a href=[^>]+>[\s\S]*?<\/a>/g, "")
     .replace(pictureRegExp, "");
 
-  const $ = cheerio.load(clearString);
-  const paragraph = $("p")[0];
-  const fullText = $(paragraph).text().trim();
+  const paragraph = new Element(clearString).parse("p");
+  const fullText = paragraph.getText();
 
   if (!fullText.replace(/\s+/g, "")) return false;
 
@@ -216,11 +208,11 @@ function isItalicText(htmlString, stylesData) {
   for (const classKey in stylesData) {
     if (stylesData.hasOwnProperty(classKey)) {
       // Находим все элементы <span> с текущим классом
-      const spans = $(`span.${classKey}`);
+      const spans = new Elements(clearString).parse('span', [`class="${classKey}"`]);
 
       // Проверяем каждый <span> с текущим классом
-      spans.each((_index, element) => {
-        const textInside = $(element).text().trim();
+      spans.each(( element, _index) => {
+        const textInside = element.getText();
 
         // Если текст не пустой, увеличиваем счетчик непустых элементов и добавляем его к общему курсивному тексту
         if (

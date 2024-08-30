@@ -19,6 +19,8 @@ const {
  * @returns {void}
  */
 module.exports = (rows, $, stylesData, tableObject) => {
+  // console.log('!!!');
+  
   rows.each((_rowIndex, rowElement) => {
     $("td p", rowElement).each((_cellIndex, cellElement) => {
       const $cellElement = $(cellElement);
