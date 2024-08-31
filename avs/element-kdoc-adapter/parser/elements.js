@@ -55,7 +55,7 @@ class Elements {
 	/**
 	 * @param {function(Element, number): void} f 
 	 * @returns {Elements}
-	 * @description Итерироваться по элементам. Обратный вызов принимает индекс и значение
+	 * @description Итерироваться по элементам. Обратный вызов принимает значение и индекс
 	 */
 	each(f) {
 		let size = this.elements.length;

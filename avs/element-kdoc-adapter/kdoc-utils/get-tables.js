@@ -68,7 +68,7 @@ module.exports = (tables, stylesData) => {
       }
     }
 
-    else if (!hasBorders(tableElement, stylesData) && !isPictures(rows, $)) {
+    else if (!hasBorders(tableElement, stylesData) && !isPictures(rows)) {
       fillTableObject(rows, stylesData, tableObject);
       fillByRows(tableObject, rows, stylesData);
       tablesArray.push(tableObject);

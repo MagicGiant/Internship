@@ -2,6 +2,7 @@ const ElementData = require('./elementData');
 
 /**
  * @description Нужен для работы с единственным тегом. Находит в html только первый элемент. Можно получить атрибуты элемента, все данные elementData, удалить из элемента часть текста или целый тег.
+ * @todo Пока находит атрибуты очень топорно. Должно быть полное совпадение строки атрибута. Может отличаться только вид кавычек. (class="hello") не будет равен (class = " hello "). Поэтому все parameters[] вводить с учетом этого
  * @example let element = new Element(html).parse('p'); element.replaceElement('span', ['class="style"'], '');
  */
 class Element{

@@ -3,6 +3,7 @@ const cheerio = require("cheerio");
 const getParagraph = require("./kdoc-utils/text-utils/get-paragraph");
 const getStyles = require("./kdoc-utils/get-styles");
 const getTables = require("./kdoc-utils/get-tables");
+const Elements = require("./parser/elements");
 
 /**
  * Конвертирует html-строку в объект особо вида для дальнейшей обработки.
@@ -17,21 +18,19 @@ module.exports = async (html) => {
   // читаем стили
   const stylesData = getStyles(html);
 
-  const $ = cheerio.load(html);
-
-  const paragraphs = $("p");
-  const tables = $("table");
+  const paragraphs = new Elements(html).parse("p");
+  const tables = new Elements(html).parse("table");
 
   
   const objects = [];
-  paragraphs.each((_index, element) => {
-    const $element = $(element);
-    const PObject = getParagraph($, $element, stylesData);
+  paragraphs.each(element => {
+    const PObject = getParagraph(element, stylesData);
     
     objects.push(PObject);
   });
+  
 
-  const tablesArray = getTables(tables, $, stylesData);
+  const tablesArray = getTables(tables, stylesData);
 
   const resultArray = [];
 
