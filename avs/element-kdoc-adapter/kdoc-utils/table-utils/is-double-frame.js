@@ -13,7 +13,7 @@ const Elements = require("../../parser/elements");
 module.exports = (rows, stylesData) => {
   let isDoubleFrame = true;
   const rowCount = rows.length;
-  const colCount = new Elements(rows[0].html).parse('td').length;
+  const colCount = new Elements(rows.elements[0].html).parse('td').length;
 
   const border = {
     left: [],

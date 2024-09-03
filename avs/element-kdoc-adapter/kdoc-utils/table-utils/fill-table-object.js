@@ -20,7 +20,6 @@ const deepCopy = require("../../utils/deep-copy");
  * @returns {void}
  */
 module.exports = (rows, stylesData, tableObject) => {
-  // console.log('!!!!!!!!!!');
   
   rows.each((rowElement, _rowIndex) => {
 
@@ -38,13 +37,14 @@ module.exports = (rows, stylesData, tableObject) => {
         const format = getTextFormat(styleClass, cellElement, isBold);
 
         cellElement.replaceElement('span',['style="padding-left:1em;"'], ' ');
+        
 
         const cellObject = {
           type: "P",
-          source: cellElement.html,
+          source: cellElement.html.replace(/<\/img>/g,''),
           pid: cellElement.attr('data-pid'),
           spacesBefore: 0,
-          text: cellElement.getText(),
+          text: cellElement.getText(false),
           format,
           align:  styleClass ? styleClass["text-align"] : undefined,
           isBold,

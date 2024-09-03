@@ -44,8 +44,6 @@ module.exports = (tables, stylesData) => {
       const isTeminsSection = isTermins(rows);
       const isPicturesTable = isPictures(rows); 
 
-      // console.log(doubleFrame);
-      
       if (!doubleFrame) {
         fillTableObject(rows, stylesData, tableObject);
         tablesArray.push(tableObject);

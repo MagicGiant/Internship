@@ -22,16 +22,9 @@ module.exports = (element, stylesData) => {
 
   element.replaceElement('span',['style="padding-left:1em;"'], ' ');
 
-  // $e('span[style="padding-left:1em;"]').each(function () {
-  //   $(this).replaceWith(" ");
-  // });
-  
   const spanElement = new Element(element.html).parse('span', ['style="padding-left:5em;"']);
-  // const spanElement = $('span[style="padding-left:5em;"]', $element);
 
   const styleAttributeValue = spanElement.attr('style');
-  // const styleAttributeValue = spanElement.attr("style");
-
 
   const paddingValue = styleAttributeValue
     ? styleAttributeValue.match(/padding-left:(\d+)em;/)
@@ -39,11 +32,11 @@ module.exports = (element, stylesData) => {
   const spacesBefore = paddingValue ? parseInt(paddingValue[1]) : 0;
 
   const styleClass = stylesData[element.attr("class")];
-  // const styleClass = stylesData[$element.attr("class")];
 
   const isBold = 
-    element.getText() ||
-      isBoldFull(element.html, stylesData);
+    element.getText() &&
+      (styleClass["font-weight"] == "bold" ||
+        isBoldFull(element.html, stylesData));
 
   const isItalic =
     element.getText() &&
@@ -51,13 +44,12 @@ module.exports = (element, stylesData) => {
       isItalicText(element.html, stylesData));
 
   const format = getTextFormat(styleClass, element, isBold);
-  
   const PObject = {
     type: "P",
-    source: element.html,
+    source: element.html.replace(/<\/img>/g,''),
     pid: element.attr("data-pid"),
     spacesBefore: spacesBefore,
-    text: element.getText(),
+    text: element.getText(false),
     format: format,
     align: styleClass ? styleClass["text-align"] : undefined,
     isBold: isBold,
@@ -65,6 +57,9 @@ module.exports = (element, stylesData) => {
     isBoldBegin: isBoldStart(element.html, stylesData),
     docType: docType,
   };
+  
+ 
+  
 
   const pictureRegExp =
     /<picture\s+class="[^>]+"><img\s+src="data:image\/png;base64,[^>]+"\s+style="[^>]+"><\/picture>/;
@@ -74,7 +69,10 @@ module.exports = (element, stylesData) => {
       .replace(/<span style="padding-left:1em;">/g, (str) => ` ${str}`)
       .replace(/<(?!\/?(picture|img)\b)[^>]*>/g, "")
       .replace(/&nbsp;/g, " ");
+    if (PObject.text.includes('&nbsp;')){
+      console.log(PObject);
+      console.log('_______');
+    }
   }
-
   return PObject;
 };

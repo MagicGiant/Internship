@@ -22,6 +22,13 @@ const docType = require("../../constants").DOC_TYPE;
 module.exports = ($, $element, stylesData) => {
   const $e = cheerio.load($element.html());
 
+  
+  // TODO: Логирование get-paragraph cheerio
+  // if ($element.html().includes(' Градостроительство. Планировка и застройка городских и сельских поселений')){
+  //   console.log($element.html());
+  // }
+  //
+
   $e('span[style="padding-left:1em;"]').each(function () {
     $(this).replaceWith(" ");
   });
@@ -59,6 +66,14 @@ module.exports = ($, $element, stylesData) => {
     docType: docType,
   };
 
+  
+  // if (PObject.text.includes('Пробки резьбовые с полным профилем для трубной цилиндрической резьбы диаметром')){
+  //   console.log('До регулярки cheerio:');
+  //   console.log(PObject);
+  //   console.log('_____');
+  // }
+
+
   const pictureRegExp =
     /<picture\s+class="[^>]+"><img\s+src="data:image\/png;base64,[^>]+"\s+style="[^>]+"><\/picture>/;
 
@@ -68,6 +83,13 @@ module.exports = ($, $element, stylesData) => {
       .replace(/<(?!\/?(picture|img)\b)[^>]*>/g, "")
       .replace(/&nbsp;/g, " ");
   }
+  
+  // if (PObject.text.includes('Пробки резьбовые с полным профилем для трубной цилиндрической резьбы диаметром')){
+  //   console.log('После регулярки');
+  //   console.log(PObject);
+  //   console.log('_____________');
+    
+  // }
 
   return PObject;
 };

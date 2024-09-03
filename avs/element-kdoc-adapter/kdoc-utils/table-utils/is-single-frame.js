@@ -19,7 +19,6 @@ module.exports = (rows, stylesData) => {
     
     let tds = new Elements(rowElement.html).parse('td');
     const colCount = tds.length;
-    // const colCount = $(rowElement).find("td").length;
 
     tds.each((cellElement, cellIndex) => {
       if (!isSingleFrame) return 'break';

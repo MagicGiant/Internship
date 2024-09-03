@@ -9,17 +9,8 @@ class Elements {
 	 * @param { string } html
 	 */
 	constructor(html) {
-		this.html = html;
+		this.html = html.replace(/\u00A0/g, '&nbsp;');;
 		/**@type {Element[]}*/ this.elements = [];
-
-    return new Proxy(this, {
-      get: (target, prop) => {
-        if (typeof prop === 'string' && !isNaN(prop)) {
-          return target.elements[Number(prop)];
-        }
-        return target[prop];
-      }
-    });
 	}
 
   get length(){
@@ -33,21 +24,28 @@ class Elements {
 	 */
 	parse(tag, parameters = []) {
     this.elements = [];
-		const tagRegex = Element.getTagRegex(tag);
-		let match = tagRegex.exec(this.html);
-		
-		while(match){
-      let elementData = Element.createElementData(match);
 
+    let elementsData = Element.getElementsData(this.html, tag, parameters);
+
+    elementsData.forEach(elementData =>{
       let element = new Element(elementData.all);
-      element.elementData = elementData
+      element.elementData = elementData;
+      this.elements.push(element);
+    })
+
+		// const tagRegex = Element.getTagRegex(tag, parameters);
+		// let match = tagRegex.exec(this.html);
+		
+		// while(match){
+    //   let elementData = Element.createElementDataFromMatch(match);
+
+    //   let element = new Element(elementData.all);
+    //   element.elementData = elementData
       
-      if (parameters.every(arrEl => elementData.parameters.includes(arrEl))){ 
-		    this.elements.push(element);
-      }
+		//   this.elements.push(element);
     
-      match = tagRegex.exec(this.html);
-		}
+    //   match = tagRegex.exec(this.html);
+		// }
 
 		return this;
 	}

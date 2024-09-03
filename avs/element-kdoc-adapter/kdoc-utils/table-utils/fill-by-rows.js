@@ -17,10 +17,10 @@ const {
  * @returns {void}
  */
 module.exports = (tableObject, rows, stylesData) => {
-  tableObject.type = "ROWS";
+  tableObject.type = "ROWS"; 
   tableObject.rows = [];
 
-  rows.each((_index, row) => {
+  rows.each((row, _index) => {
     let text = "";
     const cells = [];
 
@@ -41,9 +41,9 @@ module.exports = (tableObject, rows, stylesData) => {
             .replace(/&nbsp;/g, " ");
         }
 
-        if (!cellText) cellText = cell.getText();
+        if (!cellText) cellText = cell.getText(false);
 
-        text += cellText;
+        text +=` ${cellText}`;
 
         const styleClass = stylesData[cell.attr('class')];
         const isBold = cell.getText() &&
@@ -53,12 +53,12 @@ module.exports = (tableObject, rows, stylesData) => {
           cell.getText() &&
           (styleClass['font-style'] == 'italic' ||
             isItalicText(cell.html, stylesData));
-        
+
         const format = getTextFormat(styleClass, cell, isBold);
 
         const cellObject = {
           type: 'P',
-          source: cell.html,
+          source: cell.replace(/<\/img>/g,'').elementData.body,
           pid: cell.attr('data-pid'),
           spacesBefore: 0,
           text: cellText,
@@ -77,8 +77,8 @@ module.exports = (tableObject, rows, stylesData) => {
 
     tableObject.rows.push({
       type: 'ROW',
-      source: row.html,
-      text,
+      source: row.replace(/<\/img>/g,'').elementData.body,
+      text: text.replace(/<\/img>/g,''),
       cells,
       firstPid,
       lastPid

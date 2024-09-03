@@ -49,27 +49,24 @@ exports.getTextFormat = getTextFormat;
  * @returns {boolean} Результат проверки: true, если HTML-строка начинается с жирного текста, иначе false.
  */
 function isBoldStart(htmlString, stylesData) {
+
   
   const element = new Element(htmlString).parse('p');
-
-  // const $ = cheerio.load(htmlString);
-  // const paragraph = $("p")[0];
-
   const fullText = element.getText();
 
   // Проходимся по всем ключам объекта styleClass
   for (const classKey in stylesData) {
     if (stylesData.hasOwnProperty(classKey)) {
       // Находим все элементы <span> с текущим классом
-      const spans = new Elements(htmlString).parse('span', [`class="${classKey}"`]);
+      const spans = new Elements(htmlString).parse('span', [`class="${classKey}"`], '.*');
       // const spans = $(`span.${classKey}`);
 
       let boldText = ""; // Строка для сбора жирного текста
 
       // Проверяем каждый <span> с текущим классом
+      const textInside = '';
       spans.each((span) =>{
         const textInside = span.getText();
-
         if (textInside !== "" && !boldText) {
           boldText = textInside;
           return "break";
@@ -84,8 +81,8 @@ function isBoldStart(htmlString, stylesData) {
         return true;
       }
       
-      }
     }
+  }
   // Если не найдено соответствий, возвращаем false
   return false;
 }

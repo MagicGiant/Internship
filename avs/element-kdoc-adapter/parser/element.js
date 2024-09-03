@@ -13,39 +13,133 @@ class Element{
 	 *@param {string} html
 	 */
 	constructor(html){
-		this.html = html
+		this.html = html.replace(/\u00A0/g, '&nbsp;');
 	}
+
+  
+  /**
+   * @param { string } str
+   * @param { RegExp } regex
+   */
+  static getCoordinateRegex(str, regex){
+    const matches = [...str.matchAll(regex)];
+    
+    return matches.map(match => ({
+      start: match.index,
+      end: match.index + match[0].length
+    }));
+  }
+
+  /**
+   *@param { string } html 
+   *@param { string } tag
+   *@param { ElementData[] } parameters
+   *@returns { ElementData[] }
+   */
+  static getElementsData(html, tag, parameters = []){
+    let parametersRegex = Element.getParametersRegex(parameters);
+
+    let openTagParamRegex = new RegExp(`<${tag}${parametersRegex}[^><]*?>`, 'g')
+    let openTag = new RegExp(`<${tag}.*?>`, 'g')
+    let closeTagRegex = new RegExp(`<\/${tag}.*?>`, 'g')
+
+    let OTPCs = Element.getCoordinateRegex(html, openTagParamRegex);
+    let OTCs = Element.getCoordinateRegex(html, openTag)
+    let CTCs = Element.getCoordinateRegex(html, closeTagRegex);
+  
+    let resultCoord = []
+
+    OTPCs.forEach(OTPC => {
+      if (resultCoord.length != 0 && OTPC.start < resultCoord[resultCoord.length - 1].end){
+        return;
+      }
+
+      OTCs = OTCs.filter(OTC => OTC.start > OTPC.start);
+      CTCs = CTCs.filter(CTC => CTC.start > OTPC.start);
+
+      let newResult = {}
+      let dif = 1;
+      while(dif != 0){
+        if (OTCs.length === 0 || OTCs[0].start > CTCs[0].start){
+          dif--;
+          newResult.start = OTPC.start;
+
+          if (!CTCs[0]){
+            console.log(OTCs);
+          }
+          
+          newResult.end = CTCs[0].end;
+          CTCs.shift();
+        }
+        else if (OTCs[0].start < CTCs[0].start){
+          dif++;
+          OTCs.shift();
+        }
+      }
+
+      resultCoord.push(newResult);
+    });
+
+    let result = resultCoord.map(el =>{
+      let strElement = html.slice(el.start, el.end);
+      let tagRegex = Element.getTagRegex(tag, parameters);
+      return Element.createElementDataFromMatch(tagRegex.exec(strElement));
+    })
+
+    return result;
+  }
 
 	/**
 	 *@param {RegExpExecArray} match 
 	 *@returns {ElementData}
 	 */
-	static createElementData(match){
+	static createElementDataFromMatch(match){
 		let elementData = Object.assign(new ElementData(), match.groups);
 		elementData.parameters = elementData.parameters.trim().split(' ');
 		return elementData;
 	}
 
+  /**
+   *@param {string[]} parameters
+   */
+  static getParametersRegex(parameters = []){
+    return parameters.map(param => {
+      return `[^><]*?${param}`
+    }).join('')
+  }
+
 	/**
 	 *@param {string} tag 
+	 *@param {string[]} parameters
 	 *@returns {RegExp}
 	 */
-	static getTagRegex(tag){
-		return new RegExp(`(?<all><(?<tag>${tag})(?<parameters>.*?)>(?<body>.*?)</${tag}>)`, "gis");
+	static getTagRegex(tag, parameters = []){
+    let parametersRegex = Element.getParametersRegex(parameters);
+    // let regex = /<span[^><]*?class="aaaaa-T14"[^><]*?>.*?<\/span>/g;
+    // let regex = /<span[^>]*>(.*?)<\/span>/
+		return new RegExp(`(?<all><(?<tag>${tag})(?<parameters>${parametersRegex}[^><]*?)>(?<body>.*)</${tag}>)`, "gis");
 	}
 
   
   /**
+   * @param {boolean} [trim=true] 
    * @returns {string|null} Вернет null если elementData = null (не был вызван метод parse)
    * @description Возвращает elementData.body без тегов, оставляя только текст без крайних пробелов
    */
-  getText(){
+  getText(trim = true){
     if (!this.elementData){
       return null;
     }
-    let a = this.elementData.body.replace(/<[^>]+>/gs, '').trim();
-    // console.log(a);
-    
+
+    let a = this.elementData.body
+      .replace(/<[^>]+>/gs, '')
+      .replace(/&nbsp;/g, '\u00A0')
+      .replace(/&gt;/g, '>')
+      .replace(/&lt;/g, '<')
+
+    if (trim){
+      a = a.trim();
+    }
     return a;
   }
 
@@ -55,13 +149,17 @@ class Element{
   * @returns { boolean }
   */
 	isAllParameters(elementData, parameters){
-
     const quoteReplaceRegex = /['`]/g;
-
     const thisParam_replace = elementData.parameters.map(str => str.replace(quoteReplaceRegex, '"'));
-
     const inputParam_replace = parameters.map(str => str.replace(quoteReplaceRegex, '"'));
 
+    // TODO: Логирование isAllParameters
+    // if (elementData.all.includes('Оборудование для испытания')){
+    //   console.log('---------------------');
+    //   console.log(thisParam_replace);
+    //   console.log(inputParam_replace);
+    // }
+    //
 		return inputParam_replace.every(param =>thisParam_replace.includes(param));
 	}
 
@@ -71,18 +169,14 @@ class Element{
 	 *@returns {Element}
 	 */
 	parse(tag, parameters = []) {
-		const tagRegex = Element.getTagRegex(tag);
+		const tagRegex = Element.getTagRegex(tag, parameters);
 		let match = tagRegex.exec(this.html);
 		
 		if (!match){
 			return this;
 		}
 
-		let elementData = Element.createElementData(match);
-		
-		if (this.isAllParameters(elementData, parameters)){ 
-			this.elementData = elementData;
-		}
+		this.elementData = Element.createElementDataFromMatch(match);
 
 		return this;
 	}
@@ -138,7 +232,7 @@ class Element{
 		}
 
 		this.elementData.all = this.elementData.all.replace(searchValue, replaceValue);
-		Object.assign(this.elementData, Element.createElementData(Element.getTagRegex(this.elementData.tag).exec(this.elementData.all)))
+		Object.assign(this.elementData, Element.createElementDataFromMatch(Element.getTagRegex(this.elementData.tag).exec(this.elementData.all)))
 		return this;
 	}
 
@@ -149,20 +243,31 @@ class Element{
 	 *@returns {Element}
 	 */
 	replaceElement(tag, parameters, replaceValue){
-    let match = Element.getTagRegex(tag).exec(this.elementData.all)
-
-    if (!match){
+    if (!this.elementData){
       return this;
     }
-    
-		let elementData = Element.createElementData(match);
 
-		if (this.isAllParameters(elementData, parameters)){
-			this.replace(elementData.all, replaceValue);
-		}
+    let elementsData = Element.getElementsData(this.html, tag, parameters);
 
-		return this;
-	}
+    elementsData.forEach(element => {
+      this.replace(element.all, replaceValue);
+    });
+  
+    // let regex = Element.getTagRegex(tag, parameters);
+    // let match = regex.exec(this.elementData.all);
+
+    // while (match){
+
+    //   let elementData = Element.createElementDataFromMatch(match);
+
+    //   if (this.isAllParameters(elementData, parameters)){
+    //     this.replace(elementData.all, replaceValue);
+    //   }
+  
+    //   match = regex.exec(this.elementData.all);
+    // }
+    return this;
+  }
 }
 
 module.exports = Element;

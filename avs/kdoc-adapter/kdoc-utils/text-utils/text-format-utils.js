@@ -64,6 +64,11 @@ function isBoldStart(htmlString, stylesData) {
 
       // Проверяем каждый <span> с текущим классом
       for (let span of spans) {
+        // TODO: Дебаг isBoldStart cheerio
+        if (htmlString.includes('data-pid="104"') && classKey=='aaaaa-T14'){
+          console.log(classKey);
+        }
+        //
         const textInside = $(span).text().trim();
 
         if (textInside !== "" && !boldText) {
@@ -77,6 +82,7 @@ function isBoldStart(htmlString, stylesData) {
         stylesData[classKey]["font-weight"] === "bold" &&
         fullText.startsWith(boldText)
       ) {
+        
         return true;
       }
     }

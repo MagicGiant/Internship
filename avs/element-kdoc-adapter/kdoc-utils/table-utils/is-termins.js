@@ -23,13 +23,11 @@ module.exports = (rows) => {
 
       if (text) isFirstCell = true;
 
-      // console.log(rowLength - 1, cellIndex);
       if (
         isFirstCell &&
         text.match(/^\d+(\.\d+)*\s+[А-ЯЁа-яё\s]+?[:;][А-ЯЁа-яё\s]+?/)
       ) {
         firstCellMatch = true;
-        // console.log("BEGIN: " + text);
       }
       if (
         cellIndex == rowLength - 1 &&
@@ -37,7 +35,6 @@ module.exports = (rows) => {
         text.match(/^[A-Za-z,.;()"'/\\*[\]{}\-_\d\s]+$/)
       ) {
         lastCellMatch = true;
-        // console.log("END: " + text);
       }
     });
 
