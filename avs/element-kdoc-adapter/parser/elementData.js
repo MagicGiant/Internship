@@ -1,12 +1,12 @@
-class ElementData{
+class ElementData {
   /**
    * @type {string}
-   * @description весь html элемента, который может меняться при вызове таких методов как replace, replaceTag 
-   * */ 
+   * @description весь html элемента, который может меняться при вызове таких методов как replace, replaceTag
+   * */
   all = "";
   /**@type {string}*/ parameters = "";
-  /**@type {string}*/ tag = ""; 
+  /**@type {string}*/ tag = "";
   /**@type {string}*/ body = "";
 }
 
-module.exports = ElementData
+module.exports = ElementData;

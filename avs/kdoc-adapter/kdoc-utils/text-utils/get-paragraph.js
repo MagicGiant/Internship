@@ -22,13 +22,6 @@ const docType = require("../../constants").DOC_TYPE;
 module.exports = ($, $element, stylesData) => {
   const $e = cheerio.load($element.html());
 
-  
-  // TODO: Логирование get-paragraph cheerio
-  // if ($element.html().includes(' Градостроительство. Планировка и застройка городских и сельских поселений')){
-  //   console.log($element.html());
-  // }
-  //
-
   $e('span[style="padding-left:1em;"]').each(function () {
     $(this).replaceWith(" ");
   });
