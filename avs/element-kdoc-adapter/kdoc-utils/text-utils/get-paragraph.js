@@ -69,10 +69,6 @@ module.exports = (element, stylesData) => {
       .replace(/<span style="padding-left:1em;">/g, (str) => ` ${str}`)
       .replace(/<(?!\/?(picture|img)\b)[^>]*>/g, "")
       .replace(/&nbsp;/g, " ");
-    if (PObject.text.includes('&nbsp;')){
-      console.log(PObject);
-      console.log('_______');
-    }
   }
   return PObject;
 };

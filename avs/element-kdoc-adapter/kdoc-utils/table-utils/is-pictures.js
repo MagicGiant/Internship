@@ -12,7 +12,7 @@ module.exports = (rows) => {
       new Elements(tdElement.html).parse('p').each((row) =>{
         const text = row.getText();
 
-        if (!text) return 'break';
+        if (!text) return;
 
         if (!text.match(/^<picture[^>]+?><img[^>]+?><\/ picture>$/)) {
           isPictures = false;

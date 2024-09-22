@@ -10,7 +10,7 @@ const getTables = require("./kdoc-utils/get-tables");
  * Функция принимает html-строку и возвращает объект с данными о содержимом документа
  * и css-стилях содержимого
  *
- * @param {string} html исходная html-строка
+ * @param {string} html исходня html-строка
  * @returns {object} Результат: объект с информацией о содержимом документа и о css-стилях
  */
 module.exports = async (html) => {
@@ -22,12 +22,12 @@ module.exports = async (html) => {
   const paragraphs = $("p");
   const tables = $("table");
 
-  
   const objects = [];
+
   paragraphs.each((_index, element) => {
     const $element = $(element);
     const PObject = getParagraph($, $element, stylesData);
-    
+
     objects.push(PObject);
   });
 

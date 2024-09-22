@@ -1,7 +1,7 @@
-const cheerio = require("cheerio");
-
 const getParagraph = require("../text-utils/get-paragraph");
 const fillTableObject = require("./fill-table-object");
+const Element = require("../../parser/element");
+const Elements = require("../../parser/elements");
 
 const docType = require("../../constants").DOC_TYPE;
 const notRowMarker = require("../../constants").NOT_ROW_MARKER;
@@ -145,11 +145,13 @@ module.exports = (tableObject, tableString, stylesData) => {
   // заполняем поле "objects" объектами, полученными из внутренностей рамки
   for (let string of htmlStrings) {
     
-    const $ = cheerio.load(string);
+    // const $ = cheerio.load(string); 
 
     if (string.match(/^<p/)) {
-      const $element = $($("p")[0]);
-      const PObject = getParagraph($, $element, stylesData);
+
+      // const $element = $($("p")[0]);
+      const element = new Element(string).parse('p');
+      const PObject = getParagraph(element, stylesData);
 
       tableObject.objects.push(PObject);
     } else if (string.match(/^<table/)) {
@@ -162,11 +164,13 @@ module.exports = (tableObject, tableString, stylesData) => {
         fromSingleFrame: true,
       };
 
-      const tableElement = $("table")[0];
-      const rows = $("tr", tableElement);
+      // const tableElement = $("table")[0];
+      const tableElement = new Element(string).parse('table');
+      // const rows = $("tr", tableElement);
+      const rows = new Elements(tableElement.elementData.all).parse('tr');
 
-      fillTableObject(rows, $, stylesData, TObject);
-      setFrameBorders(TObject, tableElement, $, stylesData);
+      fillTableObject(rows, stylesData, TObject);
+      setFrameBorders(TObject, tableElement, stylesData);
 
       tableObject.objects.push(TObject);
     }
@@ -180,66 +184,67 @@ module.exports = (tableObject, tableString, stylesData) => {
  * объект cheerio для работы с DOM и объект со стилями.
  *
  * @param {object} tableObject табличный объект из адаптера.
- * @param {cheerio.Cheerio} tableElement табличный объект cheerio.
- * @param {cheerio.CheerioAPI} $ объект cheerio для работы с DOM.
+ * @param {Element} tableElement табличный объект cheerio.
  * @param {object} stylesData объект со стилями.
  * @returns {void}
  */
-function setFrameBorders(tableObject, tableElement, $, stylesData) {
-  $("td", tableElement).each((_index, element) => {
-    const styleClass = $(element).attr("class");
-    if (styleClass) {
-      const style = stylesData[styleClass];
-
-      const left = /solid/.test(style["border-left"]);
-      const right = /solid/.test(style["border-right"]);
-      const top = /solid/.test(style["border-top"]);
-      const bottom = /solid/.test(style["border-bottom"]);
-
-      if (left) {
-        if (!tableObject.borderColor) {
-          tableObject.borderColor = style["border-left"].trim().split(/\s+/)[2];
+function setFrameBorders(tableObject, tableElement, stylesData) {
+  new Elements(tableElement.elementData.all)
+    .parse('td')
+    .each((element, _index) => {
+      const styleClass = element.attr('class');
+      if (styleClass) {
+        const style = stylesData[styleClass];
+  
+        const left = /solid/.test(style["border-left"]);
+        const right = /solid/.test(style["border-right"]);
+        const top = /solid/.test(style["border-top"]);
+        const bottom = /solid/.test(style["border-bottom"]);
+  
+        if (left) {
+          if (!tableObject.borderColor) {
+            tableObject.borderColor = style["border-left"].trim().split(/\s+/)[2];
+          }
+          if (!tableObject.borderThickness) {
+            tableObject.borderThickness = style["border-left"]
+              .trim()
+              .split(/\s+/)[0];
+          }
         }
-        if (!tableObject.borderThickness) {
-          tableObject.borderThickness = style["border-left"]
-            .trim()
-            .split(/\s+/)[0];
+        if (right) {
+          if (!tableObject.borderColor) {
+            tableObject.borderColor = style["border-right"]
+              .trim()
+              .split(/\s+/)[2];
+          }
+          if (!tableObject.borderThickness) {
+            tableObject.borderThickness = style["border-right"]
+              .trim()
+              .split(/\s+/)[0];
+          }
+        }
+        if (top) {
+          if (!tableObject.borderColor) {
+            tableObject.borderColor = style["border-top"].trim().split(/\s+/)[2];
+          }
+          if (!tableObject.borderThickness) {
+            tableObject.borderThickness = style["border-top"]
+              .trim()
+              .split(/\s+/)[0];
+          }
+        }
+        if (bottom) {
+          if (!tableObject.borderColor) {
+            tableObject.borderColor = style["border-bottom"]
+              .trim()
+              .split(/\s+/)[2];
+          }
+          if (!tableObject.borderThickness) {
+            tableObject.borderThickness = style["border-bottom"]
+              .trim()
+              .split(/\s+/)[0];
+          }
         }
       }
-      if (right) {
-        if (!tableObject.borderColor) {
-          tableObject.borderColor = style["border-right"]
-            .trim()
-            .split(/\s+/)[2];
-        }
-        if (!tableObject.borderThickness) {
-          tableObject.borderThickness = style["border-right"]
-            .trim()
-            .split(/\s+/)[0];
-        }
-      }
-      if (top) {
-        if (!tableObject.borderColor) {
-          tableObject.borderColor = style["border-top"].trim().split(/\s+/)[2];
-        }
-        if (!tableObject.borderThickness) {
-          tableObject.borderThickness = style["border-top"]
-            .trim()
-            .split(/\s+/)[0];
-        }
-      }
-      if (bottom) {
-        if (!tableObject.borderColor) {
-          tableObject.borderColor = style["border-bottom"]
-            .trim()
-            .split(/\s+/)[2];
-        }
-        if (!tableObject.borderThickness) {
-          tableObject.borderThickness = style["border-bottom"]
-            .trim()
-            .split(/\s+/)[0];
-        }
-      }
-    }
-  });
+    })
 }

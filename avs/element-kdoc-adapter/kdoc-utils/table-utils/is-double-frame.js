@@ -8,9 +8,10 @@ const Elements = require("../../parser/elements");
  *
  * @param {Elements} rows коллекция рядов таблицы.
  * @param {object} stylesData объект со стилями.
+ * @param tableElement
  * @returns {boolean} Результат проверки: true, если таблица является двойной рамкой, иначе false.
  */
-module.exports = (rows, stylesData) => {
+module.exports = (rows, stylesData, tableElement) => {
   let isDoubleFrame = true;
   const rowCount = rows.length;
   const colCount = new Elements(rows.elements[0].html).parse('td').length;
@@ -57,36 +58,36 @@ module.exports = (rows, stylesData) => {
 
       if (isTopRow) {
         if (isFirstCol) {
-          if (left && !right && top && !bottom) return "break";
+          if (left && !right && top && !bottom) return;
         } else if (isLastCol) {
-          if (!left && right && top && !bottom) return "break";
+          if (!left && right && top && !bottom) return;
         } else {
           if (!left && !right && top) {
             if (bottom) border.top[cellIndex - 1] = true;
-            return "break";
+            return;
           }
         }
       } else if (isBottomRow) {
         if (isFirstCol) {
-          if (left && !right && !top && bottom) return "break";
+          if (left && !right && !top && bottom) return;
         } else if (isLastCol) {
-          if (!left && right && !top && bottom) return "break";
+          if (!left && right && !top && bottom) return;
         } else {
           if (!left && !right && bottom) {
             if (top) border.bottom[cellIndex - 1] = true;
-            return "break";
+            return;
           }
         }
       } else if (isSecondRow) {
         if (isFirstCol) {
           if (left && !top && !bottom) {
             if (right) border.left[rowIndex - 1] = true;
-            return "break";
+            return;
           }
         } else if (isLastCol) {
           if (right && !top && !bottom) {
             if (left) border.right[rowIndex - 1] = true;
-            return "break";
+            return;
           }
         } else if (isSecondCol) {
           if (rowCount == 3) {
@@ -95,23 +96,23 @@ module.exports = (rows, stylesData) => {
               if (left) border.left[rowIndex - 1] = true;
               if (top) border.top[cellIndex - 1] = true;
               if (bottom) border.bottom[cellIndex - 1] = true;
-              return "break";
+              return;
             } else if (colCount > 3) {
               if (left) border.left[rowIndex - 1] = true;
               if (top) border.top[cellIndex - 1] = true;
               if (bottom) border.bottom[cellIndex - 1] = true;
-              if (!right) return "break";
+              if (!right) return;
             }
           } else if (rowCount > 3) {
             if (colCount == 3) {
               if (right) border.right[rowIndex - 1] = true;
               if (left) border.left[rowIndex - 1] = true;
               if (top) border.top[cellIndex - 1] = true;
-              if (!bottom) return "break";
+              if (!bottom) return;
             } else if (colCount > 3) {
               if (left) border.left[rowIndex - 1] = true;
               if (top) border.top[cellIndex - 1] = true;
-              if (!bottom && !right) return "break";
+              if (!bottom && !right) return;
             }
           }
         } else if (isPreLastCol) {
@@ -121,23 +122,23 @@ module.exports = (rows, stylesData) => {
               if (left) border.left[rowIndex - 1] = true;
               if (top) border.top[cellIndex - 1] = true;
               if (bottom) border.bottom[cellIndex - 1] = true;
-              return "break";
+              return;
             } else if (colCount > 3) {
               if (right) border.right[rowIndex - 1] = true;
               if (top) border.top[cellIndex - 1] = true;
               if (bottom) border.bottom[cellIndex - 1] = true;
-              if (!left) return "break";
+              if (!left) return;
             }
           } else if (rowCount > 3) {
             if (colCount == 3) {
               if (right) border.right[rowIndex - 1] = true;
               if (left) border.left[rowIndex - 1] = true;
               if (top) border.top[cellIndex - 1] = true;
-              if (!bottom) return "break";
+              if (!bottom) return;
             } else if (colCount > 3) {
               if (right) border.right[rowIndex - 1] = true;
               if (bottom) border.bottom[cellIndex - 1] = true;
-              if (!bottom && !left) return "break";
+              if (!bottom && !left) return;
             }
           }
         }
@@ -145,12 +146,12 @@ module.exports = (rows, stylesData) => {
         if (isFirstCol) {
           if (left && !top && !bottom) {
             if (right) border.right[rowIndex - 1] = true;
-            return "break";
+            return;
           }
         } else if (isLastCol) {
           if (right && !top && !bottom) {
             if (left) border.left[rowIndex - 1] = true;
-            return "break";
+            return;
           }
         } else if (isSecondCol) {
           if (rowCount == 3) {
@@ -159,21 +160,21 @@ module.exports = (rows, stylesData) => {
               if (left) border.left[rowIndex - 1] = true;
               if (top) border.top[cellIndex - 1] = true;
               if (bottom) border.bottom[cellIndex - 1] = true;
-              return "break";
+              return;
             } else if (colCount > 3) {
               if (left) border.left[rowIndex - 1] = true;
               if (top) border.top[cellIndex - 1] = true;
               if (bottom) border.bottom[cellIndex - 1] = true;
-              if (!right) return "break";
+              if (!right) return;
             }
           } else if (rowCount > 3) {
             if (colCount == 3) {
               if (right) border.right[rowIndex - 1] = true;
               if (left) border.left[rowIndex - 1] = true;
               if (bottom) border.bottom[cellIndex - 1] = true;
-              if (!top) return "break";
+              if (!top) return;
             } else if (colCount > 3) {
-              if (!top && !right) return "break";
+              if (!top && !right) return;
             }
           }
         } else if (isPreLastCol) {
@@ -183,23 +184,23 @@ module.exports = (rows, stylesData) => {
               if (left) border.left[rowIndex - 1] = true;
               if (top) border.top[cellIndex - 1] = true;
               if (bottom) border.bottom[cellIndex - 1] = true;
-              return "break";
+              return;
             } else if (colCount > 3) {
               if (right) border.right[rowIndex - 1] = true;
               if (top) border.top[cellIndex - 1] = true;
               if (bottom) border.bottom[cellIndex - 1] = true;
-              if (!left) return "break";
+              if (!left) return;
             }
           } else if (rowCount > 3) {
             if (colCount == 3) {
               if (right) border.right[rowIndex - 1] = true;
               if (left) border.left[rowIndex - 1] = true;
               if (bottom) border.bottom[cellIndex - 1] = true;
-              if (!top) return "break";
+              if (!top) return;
             } else if (colCount > 3) {
               if (right) border.right[rowIndex - 1] = true;
               if (bottom) border.bottom[cellIndex - 1] = true;
-              if (!top && !left) return "break";
+              if (!top && !left) return;
             }
           }
         }

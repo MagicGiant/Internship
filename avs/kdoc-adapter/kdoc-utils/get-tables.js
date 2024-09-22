@@ -20,7 +20,7 @@ const docType = require("../constants").DOC_TYPE;
  * @param {Iterable<cheerio.Cheerio>} tables коллекция объектов-таблиц, полученная из Cheerio.
  * @param {cheerio.CheerioAPI} $ объект Cheerio для работы с элементами DOM.
  * @param {object} stylesData объект со стилями, полученный после обработки входного kdoc.
- * @returns {[]}
+ * @returns {void}
  */
 module.exports = (tables, $, stylesData) => {
   const tablesArray = [];
@@ -36,16 +36,14 @@ module.exports = (tables, $, stylesData) => {
 
     const tableText = $(tableElement).html();
     const rows = $("tr", tableElement);
+
     // проверяем наличие более чем одной ячейки
     if (rows.length > 1) {
-      const doubleFrame = isDoubleFrame(rows, $, stylesData);
+      const doubleFrame = isDoubleFrame(rows, $, stylesData, tableElement);
       const singleFrame = isSingleFrame(rows, $, stylesData);
       const isRealTable = hasBorders(tableElement, $, stylesData);
       const isTeminsSection = isTermins(rows, $);
       const isPicturesTable = isPictures(rows, $);
-
-      // console.log(doubleFrame);
-      
 
       if (!doubleFrame) {
         fillTableObject(rows, $, stylesData, tableObject);

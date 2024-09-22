@@ -6,6 +6,9 @@ const Logger = require('./element-kdoc-adapter/utils/logger');
 const getTables = require('./element-kdoc-adapter/kdoc-utils/get-tables');
 const getStyles = require('./kdoc-adapter/kdoc-utils/get-styles');
 const Elements = require('./element-kdoc-adapter/parser/elements');
+const Element = require('./element-kdoc-adapter/parser/element');
+const { log } = require('console');
+const cheerio = require("cheerio");
 
 async function getTimes(fileName){
   let html = fs.readFileSync(`./docs/htmls/${fileName}`).toString();
@@ -54,9 +57,12 @@ async function main(){
   // console.log(await getTimes('9056051.html'));
   // console.log(await getTimes('902111644.html'))
 
-  let html = fs.readFileSync(`./docs/htmls/902111644.html`).toString();
+  // 1304207340
+  // 1305126667
 
-  logCheerioAdapter(html);
+  let html = fs.readFileSync(`./docs/htmls/456069588.html`).toString();
+
+  // logCheerioAdapter(html);
   logMyAdapter(html);
 }
 

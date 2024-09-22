@@ -1,4 +1,5 @@
 const Elements = require("../../parser/elements");
+const deepCopy = require("../../utils/deep-copy");
 const {
   isBoldFull,
   isItalicText,
@@ -32,16 +33,20 @@ module.exports = (tableObject, rows, stylesData) => {
         const kdocHtmlRegExp =
         /<picture\s+class="[^>]+"><img\s+src="data:image\/png;base64,[^>]+"\s+style="[^>]+"><\/picture>/;
 
-        let cellText = "";
+        let cellText = ""
 
-        if (kdocHtmlRegExp.test(cell.html.trim())) {
-          cell
+        let source = cell.elementData.body.replace(/<\/img>/g,'')
+
+        if (kdocHtmlRegExp.test(source.trim())) {
+          cellText = source
             .replace(/<span style="padding-left:1em;">/g, (str) => ` ${str}`)
             .replace(/<(?!\/?(picture|img)\b)[^>]*>/g, "")
             .replace(/&nbsp;/g, " ");
         }
 
-        if (!cellText) cellText = cell.getText(false);
+        if (!cellText) {
+          cellText = cell.getText(false);
+        }
 
         text +=` ${cellText}`;
 
@@ -58,7 +63,7 @@ module.exports = (tableObject, rows, stylesData) => {
 
         const cellObject = {
           type: 'P',
-          source: cell.replace(/<\/img>/g,'').elementData.body,
+          source,
           pid: cell.attr('data-pid'),
           spacesBefore: 0,
           text: cellText,

@@ -1,4 +1,3 @@
-const cheerio = require("cheerio");
 const isHorizontalLinesOnly = require("./is-only-horisontal");
 const {
   isBoldFull,

@@ -21,7 +21,7 @@ module.exports = (rows, stylesData) => {
     const colCount = tds.length;
 
     tds.each((cellElement, cellIndex) => {
-      if (!isSingleFrame) return 'break';
+      if (!isSingleFrame) return;
 
       const styleClass = stylesData[cellElement.attr("class")];
 
@@ -38,52 +38,52 @@ module.exports = (rows, stylesData) => {
       if (isTopRow) {
         if (isFirstCol) {
           if (left && top && !right && !bottom) {
-            return 'break';
+            return;
           }
 
           if (isLastCol && left && top && right && !bottom) {
-            return 'break';
+            return;
           }
         }
         if (isLastCol) {
           if (!left && top && right && !bottom) {
-            return 'break';
+            return;
           }
         } else {
-          if (top) return 'break';
+          if (top) return;
         }
       } else if (isBottomRow) {
         if (isFirstCol) {
           if (left && !top && !right && bottom) {
-            return 'break';
+            return;
           }
 
           if (isLastCol && left && !top && right && bottom) {
-            return 'break';
+            return;
           }
         }
         if (isLastCol) {
           if (!left && !top && right && bottom) {
-            return 'break';
+            return;
           }
         } else {
-          if (bottom) return 'break';
+          if (bottom) return;
         }
       } else {
         if (isFirstCol) {
           if (left && !top && !bottom) {
-            return 'break';
+            return;
           }
 
           if (isLastCol && left && !top && right && !bottom) {
-            return 'break';
+            return;
           }
         } else if (isLastCol) {
           if (!top && right && !bottom) {
-            return 'break';
+            return;
           }
         } else if (!isTopRow && !isBottomRow && !isFirstCol && !isLastCol) {
-          return 'break';
+          return;
         }
       }
 

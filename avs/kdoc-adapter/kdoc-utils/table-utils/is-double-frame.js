@@ -8,9 +8,10 @@
  * @param {Iterable<cheerio.Cheerio>} rows коллекция рядов таблицы.
  * @param {cheerio.CheerioAPI} $ объект cheerio для работы с DOM.
  * @param {object} stylesData объект со стилями.
+ * @param tableElement
  * @returns {boolean} Результат проверки: true, если таблица является двойной рамкой, иначе false.
  */
-module.exports = (rows, $, stylesData) => {
+module.exports = (rows, $, stylesData, tableElement) => {
   let isDoubleFrame = true;
   const rowCount = rows.length;
   const colCount = $(rows[0]).find("td").length;
@@ -38,13 +39,12 @@ module.exports = (rows, $, stylesData) => {
 
       const $cellElement = $(cellElement);
       const styleClass = stylesData[$cellElement.attr("class")];
-
-      const left = /solid/.test(styleClass["border-left"]);
+      const left = /solid/.test(styleClass["border-left"]); 
       const right = /solid/.test(styleClass["border-right"]);
       const top = /solid/.test(styleClass["border-top"]);
       const bottom = /solid/.test(styleClass["border-bottom"]);
 
-      const isTopRow = rowIndex == 0;
+      const isTopRow = rowIndex == 0; 
       const isBottomRow = rowIndex == rowCount - 1;
       const isFirstCol = cellIndex == 0;
       const isLastCol = cellIndex == colCount - 1;

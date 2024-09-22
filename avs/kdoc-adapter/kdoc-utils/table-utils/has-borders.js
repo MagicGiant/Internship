@@ -7,7 +7,7 @@
  * @param {cheerio.Cheerio} table cheerio-объект таблицы.
  * @param {cheerio.CheerioAPI} $ cheerio-объект для работы с DOM.
  * @param {object} stylesData объект со стилями.
- * @returns {boolean} Результат проверки: true,  
+ * @returns {boolean} Результат проверки: true, если границы есть, иначе false.
  */
 module.exports = (table, $, stylesData) => {
   let hasBorders = false;

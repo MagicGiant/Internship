@@ -1,5 +1,3 @@
-const cheerio = require("cheerio");
-
 const getParagraph = require("./kdoc-utils/text-utils/get-paragraph");
 const getStyles = require("./kdoc-utils/get-styles");
 const getTables = require("./kdoc-utils/get-tables");
@@ -12,7 +10,7 @@ const Elements = require("./parser/elements");
  * и css-стилях содержимого
  *
  * @param {string} html исходная html-строка
- * @returns {object} Результат: объект с информацией о содержимом документа и о css-стилях
+ * @returns {Promise<object>} Результат: объект с информацией о содержимом документа и о css-стилях
  */
 module.exports = async (html) => {
   // читаем стили
@@ -25,7 +23,6 @@ module.exports = async (html) => {
   const objects = [];
   paragraphs.each(element => {
     const PObject = getParagraph(element, stylesData);
-    
     objects.push(PObject);
   });
   

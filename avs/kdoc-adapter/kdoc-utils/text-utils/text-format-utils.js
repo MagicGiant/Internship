@@ -77,7 +77,6 @@ function isBoldStart(htmlString, stylesData) {
         stylesData[classKey]["font-weight"] === "bold" &&
         fullText.startsWith(boldText)
       ) {
-        
         return true;
       }
     }

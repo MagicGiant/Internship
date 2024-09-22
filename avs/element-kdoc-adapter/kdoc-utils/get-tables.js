@@ -36,9 +36,9 @@ module.exports = (tables, stylesData) => {
 
     const tableText = tableElement.html;
     const rows = new Elements(tableElement.html).parse('tr');
-    
+
     if (rows.length > 1){
-      const doubleFrame = isDoubleFrame(rows, stylesData);
+      const doubleFrame = isDoubleFrame(rows, stylesData, tableElement);
       const singleFrame = isSingleFrame(rows, stylesData);
       const isRealTable = hasBorders(tableElement, stylesData);
       const isTeminsSection = isTermins(rows);

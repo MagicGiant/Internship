@@ -52,7 +52,7 @@ class Element {
     let OTPCs = Element.getCoordinateRegex(html, openTagParamRegex);
     // Open tag coordinates: координаты всех открытых тегов
     let OTCs = Element.getCoordinateRegex(html, openTag);
-    // Close tag coordinates: координаты закрытых тегов
+    // Close tag coordinates: координаты всех закрытых тегов
     let CTCs = Element.getCoordinateRegex(html, closeTagRegex);
 
     // Тут хранятся координаты итоговых подстрок-тегов
@@ -76,10 +76,6 @@ class Element {
         if (OTCs.length === 0 || OTCs[0].start > CTCs[0].start) {
           dif--;
           newResult.start = OTPC.start;
-
-          if (!CTCs[0]) {
-            console.log(OTCs);
-          }
 
           newResult.end = CTCs[0].end;
           CTCs.shift();
@@ -151,7 +147,8 @@ class Element {
       .replace(/<[^>]+>/gs, "")
       .replace(/&nbsp;/g, "\u00A0")
       .replace(/&gt;/g, ">")
-      .replace(/&lt;/g, "<");
+      .replace(/&lt;/g, "<")
+      .replace(/&amp;/g, "&")
 
     if (trim) {
       a = a.trim();

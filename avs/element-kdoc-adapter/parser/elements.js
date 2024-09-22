@@ -49,8 +49,6 @@ class Elements {
       if (command) {
         if (command == "break") {
           break;
-        } else if (command == "continue") {
-          continue;
         }
       }
       it++;
