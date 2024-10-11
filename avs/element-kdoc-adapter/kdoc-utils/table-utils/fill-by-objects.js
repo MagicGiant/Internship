@@ -1,6 +1,6 @@
 const getParagraph = require("../text-utils/get-paragraph");
 const fillTableObject = require("./fill-table-object");
-const Element = require("../../parser/element");
+const {Element} = require("../../parser/element");
 const Elements = require("../../parser/elements");
 
 const docType = require("../../constants").DOC_TYPE;

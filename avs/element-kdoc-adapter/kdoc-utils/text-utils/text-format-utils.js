@@ -1,5 +1,5 @@
 const cheerio = require("cheerio");
-const Element = require("../../parser/element");
+const {Element} = require("../../parser/element");
 const Elements = require("../../parser/elements");
 
 /**

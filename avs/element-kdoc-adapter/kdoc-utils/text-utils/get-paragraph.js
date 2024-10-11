@@ -4,7 +4,7 @@ const {
   isItalicText,
   getTextFormat,
 } = require("./text-format-utils");
-const Element = require("../../parser/element");
+const {Element} = require("../../parser/element");
 
 const docType = require("../../constants").DOC_TYPE;
 

@@ -70,6 +70,9 @@ async function testKdocAdapter(filesNames = []) {
       let htmlPath = path.join(__dirname, `./docs/htmls/${name}.html`);
       let html = fs.readFileSync(htmlPath).toString();
 
+      let stats = fs.statSync(htmlPath);
+      let fileSizeInBytes = stats.size;
+
       describe(`Testing file ${name}`, () => {
         let results;
 
@@ -80,7 +83,9 @@ async function testKdocAdapter(filesNames = []) {
 
         test(`checkTime_cherioGreater_${name}`, () => {
           expect(results.cheerioResult.time).toBeGreaterThan(results.elementsResult.time);
-          console.log(`${name}:\n\tВремя cheerio: ${results.cheerioResult.time},\n\tВремя elements: ${results.elementsResult.time}`);
+          console.log(`${name}:\n\tВремя cheerio: ${results.cheerioResult.time},`);
+          console.log(`\tВремя elements: ${results.elementsResult.time}`);
+          console.log(`\tРазмер файла: ${fileSizeInBytes} байт`);
         });
 
         test(`checkEqual_true_${name}`, () => {

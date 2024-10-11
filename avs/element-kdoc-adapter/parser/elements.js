@@ -1,4 +1,5 @@
-const Element = require("./element");
+const TimeSeeker = require("../utils/time-seeker");
+const {Element} = require("./element");
 
 /**
  * @description Класс-контейнер. Парсит всю html страницу и хранит ее в виде объектов Element. Можно итерироваться по элементам с помощью метода each.
@@ -26,6 +27,8 @@ class Elements {
     this.elements = [];
 
     let elementsData = Element.getElementsData(this.html, tag, parameters);
+
+    TimeSeeker.parserTime.all.count.parse ++;
 
     elementsData.forEach((elementData) => {
       let element = new Element(elementData.all);

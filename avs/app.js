@@ -3,12 +3,9 @@ const elementKdocAdapter = require('./element-kdoc-adapter/kdoc-adapter');
 const kdocAdapter = require('./kdoc-adapter/kdoc-adapter');
 const path = require('path');
 const Logger = require('./element-kdoc-adapter/utils/logger');
-const getTables = require('./element-kdoc-adapter/kdoc-utils/get-tables');
-const getStyles = require('./kdoc-adapter/kdoc-utils/get-styles');
-const Elements = require('./element-kdoc-adapter/parser/elements');
-const Element = require('./element-kdoc-adapter/parser/element');
-const { log } = require('console');
-const cheerio = require("cheerio");
+const getStyles = require('./element-kdoc-adapter/kdoc-utils/get-styles');
+const {Element} = require('./element-kdoc-adapter/parser/element');
+const TimeSeeker = require('./element-kdoc-adapter/utils/time-seeker');
 
 async function getTimes(fileName){
   let html = fs.readFileSync(`./docs/htmls/${fileName}`).toString();
@@ -60,10 +57,33 @@ async function main(){
   // 1304207340
   // 1305126667
 
-  let html = fs.readFileSync(`./docs/htmls/456069588.html`).toString();
+  let html = fs.readFileSync(`./docs/htmls/1200194083.html`).toString();
 
   // logCheerioAdapter(html);
-  logMyAdapter(html);
+  let start = performance.now();
+  await logMyAdapter(html);
+  // await logCheerioAdapter(html);
+
+  // let openTag = new RegExp(`<(?:p|table).*?>`, "g");
+
+  // let matches = [...html.matchAll(openTag)];
+
+  
+  // let a = matches.map((match) => {
+  //   return {
+  //     start: match.index,
+  //     end: match.index + match[0].length,
+  //   }
+  // });
+
+  let allTime = performance.now() - start;
+  // console.log(a);
+  
+  console.log(`Все время ${allTime}`);
+  console.log(`Время парса ${JSON.stringify(TimeSeeker.parserTime, null, 2)}`);
+  console.log(`Время нахождения стилей ${TimeSeeker.stylesTime.all.time}`)
+  console.log(`Остальное ${allTime - TimeSeeker.getSum()}`);
+  
 }
 
 main()

@@ -2,3 +2,4 @@ logs.json
 myLogs.json
 myAdapter.json
 testResults
+*.md
