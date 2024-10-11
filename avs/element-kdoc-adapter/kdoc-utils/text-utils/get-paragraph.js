@@ -5,6 +5,7 @@ const {
   getTextFormat,
 } = require("./text-format-utils");
 const {Element} = require("../../parser/element");
+const TimeSeeker = require("../../utils/time-seeker");
 
 const docType = require("../../constants").DOC_TYPE;
 
@@ -19,6 +20,8 @@ const docType = require("../../constants").DOC_TYPE;
  * @returns {object} Созданный объект-параграф.
  */
 module.exports = (element, stylesData) => {
+
+  TimeSeeker.parserTime.all.count.getParagraph ++;
 
   element.replaceElement('span',['style="padding-left:1em;"'], ' ');
 

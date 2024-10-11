@@ -57,10 +57,10 @@ async function main(){
   // 1304207340
   // 1305126667
 
-  let html = fs.readFileSync(`./docs/htmls/1200194083.html`).toString();
+  let html = fs.readFileSync(`./docs/htmls/456069588.html`).toString();
 
-  // logCheerioAdapter(html);
   let start = performance.now();
+  // logCheerioAdapter(html);
   await logMyAdapter(html);
   // await logCheerioAdapter(html);
 

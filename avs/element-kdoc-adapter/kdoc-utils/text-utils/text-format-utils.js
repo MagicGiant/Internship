@@ -55,10 +55,10 @@ function isBoldStart(htmlString, stylesData) {
   const fullText = element.getText();
 
   // Проходимся по всем ключам объекта styleClass
+  const spans = new Elements(htmlString).parse('span');
   for (const classKey in stylesData) {
     if (stylesData.hasOwnProperty(classKey)) {
       // Находим все элементы <span> с текущим классом
-      const spans = new Elements(htmlString).parse('span', [`class="${classKey}"`], '.*');
       // const spans = $(`span.${classKey}`);
 
       let boldText = ""; // Строка для сбора жирного текста
@@ -66,6 +66,10 @@ function isBoldStart(htmlString, stylesData) {
       // Проверяем каждый <span> с текущим классом
       const textInside = '';
       spans.each((span) =>{
+        if (!span.isAllParameters(span.elementData, [`class="${classKey}"`])){
+          return;
+        }
+
         const textInside = span.getText();
         if (textInside !== "" && !boldText) {
           boldText = textInside;
@@ -126,13 +130,18 @@ function isBoldFull(htmlString, stylesData) {
   let boldText = ""; // Строка для сбора жирного текста
 
   // Проходимся по всем ключам объекта styleClass
+  const spans = new Elements(clearString).parse('span');
+
   for (const classKey in stylesData) {
     if (stylesData.hasOwnProperty(classKey)) {
       // Находим все элементы <span> с текущим классом
-      const spans = new Elements(clearString).parse('span', [`class="${classKey}"`]);
 
       // Проверяем каждый <span> с текущим классом
       spans.each((element) => {
+        if (!element.isAllParameters(element.elementData, [`class="${classKey}"`])){
+          return;
+        }
+
         const textInside = element.getText();
         if (
           textInside !== "" &&
@@ -202,15 +211,19 @@ function isItalicText(htmlString, stylesData) {
   let italicText = ""; // Строка для сбора курсивного текста
 
   // Проходимся по всем ключам объекта styleClass
+  const spans = new Elements(clearString).parse('span');
+
   for (const classKey in stylesData) {
     if (stylesData.hasOwnProperty(classKey)) {
       // Находим все элементы <span> с текущим классом
-      const spans = new Elements(clearString).parse('span', [`class="${classKey}"`]);
 
       // Проверяем каждый <span> с текущим классом
       spans.each(( element, _index) => {
-        const textInside = element.getText();
+        if (!element.isAllParameters(element.elementData, [`class="${classKey}"`])){
+          return;
+        }
 
+        const textInside = element.getText();
         // Если текст не пустой, увеличиваем счетчик непустых элементов и добавляем его к общему курсивному тексту
         if (
           textInside !== "" &&

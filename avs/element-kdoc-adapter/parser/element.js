@@ -155,9 +155,6 @@ class Element {
    *@param {string[]} parameters
    */
   static getParametersRegex(parameters = []) {
-    // if (parameters.length != 0){
-    //   console.log(parameters);
-    // }
     return parameters
       .map((param) => {
         return `['"a-zA-Z0-9\-_=:; ]*?${param}`;
@@ -207,7 +204,6 @@ class Element {
    * @param { ElementData } elementData
    * @param { string[] } parameters
    * @returns { boolean }
-   * @deprecated Текущий функционал позволяет обойтись без этого метода
    */
   isAllParameters(elementData, parameters) {
     const quoteReplaceRegex = /['`]/g;
@@ -323,20 +319,6 @@ class Element {
     elementsData.forEach((element) => {
       this.replace(element.all, replaceValue);
     });
-
-    // let regex = Element.getTagRegex(tag, parameters);
-    // let match = regex.exec(this.elementData.all);
-
-    // while (match){
-
-    //   let elementData = Element.createElementDataFromMatch(match);
-
-    //   if (this.isAllParameters(elementData, parameters)){
-    //     this.replace(elementData.all, replaceValue);
-    //   }
-
-    //   match = regex.exec(this.elementData.all);
-    // }
     return this;
   }
 }

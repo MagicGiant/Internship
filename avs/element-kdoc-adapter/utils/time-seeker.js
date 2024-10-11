@@ -1,3 +1,5 @@
+const getParagraph = require("../kdoc-utils/text-utils/get-paragraph");
+
 class TimeSeeker{
   static parserTime = {
     all:{
@@ -6,7 +8,8 @@ class TimeSeeker{
       count: {
         all : 0,
         replace: 0,
-        parse: 0
+        parse: 0,
+        getParagraph: 0,
       },
     },
     coor: {
