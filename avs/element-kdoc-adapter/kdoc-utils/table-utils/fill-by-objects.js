@@ -143,13 +143,9 @@ module.exports = (tableObject, tableString, stylesData) => {
   if (table) htmlStrings.push(`<table>${colString}${table}</table>`);
 
   // заполняем поле "objects" объектами, полученными из внутренностей рамки
-  for (let string of htmlStrings) {
-    
-    // const $ = cheerio.load(string); 
+  for (let string of htmlStrings) { 
 
     if (string.match(/^<p/)) {
-
-      // const $element = $($("p")[0]);
       const element = new Element(string).parse('p');
       const PObject = getParagraph(element, stylesData);
 
@@ -163,10 +159,7 @@ module.exports = (tableObject, tableString, stylesData) => {
         docType: docType,
         fromSingleFrame: true,
       };
-
-      // const tableElement = $("table")[0];
       const tableElement = new Element(string).parse('table');
-      // const rows = $("tr", tableElement);
       const rows = new Elements(tableElement.elementData.all).parse('tr');
 
       fillTableObject(rows, stylesData, TObject);

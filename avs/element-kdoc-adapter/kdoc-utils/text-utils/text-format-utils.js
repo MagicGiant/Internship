@@ -58,13 +58,9 @@ function isBoldStart(htmlString, stylesData) {
   const spans = new Elements(htmlString).parse('span');
   for (const classKey in stylesData) {
     if (stylesData.hasOwnProperty(classKey)) {
-      // Находим все элементы <span> с текущим классом
-      // const spans = $(`span.${classKey}`);
 
       let boldText = ""; // Строка для сбора жирного текста
 
-      // Проверяем каждый <span> с текущим классом
-      const textInside = '';
       spans.each((span) =>{
         if (!span.isAllParameters(span.elementData, [`class="${classKey}"`])){
           return;
@@ -131,10 +127,8 @@ function isBoldFull(htmlString, stylesData) {
 
   // Проходимся по всем ключам объекта styleClass
   const spans = new Elements(clearString).parse('span');
-
   for (const classKey in stylesData) {
     if (stylesData.hasOwnProperty(classKey)) {
-      // Находим все элементы <span> с текущим классом
 
       // Проверяем каждый <span> с текущим классом
       spans.each((element) => {
@@ -212,11 +206,8 @@ function isItalicText(htmlString, stylesData) {
 
   // Проходимся по всем ключам объекта styleClass
   const spans = new Elements(clearString).parse('span');
-
   for (const classKey in stylesData) {
     if (stylesData.hasOwnProperty(classKey)) {
-      // Находим все элементы <span> с текущим классом
-
       // Проверяем каждый <span> с текущим классом
       spans.each(( element, _index) => {
         if (!element.isAllParameters(element.elementData, [`class="${classKey}"`])){

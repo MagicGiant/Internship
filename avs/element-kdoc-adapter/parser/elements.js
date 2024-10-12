@@ -1,4 +1,3 @@
-const TimeSeeker = require("../utils/time-seeker");
 const {Element} = require("./element");
 
 /**
@@ -27,8 +26,6 @@ class Elements {
     this.elements = [];
 
     let elementsData = Element.getElementsData(this.html, tag, parameters);
-
-    TimeSeeker.parserTime.all.count.parse ++;
 
     elementsData.forEach((elementData) => {
       let element = new Element(elementData.all);

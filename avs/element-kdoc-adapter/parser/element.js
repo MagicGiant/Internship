@@ -1,4 +1,3 @@
-const TimeSeeker = require("../utils/time-seeker");
 const ElementData = require("./elementData");
 
 /**
@@ -7,7 +6,6 @@ const ElementData = require("./elementData");
  * @example let element = new Element(html).parse('p'); element.replaceElement('span', ['class="style"'], '');
  */
 class Element {
-
   /**@type {string}*/ html;
   /**@type {ElementData}*/ elementData = null;
 
@@ -27,9 +25,9 @@ class Element {
 
     return matches.map((match) => {
       return {
-      start: match.index,
-      end: match.index + match[0].length,
-      }
+        start: match.index,
+        end: match.index + match[0].length,
+      };
     });
   }
 
@@ -39,7 +37,7 @@ class Element {
     }
     return objects;
   }
-  
+
   /**
    *@description Безопасный метод распарсить множество тегов
    *@param { string } html
@@ -50,41 +48,22 @@ class Element {
   static getElementsData(html, tag, parameters = []) {
     // Здесь используется алгоритм скобочной последовательности, за счет чего учитывается вложенность тегов
 
-    let allStart = performance.now();
-    TimeSeeker.parserTime.all.count.all ++;
-
     let parametersRegex = Element.getParametersRegex(parameters);
 
-    let openTagParamRegex = new RegExp( 
-      `<${tag}${parametersRegex}.*?>`,
-      "g"
-    );
+    let openTagParamRegex = new RegExp(`<${tag}${parametersRegex}.*?>`, "g");
     let openTag = new RegExp(`<${tag}.*?>`, "g");
     let closeTagRegex = new RegExp(`<\/${tag}.*?>`, "g");
 
-
-    let coorTime = performance.now();
-    let curCootTime = performance.now();
     // Open tag with parameters coordinates: координаты открытых тегов с атрибутами
     let OTPCs = Element.getCoordinateRegex(html, openTagParamRegex);
-    TimeSeeker.parserTime.coor.data.OTPCs.time += performance.now() - curCootTime;
-    curCootTime = performance.now();
     // Open tag coordinates: координаты всех открытых тегов
     let OTCs = Element.getCoordinateRegex(html, openTag);
-    TimeSeeker.parserTime.coor.data.OTCs.time += performance.now() - curCootTime;
-    curCootTime = performance.now();
     // Close tag coordinates: координаты всех закрытых тегов
     let CTCs = Element.getCoordinateRegex(html, closeTagRegex);
-    TimeSeeker.parserTime.coor.data.CTCs.time += performance.now() - curCootTime;
-
-    TimeSeeker.parserTime.coor.time += performance.now() - coorTime;
-
 
     // Тут хранятся координаты итоговых подстрок-тегов
     let resultCoord = [];
 
-
-    let cycleStart = performance.now();
     OTPCs.forEach((OTPC) => {
       if (
         resultCoord.length != 0 &&
@@ -93,19 +72,17 @@ class Element {
         return;
       }
 
-      let removeStart = performance.now();
-
-      OTCs = Element.sortRemove(OTCs, (OTC) => {return OTC.start <= OTPC.start});
-      CTCs = Element.sortRemove(CTCs, (CTC) => {return CTC.start <= OTPC.start});
-
-      TimeSeeker.parserTime.remove.time += performance.now() - removeStart;
+      OTCs = Element.sortRemove(OTCs, (OTC) => {
+        return OTC.start <= OTPC.start;
+      });
+      CTCs = Element.sortRemove(CTCs, (CTC) => {
+        return CTC.start <= OTPC.start;
+      });
 
       let newResult = {};
       // dif - разница между количеством открытых тегов и закрытых
       let dif = 1;
 
-
-      let insideCycleStart = performance.now();
       while (dif != 0) {
         if (OTCs.length === 0 || OTCs[0].start > CTCs[0].start) {
           dif--;
@@ -119,24 +96,14 @@ class Element {
         }
       }
 
-      TimeSeeker.parserTime.insideCycle.time += performance.now() - insideCycleStart;
-
       resultCoord.push(newResult);
     });
 
-    TimeSeeker.parserTime.cycle.time += performance.now() - cycleStart;
-
-
-    let resultStart = performance.now();
     let result = resultCoord.map((el) => {
       let strElement = html.slice(el.start, el.end);
       let tagRegex = Element.getTagRegex(tag, parameters);
       return Element.createElementDataFromMatch(tagRegex.exec(strElement));
     });
-
-    TimeSeeker.parserTime.result.time += performance.now() - resultStart;
-
-    TimeSeeker.parserTime.all.time += performance.now() - allStart;
 
     return result;
   }
@@ -192,7 +159,7 @@ class Element {
       .replace(/&nbsp;/g, "\u00A0")
       .replace(/&gt;/g, ">")
       .replace(/&lt;/g, "<")
-      .replace(/&amp;/g, "&")
+      .replace(/&amp;/g, "&");
 
     if (trim) {
       a = a.trim();
@@ -312,8 +279,6 @@ class Element {
       return this;
     }
 
-    TimeSeeker.parserTime.all.count.replace ++;
-
     let elementsData = Element.getElementsData(this.html, tag, parameters);
 
     elementsData.forEach((element) => {
@@ -324,5 +289,5 @@ class Element {
 }
 
 module.exports = {
-  Element
+  Element,
 };

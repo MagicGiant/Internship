@@ -2,8 +2,6 @@ const getParagraph = require("./kdoc-utils/text-utils/get-paragraph");
 const getStyles = require("./kdoc-utils/get-styles");
 const getTables = require("./kdoc-utils/get-tables");
 const Elements = require("./parser/elements");
-const TimeSeeker = require("./utils/time-seeker");
-
 /**
  * Конвертирует html-строку в объект особо вида для дальнейшей обработки.
  *
@@ -27,12 +25,11 @@ module.exports = async (html) => {
     objects.push(PObject);
   });
   
-  console.log(TimeSeeker.parserTime.all.count.parse);
-  
 
   const tablesArray = getTables(tables, stylesData);
 
   const resultArray = [];
+
 
   for (let i = 0; i < objects.length; i++) {
     const object = objects[i];

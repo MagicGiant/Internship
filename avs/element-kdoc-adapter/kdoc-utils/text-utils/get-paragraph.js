@@ -4,8 +4,7 @@ const {
   isItalicText,
   getTextFormat,
 } = require("./text-format-utils");
-const {Element} = require("../../parser/element");
-const TimeSeeker = require("../../utils/time-seeker");
+const { Element } = require("../../parser/element");
 
 const docType = require("../../constants").DOC_TYPE;
 
@@ -20,14 +19,13 @@ const docType = require("../../constants").DOC_TYPE;
  * @returns {object} Созданный объект-параграф.
  */
 module.exports = (element, stylesData) => {
+  element.replaceElement("span", ['style="padding-left:1em;"'], " ");
 
-  TimeSeeker.parserTime.all.count.getParagraph ++;
+  const spanElement = new Element(element.html).parse("span", [
+    'style="padding-left:5em;"',
+  ]);
 
-  element.replaceElement('span',['style="padding-left:1em;"'], ' ');
-
-  const spanElement = new Element(element.html).parse('span', ['style="padding-left:5em;"']);
-
-  const styleAttributeValue = spanElement.attr('style');
+  const styleAttributeValue = spanElement.attr("style");
 
   const paddingValue = styleAttributeValue
     ? styleAttributeValue.match(/padding-left:(\d+)em;/)
@@ -36,10 +34,10 @@ module.exports = (element, stylesData) => {
 
   const styleClass = stylesData[element.attr("class")];
 
-  const isBold = 
+  const isBold =
     element.getText() &&
-      (styleClass["font-weight"] == "bold" ||
-        isBoldFull(element.html, stylesData));
+    (styleClass["font-weight"] == "bold" ||
+      isBoldFull(element.html, stylesData));
 
   const isItalic =
     element.getText() &&
@@ -49,7 +47,7 @@ module.exports = (element, stylesData) => {
   const format = getTextFormat(styleClass, element, isBold);
   const PObject = {
     type: "P",
-    source: element.html.replace(/<\/img>/g,''),
+    source: element.html.replace(/<\/img>/g, ""),
     pid: element.attr("data-pid"),
     spacesBefore: spacesBefore,
     text: element.getText(false),
@@ -60,9 +58,6 @@ module.exports = (element, stylesData) => {
     isBoldBegin: isBoldStart(element.html, stylesData),
     docType: docType,
   };
-  
- 
-  
 
   const pictureRegExp =
     /<picture\s+class="[^>]+"><img\s+src="data:image\/png;base64,[^>]+"\s+style="[^>]+"><\/picture>/;
